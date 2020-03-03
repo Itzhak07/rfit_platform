@@ -1,0 +1,4 @@
+{
+    "jwtSecret": "Execute_Order_66",
+    "mongoURI": "mongodb+srv://Itzhak07:Itzhak07@cluster0-tuoql.mongodb.net/test?retryWrites=true&w=majority"
+}

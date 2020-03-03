@@ -1,0 +1,25 @@
+{
+  "name": "rfit-platform",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm instal --prefix client && npm run build --prefix client"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-validator": "^6.3.0",
+    "gravatar": "^1.8.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.13",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11"
+  }
+}
