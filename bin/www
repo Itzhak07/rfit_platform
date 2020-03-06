@@ -16,15 +16,6 @@ var prod = express();
 
 // Serve static assets in production
 
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  prod.use(express.static("client/build"));
-
-  prod.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
-
 var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 

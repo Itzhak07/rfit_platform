@@ -52,6 +52,16 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
+// heroku check
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, './client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build/index.html'));
+  });
+}
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
