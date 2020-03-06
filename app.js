@@ -16,14 +16,6 @@ const db_atlas = config.get("mongoURI");
 
 var app = express();
 
-if(process.env.NODE_ENV === "production"){
-  app.use(express.static('client/build'))
-
-  app.get('*', (req,res)=>{
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-  })
-}
-
 // Connection to MongoDB
 mongoose.connect(db_atlas, {
   useNewUrlParser: true,
@@ -54,6 +46,14 @@ app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/clients", clientsRouter);
 app.use("/api/workouts", workoutsRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
