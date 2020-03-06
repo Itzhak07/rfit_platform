@@ -62,14 +62,18 @@ class WorkoutsController {
     });
   }
 
-  static updateWorkout({ body }, userid) {
+  static updateWorkout({ body }, userId) {
     const { id } = body;
+
+    console.log(body);
+    
+
     return new Promise((resolve, reject) => {
       Workout.findByIdAndUpdate(id, body, function(err, docs) {
         if (err) {
           reject(err);
         } else {
-          resolve(WorkoutsController.getAll(userid));
+          resolve(WorkoutsController.getAll(userId));
         }
       });
     });

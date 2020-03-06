@@ -14,7 +14,6 @@ router.get("/", auth, async function(req, res, next) {
 
     res.json(workouts);
   } catch (err) {
-
     res.status(409).json(err);
   }
 });
@@ -45,7 +44,6 @@ router.post(
     const reqErrors = validationResult(req);
 
     if (!reqErrors.isEmpty()) {
- 
       return res.status(400).json({
         error: reqErrors.array()
       });
@@ -56,7 +54,6 @@ router.post(
       const newWorkout = await WorkoutsController.addWorkout(req, id);
       res.json(newWorkout);
     } catch (err) {
-
       res.status(409).json(err);
     }
   }
@@ -69,7 +66,6 @@ router.get("/singleworkout", async function(req, res, next) {
     const workout = await WorkoutsController.getSingleWorkout(req);
     res.json(workout);
   } catch (err) {
-
     res.status(409).json(err);
   }
 });
@@ -87,11 +83,13 @@ router.delete("/delete/:id", auth, async function(req, res, next) {
 });
 
 // Update Workout
-router.put("/update",auth, async function(req, res, next) {
+router.put("/update", auth, async function(req, res, next) {
   try {
     const { id } = req.user;
-    
+    console.log(id);
+
     const workouts = await WorkoutsController.updateWorkout(req, id);
+    console.log(workouts);
 
     res.json(workouts);
   } catch (err) {
