@@ -7,9 +7,7 @@
 var app = require("../app");
 var debug = require("debug")("rfit-platform:server");
 var http = require("http");
-var path = require("path");
-var express = require("express");
-var prod = express();
+
 /**
  * Get port from environment and store in Express.
  */

@@ -14,13 +14,13 @@ const config = require("config");
 
 const db_atlas = config.get("mongoURI");
 
-console.log(db_atlas);
+// console.log(db_atlas);
 
 
 var app = express();
 
 // Connection to MongoDB
-mongoose.connect("mongodb+srv://Itzhak07:Itzhak07@cluster0-tuoql.mongodb.net/RFit_DB?retryWrites=true&w=majority", {
+mongoose.connect(db_atlas, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -36,8 +36,8 @@ db.once("open", function() {
 });
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "pug");
 
 app.use(cors());
 
