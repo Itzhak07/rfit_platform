@@ -34,16 +34,6 @@ db.once("open", function() {
   console.log("Connected!");
 });
 
-// heroku check
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, "./client/build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "./client/build/index.html"));
-  });
-}
-
 // view engine setup
 // app.set("views", path.join(__dirname, "views"));
 // app.set("view engine", "pug");
@@ -61,10 +51,20 @@ app.use("/api/auth", authRouter);
 app.use("/api/clients", clientsRouter);
 app.use("/api/workouts", workoutsRouter);
 
+// heroku check
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, "./client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "./client/build/index.html"));
+  });
+}
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function(err, req, res, next) {
