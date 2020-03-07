@@ -14,15 +14,20 @@ const config = require("config");
 
 const db_atlas = config.get("mongoURI");
 
+console.log(db_atlas);
+
+
 var app = express();
 
 // Connection to MongoDB
-mongoose.connect(db_atlas, {
+mongoose.connect("mongodb+srv://Itzhak07:Itzhak07@cluster0-tuoql.mongodb.net/RFit_DB?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false
 });
+
+// mongodb+srv://Itzhak07:Itzhak07@cluster0-tuoql.mongodb.net/RFit_DB?retryWrites=true&w=majority
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
