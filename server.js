@@ -13,9 +13,6 @@ const config = require("config");
 
 const db_atlas = config.get("mongoURI");
 
-console.log(__dirname);
-
-
 // Connect Database
 mongoose.connect(db_atlas, {
   useNewUrlParser: true,
