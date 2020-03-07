@@ -7,7 +7,6 @@
   "private": true,
   "scripts": {
     "start": "node server",
-    "client": "npm start --prefix client",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Itzhak Tzoref",

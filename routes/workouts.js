@@ -86,10 +86,7 @@ router.delete("/delete/:id", auth, async function(req, res, next) {
 router.put("/update", auth, async function(req, res, next) {
   try {
     const { id } = req.user;
-    console.log(id);
-
     const workouts = await WorkoutsController.updateWorkout(req, id);
-    console.log(workouts);
 
     res.json(workouts);
   } catch (err) {

@@ -65,9 +65,6 @@ class WorkoutsController {
   static updateWorkout({ body }, userId) {
     const { id } = body;
 
-    console.log(body);
-    
-
     return new Promise((resolve, reject) => {
       Workout.findByIdAndUpdate(id, body, function(err, docs) {
         if (err) {
