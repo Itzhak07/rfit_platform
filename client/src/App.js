@@ -19,61 +19,89 @@ const LandingPage = lazy(() =>
   )
 );
 
-const Schedule = lazy(async () => {
-  const [moduleExports] = await Promise.all([
-    import(/* webpackChunkName: "Schedule"*/ "./components/Schedule2"),
-    new Promise(resolve => setTimeout(resolve, 600))
-  ]);
-  return moduleExports;
-});
+const Schedule = lazy(() =>
+  import(/* webpackChunkName: "Schedule"*/ "./components/Schedule2")
+);
 
-const WorkoutesManager = lazy(async () => {
-  const [moduleExports] = await Promise.all([
-    import(
-      /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/WorkoutsManagePage"
-    ),
-    new Promise(resolve => setTimeout(resolve, 600))
-  ]);
-  return moduleExports;
-});
+const WorkoutesManager = lazy(() =>
+  import(
+    /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/WorkoutsManagePage"
+  )
+);
 
-const ClientsManager = lazy(async () => {
-  const [moduleExports] = await Promise.all([
-    import(
-      /* webpackChunkName: "ClientsManagePage"*/ "./layouts/ClientsManagePage"
-    ),
-    new Promise(resolve => setTimeout(resolve, 600))
-  ]);
-  return moduleExports;
-});
+const ClientsManager = lazy(() =>
+  import(
+    /* webpackChunkName: "ClientsManagePage"*/ "./layouts/ClientsManagePage"
+  )
+);
 
-const Home = lazy(async () => {
-  const [moduleExports] = await Promise.all([
-    import(/* webpackChunkName: "Home"*/ "./layouts/Home"),
-    new Promise(resolve => setTimeout(resolve, 600))
-  ]);
-  return moduleExports;
-});
+const Home = lazy(() => import(/* webpackChunkName: "Home"*/ "./layouts/Home"));
 
-const Account = lazy(async () => {
-  await store.dispatch(loadUser());
-  const [moduleExports] = await Promise.all([
-    import(/* webpackChunkName: "Account"*/ "./layouts/Account"),
-    new Promise(resolve => setTimeout(resolve, 600))
-  ]);
-  return moduleExports;
-});
+const Account = lazy(() =>
+  import(/* webpackChunkName: "Account"*/ "./layouts/Account")
+);
 
-const ClientProfilePage = lazy(async () => {
-  // await store.dispatch(fetchClients());
-  const [moduleExports] = await Promise.all([
-    import(
-      /* webpackChunkName: "ClientProfilePage"*/ "./layouts/ClientProfilePage"
-    ),
-    new Promise(resolve => setTimeout(resolve, 600))
-  ]);
-  return moduleExports;
-});
+const ClientProfilePage = lazy(() =>
+  import(
+    /* webpackChunkName: "ClientProfilePage"*/ "./layouts/ClientProfilePage"
+  )
+);
+
+// const Schedule = lazy(async () => {
+//   const [moduleExports] = await Promise.all([
+//     import(/* webpackChunkName: "Schedule"*/ "./components/Schedule2"),
+//     new Promise(resolve => setTimeout(resolve, 600))
+//   ]);
+//   return moduleExports;
+// });
+
+// const WorkoutesManager = lazy(async () => {
+//   const [moduleExports] = await Promise.all([
+//     import(
+//       /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/WorkoutsManagePage"
+//     ),
+//     new Promise(resolve => setTimeout(resolve, 600))
+//   ]);
+//   return moduleExports;
+// });
+
+// const ClientsManager = lazy(async () => {
+//   const [moduleExports] = await Promise.all([
+//     import(
+//       /* webpackChunkName: "ClientsManagePage"*/ "./layouts/ClientsManagePage"
+//     ),
+//     new Promise(resolve => setTimeout(resolve, 600))
+//   ]);
+//   return moduleExports;
+// });
+
+// const Home = lazy(async () => {
+//   const [moduleExports] = await Promise.all([
+//     import(/* webpackChunkName: "Home"*/ "./layouts/Home"),
+//     new Promise(resolve => setTimeout(resolve, 600))
+//   ]);
+//   return moduleExports;
+// });
+
+// const Account = lazy(async () => {
+//   await store.dispatch(loadUser());
+//   const [moduleExports] = await Promise.all([
+//     import(/* webpackChunkName: "Account"*/ "./layouts/Account"),
+//     new Promise(resolve => setTimeout(resolve, 600))
+//   ]);
+//   return moduleExports;
+// });
+
+// const ClientProfilePage = lazy(async () => {
+//   // await store.dispatch(fetchClients());
+//   const [moduleExports] = await Promise.all([
+//     import(
+//       /* webpackChunkName: "ClientProfilePage"*/ "./layouts/ClientProfilePage"
+//     ),
+//     new Promise(resolve => setTimeout(resolve, 600))
+//   ]);
+//   return moduleExports;
+// });
 
 function App() {
   if (localStorage.token) {
@@ -112,7 +140,11 @@ function App() {
                 path="/dashboard/clients/:id"
                 component={ClientProfilePage}
               />
-              <PrivateRoute exact path="/dashboard/account" component={Account} />
+              <PrivateRoute
+                exact
+                path="/dashboard/account"
+                component={Account}
+              />
             </ResponsiveDrawer>
             <Route component={NotFound} />
           </Switch>

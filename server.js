@@ -14,12 +14,6 @@ const config = require("config");
 const db_atlas = config.get("mongoURI");
 
 // Connect Database
-mongoose.connect(db_atlas, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-});
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
