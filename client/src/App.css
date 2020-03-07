@@ -1,0 +1,10 @@
+a {
+  color: black;
+  text-decoration: unset;
+}
+
+a:hover {
+  color: unset;
+  text-decoration: unset;
+}
+  
