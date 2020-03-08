@@ -1,9 +1,7 @@
 import React from "react";
-
 import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
-import { Paper } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {

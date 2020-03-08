@@ -6,13 +6,25 @@ import { fetchWorkouts } from "../actions/workoutActions";
 import { fetchClients } from "../actions/clientActions";
 import DaySchedule from "../components/DaySchedule";
 import bgwhite from "../assets/images/bgwhite.png";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import {
+  CalendarToday as CalendarTodayIcon,
+  AccountBox as AccountBoxIcon
+} from "@material-ui/icons";
 
 const TodaysWorkoutsModal = lazy(() =>
   import("../layouts/TodaysWorkoutsModal")
 );
 
-function Home({ workouts, clients, activeClients, loading, today }) {
+function Home({
+  workouts,
+  clients,
+  activeClients,
+  loading,
+  today,
+  clientLoading
+}) {
   const [open, setOpen] = useState(false);
 
   const modalOpen = () => {
@@ -37,11 +49,14 @@ function Home({ workouts, clients, activeClients, loading, today }) {
       marginBottom: 50,
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
       background: "#000000bf",
-      height: "100%",
+      height: "100%"
       // borderRadius: 30
     },
     schedule: {
       margin: "auto"
+    },
+    linkBtn: {
+      margin: "0 5px"
     }
   };
 
@@ -57,7 +72,7 @@ function Home({ workouts, clients, activeClients, loading, today }) {
         <SimpleCard
           title="Clients"
           count={
-            clients == null || (!loading && clients.length === 0)
+            clients == null || (!clientLoading && clients.length === 0)
               ? "0"
               : clients.length
           }
@@ -67,7 +82,9 @@ function Home({ workouts, clients, activeClients, loading, today }) {
         <SimpleCard
           title="Active Clients"
           count={
-            !loading && activeClients.length === 0 ? "0" : activeClients.length
+            clients == null || (!clientLoading && activeClients.length === 0)
+              ? "0"
+              : activeClients.length
           }
           urlName="Clients"
           url="dashboard/clients"
@@ -80,6 +97,16 @@ function Home({ workouts, clients, activeClients, loading, today }) {
         />
       </div>
       <div style={styles.schedule}>
+        <Link style={styles.linkBtn} to="./dashboard/schedule">
+          <Button variant="outlined" startIcon={<CalendarTodayIcon />}>
+            Full Scheduele
+          </Button>
+        </Link>
+        <Link style={styles.linkBtn} to="./dashboard/account">
+          <Button variant="outlined" startIcon={<AccountBoxIcon />}>
+            Account
+          </Button>
+        </Link>
         <DaySchedule workouts={today} loading={loading} />
       </div>
 
@@ -108,7 +135,8 @@ const mapStateToProps = state => ({
   today: state.workouts.today,
   clients: state.clients.clients,
   activeClients: state.clients.active,
-  loading: state.workouts.loading
+  loading: state.workouts.loading,
+  clientLoading: state.clients.loading
 });
 
 export default connect(mapStateToProps, { fetchWorkouts, fetchClients })(Home);

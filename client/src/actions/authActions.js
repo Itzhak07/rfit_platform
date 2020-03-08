@@ -22,13 +22,13 @@ export const loadUser = () => async dispatch => {
   try {
     const res = await axios.get("https://rfit-platform.herokuapp.com/api/auth");
 
-    dispatch({
+    await dispatch({
       type: USER_LOADED,
       payload: res.data
     });
 
-    dispatch(fetchWorkouts());
-    dispatch(fetchClients());
+    await dispatch(fetchClients());
+    await dispatch(fetchWorkouts());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR
@@ -65,7 +65,6 @@ export const register = ({
     dispatch(loadUser());
   } catch (err) {
     const { error } = err.response.data;
-
 
     dispatch(setAlert(error));
 
@@ -121,7 +120,5 @@ export const updateUser = data => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => {
-
-    });
+    .catch(err => {});
 };

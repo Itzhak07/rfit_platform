@@ -7,7 +7,6 @@ import {
   AppointmentTooltip
 } from "@devexpress/dx-react-scheduler-material-ui";
 import WeightlifterPic from "../assets/images/weightlifter.png";
-
 import { Typography, LinearProgress } from "@material-ui/core";
 
 export default function DaySchedule({ workouts, loading }) {
@@ -37,12 +36,18 @@ export default function DaySchedule({ workouts, loading }) {
 
   return (
     <Paper style={styles.root} elevation={3}>
-      <Typography style={styles.title}>Today's Schedule</Typography>
+      <Typography style={styles.title}>Today's Schedule </Typography>
+
       {loading ? <LinearProgress variant="query" /> : ""}
       {!loading && workouts.length === 0 ? (
         <div style={styles.wrapper}>
           <Typography style={styles.message}>No Appointments Today!</Typography>
-          <img src={WeightlifterPic} title="weightlifter" alt="weightlifter" style={styles.img} />
+          <img
+            src={WeightlifterPic}
+            title="weightlifter"
+            alt="weightlifter"
+            style={styles.img}
+          />
         </div>
       ) : (
         <Scheduler data={workouts}>

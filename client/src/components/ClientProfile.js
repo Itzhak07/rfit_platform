@@ -1,6 +1,5 @@
 import React from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import moment from "moment";
 
 const useStyles = makeStyles({
   root: {

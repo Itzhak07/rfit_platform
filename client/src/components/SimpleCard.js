@@ -63,12 +63,13 @@ export default function SimpleCard({
           <CardActions>
             {url && urlName ? (
               <Link to={url}>
-                <Button color="primary" size="small">
+                <Button variant="outlined" color="primary" size="small">
                   {urlName}
                 </Button>
               </Link>
             ) : (
               <Button
+                variant="outlined"
                 color="secondary"
                 onClick={() => openModal()}
                 size="small"

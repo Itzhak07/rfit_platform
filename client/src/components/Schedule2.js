@@ -155,8 +155,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       cancelAppointment,
       target,
       onHide,
-      activeClients,
-      data
+      activeClients
     } = this.props;
 
     const { appointmentChanges } = this.state;
@@ -322,7 +321,7 @@ const styles = theme => ({
   addButton: {
     position: "absolute",
     bottom: theme.spacing(1) * 3,
-    right: theme.spacing(1) * 4,
+    right: theme.spacing(1) * 4
   }
 });
 

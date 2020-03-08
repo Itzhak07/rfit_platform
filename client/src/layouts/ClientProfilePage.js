@@ -10,12 +10,16 @@ const useStyles = makeStyles({
   root: {
     width: "100%",
     display: "flex",
-    flexFlow: "row wrap",
-    justifyContent: "space-evenly"
+    flexFlow: "row wrap"
   },
-  paper: {
+  info: {
     padding: 20,
-    width: 800
+    width: 430
+  },
+  workouts: {
+    padding: 20,
+    width: "100%",
+    margin: "20px auto"
   },
   item: { padding: "0 0 20px 0" }
 });
@@ -38,14 +42,14 @@ function ClientProfilePage({ clients, workouts }) {
       return workouts.client === id;
     });
     setState({ thisClient: thisClient[0], thisWorkouts: clientWorkouts });
-  }, []);
+  }, [clients, workouts, id]);
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper} variant="outlined">
+      <Paper className={classes.info} variant="outlined">
         {<ClientProfile client={thisClient} />}
       </Paper>
-      <Paper className={classes.paper} variant="outlined">
+      <Paper className={classes.workouts} variant="outlined">
         <h2> {thisClient.firstName}'s Workouts History:</h2>
         <ClientWorkoutsTable workouts={thisWorkouts} />
       </Paper>

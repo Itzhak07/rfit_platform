@@ -129,9 +129,9 @@ const useStyles = makeStyles(theme => ({
 function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [pageName, setPageName] = useState();
-  const [open, setOpen] = React.useState({
+  const [open, setOpen] = useState({
     workouts: false,
     clients: false
   });

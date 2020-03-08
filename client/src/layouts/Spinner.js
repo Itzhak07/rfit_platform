@@ -13,10 +13,10 @@ const useStyles = makeStyles(theme => ({
     margin: "auto"
   },
   logo: {
-    width: 350,
+    maxWidth: 350,
     position: "relative",
     top: 280
-  }
+  },
 }));
 
 export const Spinner = () => {
@@ -25,8 +25,11 @@ export const Spinner = () => {
   return (
     <div className={classes.root}>
       <div className={classes.spinner}>
-        <img className={classes.logo} src={logo} alt="logo"/>
-        <CircularProgress size={400} thickness={2} />
+        <img className={classes.logo} src={logo} alt="logo" />
+        <CircularProgress
+          size={400}
+          thickness={2}
+        />
       </div>
     </div>
   );
