@@ -120,7 +120,7 @@ const useStyles = makeStyles(theme => ({
   collapsed: {
     transition: "all 0.3s ease",
     "&:hover": {
-      marginLeft: 10,
+      paddingLeft: 10,
       transition: "all 0.3s ease"
     }
   }
@@ -225,6 +225,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                 }}
               >
                 <ListItem button className={classes.listItem}>
+                  <div className={classes.itemBalckBar} />
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.name} />
                 </ListItem>

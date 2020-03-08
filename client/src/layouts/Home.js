@@ -40,7 +40,8 @@ function Home({
       display: "flex",
       flexFlow: "row-reverse wrap",
       justifyContent: "space-evenly",
-      background: `url(${bgwhite})`
+      background: `url(${bgwhite})`,
+      padding: 10
     },
     cardsWrapper: {
       display: "flex",
