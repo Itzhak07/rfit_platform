@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
+import { CircularProgress } from "@material-ui/core";
 const ErrorAlert = lazy(() => import("./ErrorAlert"));
 
 const useStyles = makeStyles({
@@ -102,7 +103,7 @@ export default function WorkoutsTable({
         }}
       />
       {alerts ? (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<CircularProgress />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

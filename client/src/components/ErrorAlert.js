@@ -1,14 +1,25 @@
 import React from "react";
 import ErrorIcon from "@material-ui/icons/Error";
 
-const style = {
-  maxWidth: "600px"
+const rootStyle = {
+  maxWidth: 600,
+  height: 40,
+  background: "#ff3366",
+  borderRadius: 4,
+  display: "flex",
+  alignItems: "center",
+  padding: 10,
+  color: "white"
+};
+
+const iconStyle = {
+  marginRight: 5
 };
 
 export default function ErrorAlert({ message }) {
   return (
-    <div className="stylealert alert alert-danger" style={style}>
-      <ErrorIcon /> {message}
+    <div style={rootStyle}>
+      <ErrorIcon style={iconStyle} /> {message}
     </div>
   );
 }

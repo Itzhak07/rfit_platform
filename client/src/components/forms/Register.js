@@ -9,13 +9,15 @@ import {
   Typography,
   Container,
   Grid,
-  Link
+  Link,
+  CircularProgress
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { register } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
+import { setAlert } from "../../actions/alertActions";
 
 const ErrorAlert = lazy(() => import("../ErrorAlert"));
 
@@ -52,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Register = ({ alerts, register, isAuthenticated }) => {
+const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -71,18 +73,15 @@ const Register = ({ alerts, register, isAuthenticated }) => {
   const onSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
-      alert("not match");
+      setAlert([{ msg: "Passwords doesn't match." }]);
     } else {
       register({ firstName, lastName, email, password });
-    
     }
   };
 
-  
   if (isAuthenticated) {
     return <Redirect to="./dashboard" />;
   }
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -177,7 +176,7 @@ const Register = ({ alerts, register, isAuthenticated }) => {
         </form>
       </div>
       {alerts ? (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<CircularProgress />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;
@@ -196,7 +195,8 @@ const Register = ({ alerts, register, isAuthenticated }) => {
 
 Register.propTypes = {
   register: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  setAlert: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -204,4 +204,4 @@ const mapStateToProps = state => ({
   alerts: state.alerts.alerts
 });
 
-export default connect(mapStateToProps, { register })(Register);
+export default connect(mapStateToProps, { register, setAlert })(Register);

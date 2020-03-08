@@ -9,7 +9,8 @@ import {
   Link,
   Box,
   Typography,
-  Container
+  Container,
+  CircularProgress
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
@@ -124,7 +125,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
         </form>
       </div>
       {alerts ? (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<CircularProgress />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
-import { Paper } from "@material-ui/core";
+import { Paper, CircularProgress } from "@material-ui/core";
 const ErrorAlert = lazy(() => import("./ErrorAlert"));
 
 const useStyles = makeStyles({
@@ -109,7 +109,7 @@ export default function ClientsTable({
           }}
         />
         {alerts ? (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<CircularProgress />}>
             {alerts.map(alert => {
               return alert.msg.map(err => {
                 return <ErrorAlert message={err} />;
