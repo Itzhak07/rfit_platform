@@ -50,7 +50,6 @@ function ClientProfilePage({ clients, workouts }) {
         {<ClientProfile client={thisClient} />}
       </Paper>
       <Paper className={classes.workouts} variant="outlined">
-        <h2> {thisClient.firstName}'s Workouts History:</h2>
         <ClientWorkoutsTable workouts={thisWorkouts} />
       </Paper>
     </div>

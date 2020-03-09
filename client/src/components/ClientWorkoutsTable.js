@@ -28,6 +28,8 @@ export default function ClientWorkoutsTable({ workouts }) {
   return (
     <div className={classes.root}>
       <MaterialTable
+        title="Anakin's Workouts History:
+        "
         className={classes.table}
         columns={columns}
         data={data}
