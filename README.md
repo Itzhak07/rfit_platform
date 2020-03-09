@@ -20,6 +20,7 @@ it was important for me to build something simple but powerful.
 * React.js
 * Redux Thunk
 * Material UI
+* Responsive Design
 * DevExtremeREACTIVE - React Scheduler
 
 ## Features:
