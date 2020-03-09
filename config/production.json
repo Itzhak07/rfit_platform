@@ -1,4 +1,4 @@
 {
-    "jwtSecret": "Execute_Order_66",
+    "jwtSecret": "//JWT Secret//",
     "mongoURI": "//Mongo DB URI//"
 }
