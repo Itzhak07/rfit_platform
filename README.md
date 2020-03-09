@@ -22,4 +22,6 @@ it was important for me to build something simple but powerful.
 * DevExtremeREACTIVE - React Scheduler
 
 ## Features:
-* Login / Registration
+* Auth - Login / Registration
+* Schedule - Add, update, delete appointments. also you can update by drag & drop the appointment.
+day/week/month view options.
