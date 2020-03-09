@@ -1,5 +1,5 @@
 # Welcome to RFit Platform
-**Live Demo: https://www.rfit-platform.com**
+**Live Demo: http://www.rfit-platform.com/**
 
 ## What is RFit Platform?
 The RFit Platform is a tool built for personal trainers to keep track on their tight schedule and most of all their clients.
