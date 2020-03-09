@@ -33,3 +33,5 @@ filtering options using Material-Table.
 * Workouts - Add, update, delete workouts.
 filtering options using Material-Table.
 
+###### Dashboard:
+![](https://i.ibb.co/7QZ7vzZ/2.jpg)
