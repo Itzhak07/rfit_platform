@@ -10,6 +10,14 @@ class ClientController {
     });
   }
 
+  static clientValidation(body) {
+    const { email } = body;
+    const email_lowerCase = email.toLowerCase();
+    let client = Client.findOne({ email: email_lowerCase });
+
+    return client;
+  }
+
   static addClient(req, id) {
     const { firstName, lastName, email, phone, gender } = req.body;
 

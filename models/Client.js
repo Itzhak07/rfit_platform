@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var clientSchema = new Schema({
   firstName: { type: String },
   lastName: { type: String },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true },
   phone: { type: String },
   status: { type: Number },
   gender: { type: String },
