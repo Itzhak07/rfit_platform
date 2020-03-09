@@ -4,8 +4,12 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { CircularProgress } from "@material-ui/core";
 
-const AccountDetails = lazy(() => import("../components/AccountDetails"));
-const AccountProfile = lazy(() => import("../components/AccountProfile"));
+const AccountDetails = lazy(() =>
+  import("../../components/Account/AccountDetails")
+);
+const AccountProfile = lazy(() =>
+  import("../../components/Account/AccountProfile")
+);
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,7 +36,7 @@ function Account({ user }) {
 }
 
 Account.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToPros = state => ({

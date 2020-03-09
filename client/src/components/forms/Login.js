@@ -17,7 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { login } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 
-const ErrorAlert = lazy(() => import("../ErrorAlert"));
+const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
 
 function Copyright() {
   return (

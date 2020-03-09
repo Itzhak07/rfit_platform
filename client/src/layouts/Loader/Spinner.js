@@ -1,6 +1,6 @@
 import React from "react";
 import { CircularProgress, makeStyles } from "@material-ui/core";
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 350,
     position: "relative",
     top: 280
-  },
+  }
 }));
 
 export const Spinner = () => {
@@ -26,10 +26,7 @@ export const Spinner = () => {
     <div className={classes.root}>
       <div className={classes.spinner}>
         <img className={classes.logo} src={logo} alt="logo" />
-        <CircularProgress
-          size={400}
-          thickness={2}
-        />
+        <CircularProgress size={400} thickness={2} />
       </div>
     </div>
   );

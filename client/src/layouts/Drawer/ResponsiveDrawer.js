@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import { logout } from "../actions/authActions";
+import { logout } from "../../actions/authActions";
 import PropTypes from "prop-types";
 import {
   AppBar,
@@ -38,7 +38,7 @@ import {
   ExpandMore
 } from "@material-ui/icons/";
 
-import logo from "../assets/images/logo.png";
+import logo from "../../assets/images/logo.png";
 
 // if (process.env.NODE_ENV === 'development') {
 //   const whyDidYouRender = require('@welldone-software/why-did-you-render');

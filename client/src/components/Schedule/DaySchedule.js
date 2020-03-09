@@ -6,7 +6,7 @@ import {
   Appointments,
   AppointmentTooltip
 } from "@devexpress/dx-react-scheduler-material-ui";
-import WeightlifterPic from "../assets/images/weightlifter.png";
+import WeightlifterPic from "../../assets/images/weightlifter.png";
 import { Typography, LinearProgress } from "@material-ui/core";
 
 export default function DaySchedule({ workouts, loading }) {

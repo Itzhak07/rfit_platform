@@ -1,11 +1,11 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
-import ResponsiveDrawer from "./layouts/ResponsiveDrawer";
+import ResponsiveDrawer from "./layouts/Drawer/ResponsiveDrawer";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import { Spinner } from "./layouts/Spinner";
+import { Spinner } from "./layouts/Loader/Spinner";
 import "./App.css";
-import { NotFound } from "./layouts/NotFound";
+import { NotFound } from "./layouts/NotFound/NotFound";
 import { loadUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./routing/PrivateRoute";
@@ -48,7 +48,7 @@ import LandingPage from "./layouts/LandingPage/LandingPage";
 
 const Schedule = lazy(async () => {
   const [moduleExports] = await Promise.all([
-    import(/* webpackChunkName: "Schedule"*/ "./components/Schedule2"),
+    import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule"),
     new Promise(resolve => setTimeout(resolve, 600))
   ]);
   return moduleExports;
@@ -57,7 +57,7 @@ const Schedule = lazy(async () => {
 const WorkoutesManager = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import(
-      /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/WorkoutsManagePage"
+      /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/Workouts/WorkoutsManagePage"
     ),
     new Promise(resolve => setTimeout(resolve, 600))
   ]);
@@ -67,7 +67,7 @@ const WorkoutesManager = lazy(async () => {
 const ClientsManager = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import(
-      /* webpackChunkName: "ClientsManagePage"*/ "./layouts/ClientsManagePage"
+      /* webpackChunkName: "ClientsManagePage"*/ "./layouts/Client/ClientsManagePage"
     ),
     new Promise(resolve => setTimeout(resolve, 600))
   ]);
@@ -76,7 +76,7 @@ const ClientsManager = lazy(async () => {
 
 const Home = lazy(async () => {
   const [moduleExports] = await Promise.all([
-    import(/* webpackChunkName: "Home"*/ "./layouts/Home"),
+    import(/* webpackChunkName: "Home"*/ "./layouts/Home/Home"),
     new Promise(resolve => setTimeout(resolve, 600))
   ]);
   return moduleExports;
@@ -85,7 +85,7 @@ const Home = lazy(async () => {
 const Account = lazy(async () => {
   await store.dispatch(loadUser());
   const [moduleExports] = await Promise.all([
-    import(/* webpackChunkName: "Account"*/ "./layouts/Account"),
+    import(/* webpackChunkName: "Account"*/ "./layouts/Account/Account"),
     new Promise(resolve => setTimeout(resolve, 600))
   ]);
   return moduleExports;
@@ -95,7 +95,7 @@ const ClientProfilePage = lazy(async () => {
   await store.dispatch(fetchClients());
   const [moduleExports] = await Promise.all([
     import(
-      /* webpackChunkName: "ClientProfilePage"*/ "./layouts/ClientProfilePage"
+      /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
     ),
     new Promise(resolve => setTimeout(resolve, 600))
   ]);

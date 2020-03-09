@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import ClientWorkoutsTable from "../components/ClientWorkoutsTable";
+import ClientWorkoutsTable from "../../components/Client/ClientWorkoutsTable";
 import { Paper, makeStyles } from "@material-ui/core";
-import { ClientProfile } from "../components/ClientProfile";
+import { ClientProfile } from "../../components/Client/ClientProfile";
 
 const useStyles = makeStyles({
   root: {

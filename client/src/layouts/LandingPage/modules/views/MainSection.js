@@ -8,7 +8,7 @@ import Background from "../../../../assets/images/landing-bg.jpg";
 import { CircularProgress } from "@material-ui/core";
 
 const AuthModal = lazy(() =>
-  import(/* webpackChunkName: "AuthModal"*/ "../../../AuthModal")
+  import(/* webpackChunkName: "AuthModal"*/ "../../../Modal/AuthModal")
 );
 
 const styles = theme => ({

@@ -14,7 +14,7 @@ import {
   TextField
 } from "@material-ui/core";
 
-import { updateUser } from "../actions/authActions";
+import { updateUser } from "../../actions/authActions";
 
 const useStyles = makeStyles(() => ({
   root: {}

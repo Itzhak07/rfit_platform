@@ -8,10 +8,10 @@ import {
 } from "@material-ui/core";
 
 const Login = lazy(() =>
-  import(/* webpackChunkName: "LoginForm"*/ "../components/forms/Login")
+  import(/* webpackChunkName: "LoginForm"*/ "../../components/forms/Login")
 );
 const Register = lazy(() =>
-  import(/* webpackChunkName: "RegisterForm"*/ "../components/forms/Register")
+  import(/* webpackChunkName: "RegisterForm"*/ "../../components/forms/Register")
 );
 
 const Transition = React.forwardRef(function Transition(props, ref) {

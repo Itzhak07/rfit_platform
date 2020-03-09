@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createClient, updateClient } from "../actions/clientActions";
-import ClientsTable from "../components/ClientsTable";
-import { Spinner } from "./Spinner";
+import { createClient, updateClient } from "../../actions/clientActions";
+import ClientsTable from "../../components/Client/ClientsTable";
+import { Spinner } from "../Loader/Spinner";
 
 const ClientsManagePage = ({
   createClient,

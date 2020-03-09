@@ -19,7 +19,7 @@ import { register } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alertActions";
 
-const ErrorAlert = lazy(() => import("../ErrorAlert"));
+const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
 
 function Copyright() {
   return (

@@ -1,11 +1,11 @@
 import React, { useState, Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import SimpleCard from "../components/SimpleCard";
-import { fetchWorkouts } from "../actions/workoutActions";
-import { fetchClients } from "../actions/clientActions";
-import DaySchedule from "../components/DaySchedule";
-import bgwhite from "../assets/images/bgwhite.png";
+import SimpleCard from "../../components/Cards/SimpleCard";
+import { fetchWorkouts } from "../../actions/workoutActions";
+import { fetchClients } from "../../actions/clientActions";
+import DaySchedule from "../../components/Schedule/DaySchedule";
+import bgwhite from "../../assets/images/bgwhite.png";
 import { CircularProgress, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@material-ui/icons";
 
 const TodaysWorkoutsModal = lazy(() =>
-  import("../layouts/TodaysWorkoutsModal")
+  import("../Modal/TodaysWorkoutsModal")
 );
 
 function Home({

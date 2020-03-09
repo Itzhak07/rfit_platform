@@ -4,15 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
 import { Paper, CircularProgress } from "@material-ui/core";
-const ErrorAlert = lazy(() => import("./ErrorAlert"));
+const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
     overflowX: "auto"
-  },
-  table: {
-    // padding: 20
   }
 });
 
@@ -74,7 +71,6 @@ export default function ClientsTable({
       <div className={classes.root}>
         <MaterialTable
           title="Clients Mangament"
-          className={classes.table}
           columns={state.columns}
           data={state.data}
           onRowClick={(event, rowData) => {}}

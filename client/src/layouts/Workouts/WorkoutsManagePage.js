@@ -5,9 +5,9 @@ import {
   createWorkout,
   deleteWorkout,
   updateWorkout
-} from "../actions/workoutActions";
-import WorkoutsTable from "../components/workoutsTable";
-import { Spinner } from "./Spinner";
+} from "../../actions/workoutActions";
+import WorkoutsTable from "../../components/Workouts/workoutsTable";
+import { Spinner } from "../Loader/Spinner";
 
 const AllWorkoutsPage = ({
   createWorkout,

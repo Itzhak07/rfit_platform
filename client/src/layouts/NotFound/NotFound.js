@@ -1,7 +1,7 @@
 import React from "react";
-import notFoundBg from "../assets/images/404.jpg";
-import notFoundLeft from "../assets/images/404-left.jpg";
-import notFoundRight from "../assets/images/404-right.jpg";
+import notFoundBg from "../../assets/images/404.jpg";
+import notFoundLeft from "../../assets/images/404-left.jpg";
+import notFoundRight from "../../assets/images/404-right.jpg";
 
 const styles = {
   root: {

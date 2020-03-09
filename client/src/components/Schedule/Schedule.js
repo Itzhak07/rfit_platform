@@ -42,13 +42,13 @@ import {
   createWorkout,
   deleteWorkout,
   updateWorkout
-} from "../actions/workoutActions";
+} from "../../actions/workoutActions";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { Info } from "@material-ui/icons";
-const ErrorAlert = lazy(() => import("./ErrorAlert"));
+const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
 const Modal = lazy(() =>
-  import(/* webpackChunkName: "Modal"*/ "../layouts/Modal")
+  import(/* webpackChunkName: "Modal"*/ "../../layouts/Modal/Modal")
 );
 
 const containerStyles = theme => ({
@@ -326,7 +326,7 @@ const styles = theme => ({
 });
 
 /* eslint-disable-next-line react/no-multi-comp */
-class Schedule2 extends React.PureComponent {
+class Schedule extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -618,7 +618,7 @@ class Schedule2 extends React.PureComponent {
   }
 }
 
-Schedule2.propTypes = {
+Schedule.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   deleteWorkout: PropTypes.func.isRequired,
   updateWorkout: PropTypes.func.isRequired,
@@ -641,4 +641,4 @@ export default connect(mapStateToProps, {
   createWorkout,
   deleteWorkout,
   updateWorkout
-})(withStyles(styles, { name: "Schedule2" })(Schedule2));
+})(withStyles(styles, { name: "Schedule" })(Schedule));
