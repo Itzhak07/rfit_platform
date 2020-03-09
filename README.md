@@ -35,3 +35,21 @@ filtering options using Material-Table.
 
 ###### Dashboard:
 ![](https://i.ibb.co/7QZ7vzZ/2.jpg)
+
+###### Schedule:
+![](https://i.ibb.co/RTkMHTY/1.jpg)
+![](https://i.ibb.co/jzqM5TM/9.jpg)
+
+###### Clients:
+![](https://i.ibb.co/v4n9vk3/3.jpg)
+
+###### Client:
+![](https://i.ibb.co/cvRmzM6/6.jpg)
+
+###### Workouts:
+![](https://i.ibb.co/k8GwxGK/7.jpg)
+
+###### Account:
+![](https://i.ibb.co/bWnwHnt/8.jpg)
+
+
