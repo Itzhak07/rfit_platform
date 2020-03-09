@@ -8,6 +8,7 @@ it was important for me to build something simple but powerful.
 
 
 ## Brief
+* Single Page Application
 * MVC Architecture
 
 ## Backend:
@@ -26,6 +27,9 @@ it was important for me to build something simple but powerful.
 * Schedule - Add, update, delete appointments. also you can update by drag & drop the appointment.
 day/week/month view options.
 
-* Clients - Add, update clients (We dont want to remove clients, just update their status to "Not Active" :) ).
+* Clients - Add, update clients (We dont want to remove a client, just update his status to "Not Active" :) ).
+filtering options using Material-Table.
+
+* Workouts - Add, update, delete workouts.
 filtering options using Material-Table.
 
