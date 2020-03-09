@@ -38,7 +38,6 @@ router.post(
   async function(req, res, next) {
     const reqErrors = validationResult(req);
     if (!reqErrors.isEmpty()) {
-
       return res.status(400).json({
         error: reqErrors.array()
       });
@@ -50,7 +49,6 @@ router.post(
 
       res.json(newClient);
     } catch (err) {
-
       res.status(409).render("error");
     }
   }
@@ -74,6 +72,7 @@ router.put("/update", auth, async function(req, res, next) {
 
     res.json(clients);
   } catch (err) {
+    console.log(err);
     res.status(409).json(err);
   }
 });
