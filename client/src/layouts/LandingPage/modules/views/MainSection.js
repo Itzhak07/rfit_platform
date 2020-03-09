@@ -21,11 +21,19 @@ const styles = theme => ({
     minWidth: 200,
     borderRadius: "50px"
   },
-  h5: {
+  titlePrimary: {
+    fontSize: 42,
+    [theme.breakpoints.up("lg")]: {
+      fontSize: 50
+    }
+  },
+  titleSecondary: {
+    fontSize: 26,
     marginBottom: theme.spacing(4),
     marginTop: theme.spacing(4),
-    [theme.breakpoints.up("sm")]: {
-      marginTop: theme.spacing(10)
+    [theme.breakpoints.up("lg")]: {
+      marginTop: theme.spacing(10),
+      fontSize: 36
     }
   },
   more: {
@@ -54,14 +62,20 @@ function MainSection(props) {
         alt="increase priority"
       />
 
-      <Typography color="inherit" align="center" variant="h2" marked="center">
+      <Typography
+        className={classes.titlePrimary}
+        color="inherit"
+        align="center"
+        marked="center"
+        variant="h2"
+      >
         Upgrade your appointments
       </Typography>
       <Typography
         color="inherit"
         align="center"
+        className={classes.titleSecondary}
         variant="h4"
-        className={classes.h5}
       >
         Discover the RFit Platform
       </Typography>

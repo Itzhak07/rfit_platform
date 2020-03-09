@@ -17,8 +17,12 @@ function LandingPage({ isAuthenticated }) {
     return <Redirect to="/dashboard" />;
   }
 
+  const rootStyle = {
+    overflowX: "hidden"
+  };
+
   return (
-    <Fragment>
+    <div style={rootStyle}>
       <AppAppBar />
       <MainSection />
       <MockUpSection />
@@ -26,7 +30,7 @@ function LandingPage({ isAuthenticated }) {
       <Subscribe />
       <GetInTouch />
       <AppFooter />
-    </Fragment>
+    </div>
   );
 }
 
