@@ -25,3 +25,7 @@ it was important for me to build something simple but powerful.
 * Auth - Login / Registration
 * Schedule - Add, update, delete appointments. also you can update by drag & drop the appointment.
 day/week/month view options.
+
+* Clients - Add, update clients (We dont want to remove clients, just update their status to "Not Active" :) ).
+filtering options using Material-Table.
+
