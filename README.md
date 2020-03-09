@@ -1,1 +1,1 @@
-# Welcoem to RFit Platform
+# Welcome to RFit Platform
