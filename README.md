@@ -35,6 +35,7 @@ filtering options using Material-Table.
 filtering options using Material-Table.
 
 ###### Dashboard:
+Here you can see your daily schedule, and some more information like today's workouts, how many clients you have, how many ACTIVE clients and more.
 ![](https://i.ibb.co/7QZ7vzZ/2.jpg)
 
 ###### Schedule:
