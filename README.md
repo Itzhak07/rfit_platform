@@ -36,9 +36,23 @@ filtering options using Material-Table.
 
 ###### Dashboard:
 Here you can see your daily schedule, and some more information like today's workouts, how many clients you have, how many ACTIVE clients and more.
+
 ![](https://i.ibb.co/7QZ7vzZ/2.jpg)
 
 ###### Schedule:
+**Add an Appointment:**
+Double-click a cell in the timetable to open the appointment editing form or click the + button on the bottom right.
+Fill out the form and click Create to add a new appointment.
+
+**Update an Appointment:**
+Double-click an appointment to open the appointment editing form;
+Click an appointment to invoke its tooltip, and then click Edit in the tooltip to open the appointment editing form;
+Drag an appointment to another cell to reschedule it. 
+Drag an appointment's top or bottom border (left or right border for horizontal appointments) to change the appointment's duration.
+
+**Delete an Appointment:**
+Click an appointment to invoke its tooltip, and then click Delete in the tooltip to remove the appointment.
+
 ![](https://i.ibb.co/RTkMHTY/1.jpg)
 ![](https://i.ibb.co/jzqM5TM/9.jpg)
 
