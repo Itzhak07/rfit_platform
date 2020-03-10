@@ -58,17 +58,35 @@ Click an appointment to invoke its tooltip, and then click Delete in the tooltip
 
 ###### Clients:
 In this page you can manage your clients.
+you can filter the table by name, date, status, phone, email, gender.
+
 **Add a client:**
 Click on the plus button (top right, next to search input) and fill the new row that added to the table.
 
 **Update a client:**
 Click on the edit button (in Actions column) and edit the desired value.
+
 ![](https://i.ibb.co/v4n9vk3/3.jpg)
 
 ###### Client:
 ![](https://i.ibb.co/cvRmzM6/6.jpg)
 
 ###### Workouts:
+In this page you can manage your workouts.
+you can filter the table by client name or date.
+
+**Add a workout:**
+Click on the plus button (top right, next to search input) and fill the new row that added to the table.
+
+**Update a workout:**
+Click on the edit button (in Actions column) and edit the desired value.
+
+**Delete a workout:**
+Click on the delete button (in Actions column).
+
+![](https://i.ibb.co/v4n9vk3/3.jpg)
+
+
 ![](https://i.ibb.co/k8GwxGK/7.jpg)
 
 ###### Account:
