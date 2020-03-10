@@ -1,7 +1,8 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/authActions";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import {
   AppBar,
   IconButton,
@@ -23,22 +24,15 @@ import {
   CircularProgress
 } from "@material-ui/core/";
 
-import { Link } from "react-router-dom";
-
 import {
-  Dashboard as DashboardIcon,
-  CalendarToday as CalendarIcon,
   Menu as MenuIcon,
-  Sports as SportsIcon,
-  FitnessCenter as FitnessCenterIcon,
-  Group as GroupIcon,
   ExitToApp as ExitToAppIcon,
-  AccountBox as AccountBoxIcon,
   ExpandLess,
   ExpandMore
 } from "@material-ui/icons/";
 
 import logo from "../../assets/images/logo.png";
+import { drawerItems } from "./DrawerItems";
 
 // if (process.env.NODE_ENV === 'development') {
 //   const whyDidYouRender = require('@welldone-software/why-did-you-render');
@@ -154,44 +148,6 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
     setOpen({ ...open, [state]: !open[state] });
   };
 
-  const drawerItems = [
-    {
-      name: "Dashboard",
-      viewName: "Dashboard",
-      link: "/dashboard",
-      icon: <DashboardIcon className={classes.listIcon} />
-    },
-    {
-      name: "Schedule",
-      viewName: "Schedule",
-      link: "/dashboard/schedule",
-      icon: <CalendarIcon className={classes.listIcon} />
-    },
-    {
-      name: "Clients",
-      viewName: "Clients Manager",
-      link: "/dashboard/clients",
-      icon: <GroupIcon className={classes.listIcon} />
-    }
-  ];
-
-  const collapsedItems = [
-    {
-      name: "Workouts",
-      icon: <FitnessCenterIcon className={classes.listIcon} />,
-      state: "workouts",
-      subMenu: [
-        {
-          name: "Workouts Manager",
-          viewName: "Workouts Manager",
-          link: "/dashboard/workouts",
-          icon: <SportsIcon className={classes.listIcon} />,
-          key: 1
-        }
-      ]
-    }
-  ];
-
   const drawer = (
     <div>
       <div className={classes.toolbar}>
@@ -218,78 +174,67 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
         {drawerItems.map(item => {
           return (
             <div>
-              <Link
-                to={item.link}
-                onClick={() => {
-                  onViewChange(item.viewName);
-                }}
-              >
-                <ListItem button className={classes.listItem}>
-                  <div className={classes.itemBalckBar} />
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.name} />
-                </ListItem>
-              </Link>
-              <Divider />
+              {!item.isCollapse ? (
+                <Link
+                  to={item.link}
+                  onClick={() => {
+                    onViewChange(item.viewName);
+                  }}
+                >
+                  {" "}
+                  <ListItem button className={classes.listItem}>
+                    <div className={classes.itemBalckBar} />
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.name} />
+                  </ListItem>
+                  <Divider />
+                </Link>
+              ) : (
+                <div>
+                  <ListItem
+                    button
+                    key={item.key}
+                    onClick={() => openCollapse(item.state)}
+                    className={classes.listItem}
+                  >
+                    <ListItemIcon>{item.icon}</ListItemIcon>
+                    <ListItemText primary={item.name} />
+                    {open[item.state] ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                  {/* <Divider /> */}
+                  <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
+                    <Divider />
+                    <List
+                      component="div"
+                      disablePadding
+                      className={classes.collapsed}
+                    >
+                      {item.subMenu.map(subitem => {
+                        return (
+                          <div>
+                            <Link
+                              key={subitem.key}
+                              to={subitem.link}
+                              onClick={() => {
+                                onViewChange(subitem.viewName);
+                              }}
+                            >
+                              <ListItem button className={classes.nested}>
+                                <ListItemIcon>{subitem.icon}</ListItemIcon>
+                                <ListItemText primary={subitem.name} />
+                              </ListItem>
+                            </Link>
+                          </div>
+                        );
+                      })}
+                    </List>
+                  </Collapse>
+                  <Divider />
+                </div>
+              )}
             </div>
           );
         })}
-        {collapsedItems.map(item => (
-          <Fragment>
-            <ListItem
-              button
-              key={item.key}
-              onClick={() => openCollapse(item.state)}
-              className={classes.listItem}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.name} />
-              {open[item.state] ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Divider />
-            <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
-              <List
-                component="div"
-                disablePadding
-                className={classes.collapsed}
-              >
-                {item.subMenu.map(subitem => {
-                  return (
-                    <div>
-                      <Link
-                        key={subitem.key}
-                        to={subitem.link}
-                        onClick={() => {
-                          onViewChange(subitem.viewName);
-                        }}
-                      >
-                        <ListItem button className={classes.nested}>
-                          <ListItemIcon>{subitem.icon}</ListItemIcon>
-                          <ListItemText primary={subitem.name} />
-                        </ListItem>
-                      </Link>
-                      <Divider />
-                    </div>
-                  );
-                })}
-              </List>
-            </Collapse>
-            <Link
-              to="/dashboard/account"
-              onClick={() => {
-                onViewChange("Account");
-              }}
-            >
-              <ListItem button className={classes.listItem}>
-                <ListItemIcon>
-                  <AccountBoxIcon className={classes.listIcon} />
-                </ListItemIcon>
-                <ListItemText primary="Account" />
-              </ListItem>
-            </Link>
-            <Divider />
-          </Fragment>
-        ))}
       </List>
     </div>
   );
