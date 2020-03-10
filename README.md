@@ -84,9 +84,6 @@ Click on the edit button (in Actions column) and edit the desired value.
 **Delete a workout:**
 Click on the delete button (in Actions column).
 
-![](https://i.ibb.co/v4n9vk3/3.jpg)
-
-
 ![](https://i.ibb.co/k8GwxGK/7.jpg)
 
 ## Account:
