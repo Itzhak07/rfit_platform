@@ -23,7 +23,7 @@ it was important for me to build something simple but powerful.
 * Responsive Design
 * DevExtremeREACTIVE - React Scheduler
 
-## Features:
+# Features:
 * Auth - Login / Registration
 * Schedule - Add, update, delete appointments. You can also update by drag & drop the appointment.
 day/week/month view options.
@@ -39,7 +39,7 @@ Here you can see your daily schedule, and some more information like today's wor
 
 ![](https://i.ibb.co/7QZ7vzZ/2.jpg)
 
-**Schedule:**
+## Schedule:
 **Add an Appointment:**
 Double-click a cell in the timetable to open the appointment editing form or click the + button on the bottom right.
 Fill out the form and click Create to add a new appointment.
@@ -56,7 +56,7 @@ Click an appointment to invoke its tooltip, and then click Delete in the tooltip
 ![](https://i.ibb.co/RTkMHTY/1.jpg)
 ![](https://i.ibb.co/jzqM5TM/9.jpg)
 
-**Clients:**
+## Clients:
 In this page you can manage your clients.
 you can filter the table by name, date, status, phone, email, gender.
 
@@ -68,10 +68,10 @@ Click on the edit button (in Actions column) and edit the desired value.
 
 ![](https://i.ibb.co/v4n9vk3/3.jpg)
 
-**Client Profile:**
+## Client Profile:
 ![](https://i.ibb.co/cvRmzM6/6.jpg)
 
-**Workouts:**
+## Workouts:
 In this page you can manage your workouts.
 you can filter the table by client name or date.
 
@@ -89,7 +89,7 @@ Click on the delete button (in Actions column).
 
 ![](https://i.ibb.co/k8GwxGK/7.jpg)
 
-**Account:**
+## Account:
 ![](https://i.ibb.co/bWnwHnt/8.jpg)
 
 
