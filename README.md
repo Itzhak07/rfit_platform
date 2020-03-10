@@ -57,6 +57,12 @@ Click an appointment to invoke its tooltip, and then click Delete in the tooltip
 ![](https://i.ibb.co/jzqM5TM/9.jpg)
 
 ###### Clients:
+In this page you can manage your clients.
+**Add a client:**
+Click on the plus button (top right, next to search input) and fill the new row that added to the table.
+
+**Update a client:**
+Click on the edit button (in Actions column) and edit the desired value.
 ![](https://i.ibb.co/v4n9vk3/3.jpg)
 
 ###### Client:
