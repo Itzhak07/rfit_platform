@@ -81,11 +81,6 @@ export default function ClientsTable({
                 setTimeout(() => {
                   createClient(newData);
                   resolve();
-                  setState(prevState => {
-                    const data = [...prevState.data];
-                    data.push(newData);
-                    return { ...prevState, data };
-                  });
                 }, 600);
               }),
             onRowUpdate: (newData, oldData) =>
