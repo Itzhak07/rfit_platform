@@ -18,7 +18,7 @@ import { login } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import { Copyright } from "../Copyright/Copyright";
 
-const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
 
 
 const useStyles = makeStyles(theme => ({

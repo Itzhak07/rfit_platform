@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/styles";
 import { CircularProgress } from "@material-ui/core";
 
 const AccountDetails = lazy(() =>
-  import("../../components/Account/AccountDetails")
+  import(/* webpackChunkName: "AccountDetails"*/"../../components/Account/AccountDetails")
 );
 const AccountProfile = lazy(() =>
-  import("../../components/Account/AccountProfile")
+  import(/* webpackChunkName: "AccountProfile"*/"../../components/Account/AccountProfile")
 );
 
 const useStyles = makeStyles(() => ({

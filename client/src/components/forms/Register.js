@@ -20,7 +20,7 @@ import { Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alertActions";
 import { Copyright } from "../Copyright/Copyright";
 
-const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
 
 
 

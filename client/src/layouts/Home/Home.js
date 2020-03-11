@@ -13,7 +13,7 @@ import {
   AccountBox as AccountBoxIcon
 } from "@material-ui/icons";
 import MenuButton from "../../components/Buttons/MenuButton";
-const TodaysWorkoutsModal = lazy(() => import("../Modal/TodaysWorkoutsModal"));
+const TodaysWorkoutsModal = lazy(() => import(/* webpackChunkName: "TodaysWorkoutsModal"*/"../Modal/TodaysWorkoutsModal"));
 
 function Home({
   workouts,
@@ -49,7 +49,6 @@ function Home({
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
       background: "#000000bf",
       height: "100%"
-      // borderRadius: 30
     },
     schedule: {
       margin: "auto"

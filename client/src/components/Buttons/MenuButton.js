@@ -14,7 +14,7 @@ import {
   PersonAdd as PersonAddIcon,
   FitnessCenter as FitnessCenterIcon
 } from "@material-ui/icons/";
-const AddModal = lazy(() => import("../../layouts/Modal/AddModal"));
+const AddModal = lazy(() => import(/* webpackChunkName: "AuthModal"*/"../../layouts/Modal/AddModal"));
 
 const StyledMenu = withStyles({
   paper: {

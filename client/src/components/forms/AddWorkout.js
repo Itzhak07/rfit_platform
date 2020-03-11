@@ -26,7 +26,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Copyright } from "../Copyright/Copyright";
 import { createWorkout } from "../../actions/workoutActions";
 
-const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert"));
 
 const useStyles = makeStyles(theme => ({
   paper: {

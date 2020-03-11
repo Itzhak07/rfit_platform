@@ -9,7 +9,7 @@ import {
   CircularProgress
 } from "@material-ui/core";
 const SimpleWorkoutsTable = lazy(() =>
-  import("../../components/Workouts/SimpleWorkoutsTable")
+  import(/* webpackChunkName: "SimpleWorkoutsTable"*/"../../components/Workouts/SimpleWorkoutsTable")
 );
 
 const Transition = forwardRef(function Transition(props, ref) {

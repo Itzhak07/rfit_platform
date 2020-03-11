@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
 import { CircularProgress } from "@material-ui/core";
-const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
 
 const useStyles = makeStyles({
   root: {
