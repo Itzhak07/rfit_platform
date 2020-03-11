@@ -11,6 +11,8 @@ import MainSection from "./modules/views/MainSection";
 import ProductValues from "./modules/views/ProductValues";
 import Subscribe from "./modules/views/Subscribe";
 import AppAppBar from "./modules/views/AppAppBar.js";
+import { Element } from "react-scroll";
+import { ButtonToTop } from "./modules/components/ButtonToTop";
 
 function LandingPage({ isAuthenticated }) {
   if (isAuthenticated) {
@@ -25,10 +27,14 @@ function LandingPage({ isAuthenticated }) {
     <div style={rootStyle}>
       <AppAppBar />
       <MainSection />
-      <MockUpSection />
+      <Element name="mockup-section">
+        <MockUpSection />
+      </Element>
+
       <ProductValues />
       <Subscribe />
       <GetInTouch />
+      <ButtonToTop />
       <AppFooter />
     </div>
   );

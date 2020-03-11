@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
+import { Link } from "react-scroll";
 
 const styles = theme => ({
   root: {
@@ -43,10 +44,13 @@ const styles = theme => ({
     zIndex: -2
   },
   arrowDown: {
-    position: "absolute",
+    position: "relative",
+    top: 100,
     bottom: theme.spacing(2),
-    width: 50,
-    height: 50,
+    width: 100,
+    height: 100,
+    color: "white",
+    cursor: "pointer"
   }
 });
 
@@ -59,7 +63,15 @@ function ProductHeroLayout(props) {
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        <ArrowDownwardIcon className={classes.arrowDown} />
+        <Link
+          to="mockup-section"
+          spy={true}
+          smooth={true}
+          offset={-100}
+          duration={500}
+        >
+          <ArrowDownwardIcon className={classes.arrowDown} />
+        </Link>
       </div>
     </section>
   );

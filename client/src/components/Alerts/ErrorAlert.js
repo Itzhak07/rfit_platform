@@ -9,7 +9,8 @@ const rootStyle = {
   display: "flex",
   alignItems: "center",
   padding: 10,
-  color: "white"
+  color: "white",
+  margin: "5px 0"
 };
 
 const iconStyle = {

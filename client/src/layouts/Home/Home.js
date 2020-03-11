@@ -13,9 +13,7 @@ import {
   AccountBox as AccountBoxIcon
 } from "@material-ui/icons";
 
-const TodaysWorkoutsModal = lazy(() =>
-  import("../Modal/TodaysWorkoutsModal")
-);
+const TodaysWorkoutsModal = lazy(() => import("../Modal/TodaysWorkoutsModal"));
 
 function Home({
   workouts,
@@ -127,7 +125,7 @@ Home.propTypes = {
   workouts: PropTypes.array.isRequired,
   today: PropTypes.array.isRequired,
   clients: PropTypes.array,
-  activeClients: PropTypes.array.isRequired,
+  activeClients: PropTypes.array,
   loading: PropTypes.bool.isRequired
 };
 

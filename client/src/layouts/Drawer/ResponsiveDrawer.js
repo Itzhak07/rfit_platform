@@ -76,7 +76,9 @@ const useStyles = makeStyles(theme => ({
   },
 
   logo: {
-    width: "42%"
+    width: 114,
+    position: "relative",
+    top: 5
   },
   pageName: {
     flexGrow: 1
@@ -117,6 +119,9 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 10,
       transition: "all 0.3s ease"
     }
+  },
+  active: {
+    backgroundColor: "red"
   }
 }));
 
@@ -173,15 +178,15 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
       <List disablePadding>
         {drawerItems.map(item => {
           return (
-            <div>
+            <div key={item.key}>
               {!item.isCollapse ? (
                 <Link
                   to={item.link}
                   onClick={() => {
                     onViewChange(item.viewName);
                   }}
+                  activeClass={classes.active}
                 >
-                  {" "}
                   <ListItem button className={classes.listItem}>
                     <div className={classes.itemBalckBar} />
                     <ListItemIcon>{item.icon}</ListItemIcon>
@@ -193,7 +198,6 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                 <div>
                   <ListItem
                     button
-                    key={item.key}
                     onClick={() => openCollapse(item.state)}
                     className={classes.listItem}
                   >
@@ -201,23 +205,22 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                     <ListItemText primary={item.name} />
                     {open[item.state] ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
-                  {/* <Divider /> */}
                   <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
                     <Divider />
                     <List
                       component="div"
-                      disablePadding
                       className={classes.collapsed}
+                      disablePadding
                     >
                       {item.subMenu.map(subitem => {
                         return (
-                          <div>
+                          <div key={subitem.key}>
                             <Link
-                              key={subitem.key}
                               to={subitem.link}
                               onClick={() => {
                                 onViewChange(subitem.viewName);
                               }}
+                              activeClass={classes.active}
                             >
                               <ListItem button className={classes.nested}>
                                 <ListItemIcon>{subitem.icon}</ListItemIcon>

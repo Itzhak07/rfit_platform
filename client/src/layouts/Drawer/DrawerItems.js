@@ -10,6 +10,7 @@ import {
 
 export const drawerItems = [
   {
+    key: 1,
     name: "Dashboard",
     viewName: "Dashboard",
     link: "/dashboard",
@@ -17,6 +18,7 @@ export const drawerItems = [
     isCollapse: false
   },
   {
+    key: 2,
     name: "Schedule",
     viewName: "Schedule",
     link: "/dashboard/schedule",
@@ -24,6 +26,7 @@ export const drawerItems = [
     isCollapse: false
   },
   {
+    key: 3,
     name: "Clients",
     viewName: "Clients Manager",
     link: "/dashboard/clients",
@@ -31,21 +34,23 @@ export const drawerItems = [
     isCollapse: false
   },
   {
+    key: 4,
     name: "Workouts",
     icon: <FitnessCenterIcon style={{ fontSize: 30 }} />,
     state: "workouts",
     isCollapse: true,
     subMenu: [
       {
+        key: 5,
         name: "Workouts Manager",
         viewName: "Workouts Manager",
         link: "/dashboard/workouts",
         icon: <SportsIcon style={{ fontSize: 30 }} />,
-        key: 1
       }
     ]
   },
   {
+    key: 6,
     name: "Account",
     viewName: "Account",
     link: "/dashboard/account",

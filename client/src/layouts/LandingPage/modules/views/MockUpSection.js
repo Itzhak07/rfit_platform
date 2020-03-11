@@ -12,7 +12,7 @@ const styles = theme => ({
   },
   images: {
     width: "100%",
-    margin:"50px auto"
+    margin: "50px auto"
   },
   imageWrapper: {
     position: "relative",
@@ -88,10 +88,15 @@ function MockUpSection(props) {
   return (
     <Container className={classes.root} component="section">
       <Typography variant="h4" marked="center" align="center" component="h2">
-      Everything you need in one place
+        Everything you need in one place
       </Typography>
       <div className={classes.imagesWrapper}>
-        <img className={classes.images} src={Mockup} title="mockup" alt="mockup" />
+        <img
+          className={classes.images}
+          src={Mockup}
+          title="mockup"
+          alt="mockup"
+        />
       </div>
     </Container>
   );
