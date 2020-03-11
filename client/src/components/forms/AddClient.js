@@ -144,10 +144,9 @@ const AddClient = ({ createClient, alerts, closeModal, closeMenu }) => {
             variant="outlined"
             name="gender"
             margin="normal"
-            // required
+            required
             className={classes.input}
             onChange={e => onChange(e)}
-            helperText="Please select your currency"
           >
             {genderOptions.map(option => (
               <MenuItem key={option} value={option}>

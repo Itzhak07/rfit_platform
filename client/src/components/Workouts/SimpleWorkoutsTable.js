@@ -21,8 +21,6 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleWorkoutsTable({ data }) {
-  console.log(data);
-
   const classes = useStyles();
 
   return (

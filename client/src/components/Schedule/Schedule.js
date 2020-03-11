@@ -46,7 +46,9 @@ import {
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { Info } from "@material-ui/icons";
-const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() =>
+  import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
+);
 const Modal = lazy(() =>
   import(/* webpackChunkName: "Modal"*/ "../../layouts/Modal/Modal")
 );
@@ -240,7 +242,6 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                 options={clientsOptions}
                 placeholder=""
                 getOptionLabel={option => option.text}
-               
                 {...clientEditorProps("title")}
                 renderInput={params => (
                   <TextField

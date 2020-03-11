@@ -75,7 +75,6 @@ export const updateWorkout = data => dispatch => {
   Axios.put(`https://rfit-platform.herokuapp.com/api/workouts/update`, data)
     .then(res => {
       const workouts = setWorkoutsData(res.data);
-      console.log(workouts);
 
       dispatch({
         type: UPDATE_WORKOUT,
