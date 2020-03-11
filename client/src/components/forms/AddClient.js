@@ -18,7 +18,9 @@ import { createClient } from "../../actions/clientActions";
 import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
 
-const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() =>
+  import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
+);
 
 const useStyles = makeStyles(theme => ({
   paper: {

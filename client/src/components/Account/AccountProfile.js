@@ -62,7 +62,6 @@ const AccountProfile = ({ user }) => {
 AccountProfile.propTypes = {
   className: PropTypes.string,
   user: PropTypes.object,
-  loadUser: PropTypes.func.isRequired
 };
 
 const mapStateToPros = state => ({

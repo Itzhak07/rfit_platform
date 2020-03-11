@@ -56,9 +56,11 @@ export default function SimpleCard({
               {title}
             </Typography>
             <Divider />
-            <Typography className={classes.countNum}>
-              {count ? count : <CircularProgress />}
-            </Typography>
+            {count ? (
+              <Typography className={classes.countNum}>{count}</Typography>
+            ) : (
+              <CircularProgress />
+            )}
           </CardContent>
           <CardActions>
             {url && urlName ? (

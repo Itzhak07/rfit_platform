@@ -13,7 +13,12 @@ import {
   AccountBox as AccountBoxIcon
 } from "@material-ui/icons";
 import MenuButton from "../../components/Buttons/MenuButton";
-const TodaysWorkoutsModal = lazy(() => import(/* webpackChunkName: "TodaysWorkoutsModal"*/"../Modal/TodaysWorkoutsModal"));
+
+const TodaysWorkoutsModal = lazy(() =>
+  import(
+    /* webpackChunkName: "TodaysWorkoutsModal"*/ "../Modal/TodaysWorkoutsModal"
+  )
+);
 
 function Home({
   workouts,

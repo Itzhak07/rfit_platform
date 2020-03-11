@@ -14,7 +14,10 @@ import {
   PersonAdd as PersonAddIcon,
   FitnessCenter as FitnessCenterIcon
 } from "@material-ui/icons/";
-const AddModal = lazy(() => import(/* webpackChunkName: "AuthModal"*/"../../layouts/Modal/AddModal"));
+
+const AddModal = lazy(() =>
+  import(/* webpackChunkName: "AuthModal"*/ "../../layouts/Modal/AddModal")
+);
 
 const StyledMenu = withStyles({
   paper: {
@@ -110,20 +113,25 @@ export default function MenuButton() {
       >
         <StyledMenuItem onClick={() => modalOpen("Client")}>
           <ListItemIcon>
-            <PersonAddIcon fontSize="medium" />
+            <PersonAddIcon />
           </ListItemIcon>
           <ListItemText primary="New Client" />
         </StyledMenuItem>
         <StyledMenuItem onClick={() => modalOpen("Workout")}>
           <ListItemIcon>
-            <FitnessCenterIcon fontSize="medium" />
+            <FitnessCenterIcon />
           </ListItemIcon>
           <ListItemText primary="New Workout" />
         </StyledMenuItem>
       </StyledMenu>
 
       <Suspense fallback={<CircularProgress />}>
-        <AddModal open={open} closeModal={modalClose} closeMenu={handleClose} type={formType} />
+        <AddModal
+          open={open}
+          closeModal={modalClose}
+          closeMenu={handleClose}
+          type={formType}
+        />
       </Suspense>
     </div>
   );
