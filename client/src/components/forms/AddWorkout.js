@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense, useEffect } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -6,12 +6,10 @@ import {
   Button,
   CssBaseline,
   TextField,
-  Link,
   Box,
   Typography,
   Container,
-  CircularProgress,
-  MenuItem
+  CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { FitnessCenter as FitnessCenterIcon } from "@material-ui/icons";
@@ -19,14 +17,15 @@ import DateFnsUtils from "@date-io/date-fns";
 import {
   DatePicker,
   TimePicker,
-  DateTimePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Copyright } from "../Copyright/Copyright";
 import { createWorkout } from "../../actions/workoutActions";
 
-const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() =>
+  import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
+);
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -68,7 +67,7 @@ const AddWorkout = ({
     notes: ""
   });
 
-  const { client, endDate, startDate, date, notes } = formData;
+  const { endDate, startDate, date, notes } = formData;
 
   const clientsOptions = activeClients.map(client => {
     return {

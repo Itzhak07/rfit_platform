@@ -11,7 +11,9 @@ const Login = lazy(() =>
   import(/* webpackChunkName: "LoginForm"*/ "../../components/forms/Login")
 );
 const Register = lazy(() =>
-  import(/* webpackChunkName: "RegisterForm"*/ "../../components/forms/Register")
+  import(
+    /* webpackChunkName: "RegisterForm"*/ "../../components/forms/Register"
+  )
 );
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -30,7 +32,13 @@ export default function AuthModal({ open, handleCLose, type }) {
         aria-describedby="alert-dialog-slide-description"
       >
         <Suspense fallback={<CircularProgress />}>
-          {type === "Login" ? <Login /> : <Register />}
+          {type === "Login" ? (
+            <Login />
+          ) : type === "Register" ? (
+            <Register />
+          ) : (
+            ""
+          )}
         </Suspense>
 
         <DialogActions>
