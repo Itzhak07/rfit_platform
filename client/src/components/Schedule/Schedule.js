@@ -240,6 +240,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                 options={clientsOptions}
                 placeholder=""
                 getOptionLabel={option => option.text}
+               
                 {...clientEditorProps("title")}
                 renderInput={params => (
                   <TextField
@@ -319,7 +320,7 @@ const AppointmentFormContainer = withStyles(containerStyles, {
 
 const styles = theme => ({
   addButton: {
-    position: "absolute",
+    position: "fixed",
     bottom: theme.spacing(1) * 3,
     right: theme.spacing(1) * 4
   }

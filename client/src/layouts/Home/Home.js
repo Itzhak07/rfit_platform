@@ -12,7 +12,7 @@ import {
   CalendarToday as CalendarTodayIcon,
   AccountBox as AccountBoxIcon
 } from "@material-ui/icons";
-
+import MenuButton from "../../components/Buttons/MenuButton";
 const TodaysWorkoutsModal = lazy(() => import("../Modal/TodaysWorkoutsModal"));
 
 function Home({
@@ -108,6 +108,7 @@ function Home({
         </Link>
         <DaySchedule workouts={today} loading={loading} />
       </div>
+      <MenuButton />
 
       <Suspense fallback={<CircularProgress />}>
         <TodaysWorkoutsModal

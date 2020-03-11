@@ -1,17 +1,7 @@
 import React from "react";
 import { Typography, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary">
-      {"Copyright © "}
-      Rfit Platform
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { Copyright } from "../../../../components/Copyright/Copyright";
 
 const useStyles = makeStyles(theme => ({
   footer: {

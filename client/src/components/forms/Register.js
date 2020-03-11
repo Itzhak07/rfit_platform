@@ -18,21 +18,11 @@ import { connect } from "react-redux";
 import { register } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alertActions";
+import { Copyright } from "../Copyright/Copyright";
 
 const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        RFit Platform
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles(theme => ({
   paper: {

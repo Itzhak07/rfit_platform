@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -10,16 +10,15 @@ import {
   Box,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  MenuItem
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
-import { login } from "../../actions/authActions";
-import { Redirect } from "react-router-dom";
+import { createClient } from "../../actions/clientActions";
+import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
 
 const ErrorAlert = lazy(() => import("../Alerts/ErrorAlert"));
-
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -30,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: "transparent"
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -40,17 +39,23 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   },
   input: {
-    borderRadius: "30px"
+    borderRadius: "30px",
+    width: "100%"
   }
 }));
 
-const Login = ({ login, alerts, isAuthenticated }) => {
+const AddClient = ({ createClient, alerts, closeModal, closeMenu }) => {
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
-    password: ""
+    phone: "",
+    gender: ""
   });
 
-  const { email, password } = formData;
+  const { firstName, lastName, email, phone, gender } = formData;
+
+  const genderOptions = ["Male", "Female"];
 
   const classes = useStyles();
 
@@ -59,22 +64,20 @@ const Login = ({ login, alerts, isAuthenticated }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    login(email, password);
+    createClient(formData);
+    closeModal();
+    closeMenu();
   };
-
-  if (isAuthenticated) {
-    return <Redirect to="./dashboard" />;
-  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <PersonAddIcon fontSize="large" color="primary" />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          New Client
         </Typography>
         <form className={classes.form} onSubmit={e => onSubmit(e)}>
           <TextField
@@ -82,11 +85,39 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             margin="normal"
             required
             fullWidth
-            id="email-login"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="firstName"
+            label="First Name"
+            name="firstName"
+            autoComplete="firstName"
             autoFocus
+            onChange={e => onChange(e)}
+            value={firstName}
+            className={classes.input}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="lastName"
+            label="Last Name"
+            type="text"
+            id="lastName"
+            autoComplete="lastName"
+            onChange={e => onChange(e)}
+            value={lastName}
+            className={classes.input}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Email"
+            type="text"
+            id="email"
+            autoComplete="email"
             onChange={e => onChange(e)}
             value={email}
             className={classes.input}
@@ -96,15 +127,34 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             margin="normal"
             required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password-login"
-            autoComplete="current-password"
+            name="phone"
+            label="Phone"
+            type="text"
+            id="phone"
+            autoComplete="phone"
             onChange={e => onChange(e)}
-            value={password}
+            value={phone}
             className={classes.input}
           />
+          <TextField
+            id="gender"
+            select
+            label="Gender"
+            value={gender}
+            variant="outlined"
+            name="gender"
+            margin="normal"
+            // required
+            className={classes.input}
+            onChange={e => onChange(e)}
+            helperText="Please select your currency"
+          >
+            {genderOptions.map(option => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </TextField>
           <Button
             type="submit"
             fullWidth
@@ -112,7 +162,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Submit
           </Button>
         </form>
       </div>
@@ -127,21 +177,20 @@ const Login = ({ login, alerts, isAuthenticated }) => {
       ) : (
         ""
       )}
-      <Box mt={8}>
+      <Box>
         <Copyright />
       </Box>
     </Container>
   );
 };
 
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
+AddClient.propTypes = {
+  createClient: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
   alerts: state.alerts.alerts
 });
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, { createClient })(AddClient);

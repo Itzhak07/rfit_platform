@@ -120,9 +120,6 @@ const useStyles = makeStyles(theme => ({
       transition: "all 0.3s ease"
     }
   },
-  active: {
-    backgroundColor: "red"
-  }
 }));
 
 function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
@@ -185,7 +182,6 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                   onClick={() => {
                     onViewChange(item.viewName);
                   }}
-                  activeClass={classes.active}
                 >
                   <ListItem button className={classes.listItem}>
                     <div className={classes.itemBalckBar} />
@@ -220,7 +216,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                               onClick={() => {
                                 onViewChange(subitem.viewName);
                               }}
-                              activeClass={classes.active}
+              
                             >
                               <ListItem button className={classes.nested}>
                                 <ListItemIcon>{subitem.icon}</ListItemIcon>
