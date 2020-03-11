@@ -17,7 +17,6 @@ const styles = theme => ({
     textAlign: "center"
   },
   cardWrapper: {
-    zIndex: 1,
     width: "100%",
     margin: "auto",
     background: "#28282a"
