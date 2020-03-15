@@ -57,12 +57,17 @@ const EditClient = ({
     lastName: "",
     email: "",
     phone: "",
-    gender: ""
+    gender: "",
+    status: ""
   });
 
-  const { firstName, lastName, email, phone, gender } = formData;
+  const { firstName, lastName, email, phone, gender, status } = formData;
 
   const genderOptions = ["Male", "Female"];
+  const statusOptions = [
+    { title: "Active", value: 1 },
+    { title: "Not-Active", value: 2 }
+  ];
 
   const classes = useStyles();
   const { id } = useParams();
@@ -166,6 +171,24 @@ const EditClient = ({
             {genderOptions.map(option => (
               <MenuItem key={option} value={option}>
                 {option}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            id="status"
+            select
+            label="Status"
+            value={status}
+            variant="outlined"
+            name="status"
+            margin="normal"
+            required
+            className={classes.input}
+            onChange={e => onChange(e)}
+          >
+            {statusOptions.map(option => (
+              <MenuItem key={option.title} value={option.value}>
+                {option.title}
               </MenuItem>
             ))}
           </TextField>
