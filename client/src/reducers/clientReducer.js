@@ -3,7 +3,8 @@ import { FETCH_CLIENTS, NEW_CLIENT, UPDATE_CLIENT } from "../actions/types";
 const initialState = {
   clients: null,
   active: null,
-  loading: true
+  loading: true,
+  isNewClient: false
 };
 
 export default (state = initialState, action) => {
@@ -16,7 +17,8 @@ export default (state = initialState, action) => {
         active: payload.filter(client => {
           return client.status !== 2;
         }),
-        loading: false
+        loading: false,
+        isNewClient: false
       };
     case NEW_CLIENT:
       return {
@@ -25,7 +27,8 @@ export default (state = initialState, action) => {
         active: payload.filter(client => {
           return client.status !== 2;
         }),
-        loading: false
+        loading: false,
+        isNewClient: true
       };
     case UPDATE_CLIENT:
       return {
@@ -34,7 +37,8 @@ export default (state = initialState, action) => {
         active: payload.filter(client => {
           return client.status === 1;
         }),
-        loading: false
+        loading: false,
+        isNewClient: false
       };
 
     default:

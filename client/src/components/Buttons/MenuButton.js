@@ -93,7 +93,6 @@ export default function MenuButton({ addClient, editClient, addWorkout }) {
         <AddModal
           open={openModal}
           closeModal={modalClose}
-          closeMenu={handleClose}
           type={formType}
         />
       </Suspense>

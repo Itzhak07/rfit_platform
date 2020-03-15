@@ -9,7 +9,8 @@ import moment from "moment";
 const initialState = {
   workouts: [],
   today: [],
-  loading: true
+  loading: true,
+  isNewWorkout: false
 };
 
 export default (state = initialState, action) => {
@@ -25,7 +26,8 @@ export default (state = initialState, action) => {
             moment().format("MMM Do YY")
           );
         }),
-        loading: false
+        loading: false,
+        isNewWorkout: false
       };
 
     case NEW_WORKOUT:
@@ -38,7 +40,8 @@ export default (state = initialState, action) => {
             moment().format("MMM Do YY")
           );
         }),
-        loading: false
+        loading: false,
+        isNewWorkout: true
       };
     case DELETE_WORKOUT:
       return {
@@ -50,7 +53,8 @@ export default (state = initialState, action) => {
             moment().format("MMM Do YY")
           );
         }),
-        loading: false
+        loading: false,
+        isNewWorkout: false
       };
     case UPDATE_WORKOUT:
       return {
@@ -62,7 +66,8 @@ export default (state = initialState, action) => {
             moment().format("MMM Do YY")
           );
         }),
-        loading: false
+        loading: false,
+        isNewWorkout: false
       };
     default:
       return state;

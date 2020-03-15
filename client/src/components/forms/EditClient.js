@@ -49,7 +49,6 @@ const EditClient = ({
   updateClient,
   alerts,
   closeModal,
-  closeMenu,
   clients
 }) => {
   const [formData, setFormData] = useState({
@@ -86,7 +85,6 @@ const EditClient = ({
     e.preventDefault();
     updateClient(formData);
     closeModal();
-    closeMenu();
   };
 
   return (

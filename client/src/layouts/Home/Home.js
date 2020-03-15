@@ -94,6 +94,7 @@ function Home({
       <div style={styles.schedule}>
         <DaySchedule />
       </div>
+      
       <MenuButton />
 
       <Suspense fallback={<CircularProgress />}>

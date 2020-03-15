@@ -16,6 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { createClient } from "../../actions/clientActions";
 import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
+import { useEffect } from "react";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -45,7 +46,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddClient = ({ createClient, alerts, closeModal, closeMenu }) => {
+const AddClient = ({
+  createClient,
+  alerts,
+  closeModal,
+  closeMenu,
+  isNewClient
+}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -53,6 +60,12 @@ const AddClient = ({ createClient, alerts, closeModal, closeMenu }) => {
     phone: "",
     gender: ""
   });
+
+  useEffect(() => {
+    if (isNewClient) {
+      closeModal();
+    }
+  }, [isNewClient]);
 
   const { firstName, lastName, email, phone, gender } = formData;
 
@@ -66,8 +79,6 @@ const AddClient = ({ createClient, alerts, closeModal, closeMenu }) => {
   const onSubmit = e => {
     e.preventDefault();
     createClient(formData);
-    closeModal();
-    closeMenu();
   };
 
   return (
@@ -186,11 +197,13 @@ const AddClient = ({ createClient, alerts, closeModal, closeMenu }) => {
 
 AddClient.propTypes = {
   createClient: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  isNewClient: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
-  alerts: state.alerts.alerts
+  alerts: state.alerts.alerts,
+  isNewClient: state.clients.isNewClient
 });
 
 export default connect(mapStateToProps, { createClient })(AddClient);

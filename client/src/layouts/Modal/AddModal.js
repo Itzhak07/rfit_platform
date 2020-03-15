@@ -42,11 +42,11 @@ export default function AddModal({ open, closeModal, closeMenu, type }) {
       >
         <Suspense fallback={<CircularProgress />}>
           {type === "Client" ? (
-            <AddClient closeModal={closeModal} closeMenu={closeMenu} />
+            <AddClient closeModal={closeModal} />
           ) : type === "Workout" ? (
-            <AddWorkout closeModal={closeModal} closeMenu={closeMenu} />
+            <AddWorkout closeModal={closeModal} />
           ) : type === "editClient" ? (
-            <EditClient closeModal={closeModal} closeMenu={closeMenu} />
+            <EditClient closeModal={closeModal} />
           ) : (
             ""
           )}

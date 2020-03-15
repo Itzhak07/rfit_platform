@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -52,19 +52,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddWorkout = ({
-  createWorkout,
-  activeClients,
-  alerts,
-  closeModal,
-  closeMenu
-}) => {
+const AddWorkout = ({ createWorkout, activeClients, alerts, closeModal, isNewWorkout }) => {
   const [formData, setFormData] = useState({
     client: "",
     startDate: new Date(),
     endDate: new Date(),
     notes: ""
   });
+
+  useEffect(() => {
+    if (isNewWorkout) {
+      closeModal();
+    }
+  }, [isNewWorkout]);
 
   const { endDate, startDate, notes } = formData;
 
@@ -102,8 +102,6 @@ const AddWorkout = ({
       endDate: new Date(),
       notes: ""
     });
-    closeModal();
-    closeMenu();
   };
 
   return (
@@ -205,12 +203,14 @@ const AddWorkout = ({
 AddWorkout.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   activeClients: PropTypes.array.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  isNewWorkout: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   alerts: state.alerts.alerts,
-  activeClients: state.clients.active
+  activeClients: state.clients.active,
+  isNewWorkout: state.workouts.isNewWorkout
 });
 
 export default connect(mapStateToProps, { createWorkout })(AddWorkout);
