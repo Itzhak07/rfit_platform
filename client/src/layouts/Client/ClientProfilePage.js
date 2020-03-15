@@ -6,12 +6,13 @@ import ClientWorkoutsTable from "../../components/Client/ClientWorkoutsTable";
 import { Paper, makeStyles } from "@material-ui/core";
 import { ClientProfile } from "../../components/Client/ClientProfile";
 import MenuButton from "../../components/Buttons/MenuButton";
+import { ClientBreadCrumbs } from "./ClientBreadCrumbs";
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
     display: "flex",
-    flexFlow: "row wrap"
+    flexFlow: "column wrap"
   },
   info: {
     padding: 20,
@@ -47,6 +48,7 @@ function ClientProfilePage({ clients, workouts }) {
 
   return (
     <div className={classes.root}>
+      <ClientBreadCrumbs clientName={thisClient.firstName + " " + thisClient.lastName } />
       <Paper className={classes.info} variant="outlined">
         {<ClientProfile client={thisClient} />}
       </Paper>
