@@ -87,7 +87,7 @@ function MainSection(props) {
         component="a"
         onClick={openModal}
       >
-        Register
+        Sign Up
       </Button>
 
       <Suspense fallback={<CircularProgress />}>

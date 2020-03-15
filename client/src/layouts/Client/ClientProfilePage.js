@@ -53,7 +53,9 @@ function ClientProfilePage({ clients, workouts }) {
       <Paper className={classes.workouts} variant="outlined">
         <ClientWorkoutsTable workouts={thisWorkouts} client={thisClient} />
       </Paper>
-      <MenuButton editClient />
+      <div>
+        <MenuButton editClient />
+      </div>
     </div>
   );
 }
