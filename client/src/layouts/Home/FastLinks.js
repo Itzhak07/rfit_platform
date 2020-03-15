@@ -14,7 +14,7 @@ const styles = {
     justifyContent: "flex-start"
   },
   linkBtn: {
-    margin: "0 5px"
+    margin: 5
   }
 };
 
@@ -23,7 +23,7 @@ export const FastLinks = () => {
     <div style={styles.root}>
       <Link style={styles.linkBtn} to="./dashboard/schedule">
         <Button variant="outlined" startIcon={<CalendarTodayIcon />}>
-          Full Scheduele
+          Scheduele
         </Button>
       </Link>
       <Link style={styles.linkBtn} to="./dashboard/account">
