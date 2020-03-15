@@ -1,7 +1,7 @@
 import React from "react";
 import { animateScroll as scroll } from "react-scroll";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import { Button, makeStyles, Fab } from "@material-ui/core";
+import {makeStyles, Fab } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
