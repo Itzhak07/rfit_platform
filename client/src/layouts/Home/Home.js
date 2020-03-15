@@ -4,15 +4,10 @@ import { connect } from "react-redux";
 import SimpleCard from "../../components/Cards/SimpleCard";
 import DaySchedule from "../../components/Schedule/DaySchedule";
 import bgwhite from "../../assets/images/bgwhite.png";
-import { CircularProgress, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import {
-  CalendarToday as CalendarTodayIcon,
-  AccountBox as AccountBoxIcon
-} from "@material-ui/icons";
+import { CircularProgress } from "@material-ui/core";
 import MenuButton from "../../components/Buttons/MenuButton";
 import { CardsHeader } from "./CardsHeader";
-
+import { FastLinks } from "./FastLinks";
 const TodaysWorkoutsModal = lazy(() =>
   import(
     /* webpackChunkName: "TodaysWorkoutsModal"*/ "../Modal/TodaysWorkoutsModal"
@@ -49,21 +44,19 @@ function Home({
       display: "flex",
       flexFlow: "row wrap",
       justifyContent: "space-evenly",
-      marginBottom: 50,
+      marginTop: 20,
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
       background: "#000000bf",
       height: "100%"
     },
     schedule: {
       margin: "auto"
-    },
-    linkBtn: {
-      margin: "0 5px"
     }
   };
 
   return (
     <div style={styles.root}>
+      <FastLinks />
       <div style={styles.cardsWrapper}>
         <SimpleCard
           title="Total Workouts"
@@ -98,23 +91,10 @@ function Home({
           openModal={modalOpen}
         />
       </div>
-
-      {/* <CardsHeader /> */}
-
       <div style={styles.schedule}>
-        <Link style={styles.linkBtn} to="./dashboard/schedule">
-          <Button variant="outlined" startIcon={<CalendarTodayIcon />}>
-            Full Scheduele
-          </Button>
-        </Link>
-        <Link style={styles.linkBtn} to="./dashboard/account">
-          <Button variant="outlined" startIcon={<AccountBoxIcon />}>
-            Account
-          </Button>
-        </Link>
         <DaySchedule />
       </div>
-      <MenuButton/>
+      <MenuButton />
 
       <Suspense fallback={<CircularProgress />}>
         <TodaysWorkoutsModal
