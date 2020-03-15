@@ -13,6 +13,12 @@ const AddClient = lazy(() =>
   )
 );
 
+const EditClient = lazy(() =>
+  import(
+    /* webpackChunkName: "EditClientForm"*/ "../../components/forms/EditClient"
+  )
+);
+
 const AddWorkout = lazy(() =>
   import(
     /* webpackChunkName: "AddWorkoutForm"*/ "../../components/forms/AddWorkout"
@@ -39,6 +45,8 @@ export default function AddModal({ open, closeModal, closeMenu, type }) {
             <AddClient closeModal={closeModal} closeMenu={closeMenu} />
           ) : type === "Workout" ? (
             <AddWorkout closeModal={closeModal} closeMenu={closeMenu} />
+          ) : type === "editClient" ? (
+            <EditClient closeModal={closeModal} closeMenu={closeMenu} />
           ) : (
             ""
           )}

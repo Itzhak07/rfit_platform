@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress } from "@material-ui/core";
 import {
   PersonAdd as PersonAddIcon,
+  Edit as EditIcon,
   FitnessCenter as FitnessCenterIcon
 } from "@material-ui/icons/";
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MenuButton({ addClient, addWorkout }) {
+export default function MenuButton({ addClient, editClient, addWorkout }) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [formType, setFormType] = useState();
@@ -33,6 +34,11 @@ export default function MenuButton({ addClient, addWorkout }) {
         { icon: <PersonAddIcon />, name: "New Client", form: "Client" }
       ]);
     }
+    if (editClient) {
+      return setActions([
+        { icon: <EditIcon />, name: "Edit Client", form: "editClient" }
+      ]);
+    }
     if (addWorkout) {
       return setActions([
         { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
@@ -43,7 +49,7 @@ export default function MenuButton({ addClient, addWorkout }) {
         { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
       ]);
     }
-  }, [addWorkout, addClient]);
+  }, [addWorkout, addClient, editClient]);
 
   const handleClose = () => {
     setOpen(false);

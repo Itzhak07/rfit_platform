@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import ClientWorkoutsTable from "../../components/Client/ClientWorkoutsTable";
 import { Paper, makeStyles } from "@material-ui/core";
 import { ClientProfile } from "../../components/Client/ClientProfile";
+import MenuButton from "../../components/Buttons/MenuButton";
 
 const useStyles = makeStyles({
   root: {
@@ -52,7 +53,7 @@ function ClientProfilePage({ clients, workouts }) {
       <Paper className={classes.workouts} variant="outlined">
         <ClientWorkoutsTable workouts={thisWorkouts} client={thisClient} />
       </Paper>
-     
+      <MenuButton editClient />
     </div>
   );
 }
