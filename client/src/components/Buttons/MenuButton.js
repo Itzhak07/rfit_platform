@@ -27,23 +27,16 @@ export default function MenuButton({ addClient, addWorkout }) {
   const classes = useStyles();
   const [actions, setActions] = useState([]);
 
-  // const actions = [
-  //   { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
-  //   { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
-  // ];
-
   useEffect(() => {
     if (addClient) {
       return setActions([
         { icon: <PersonAddIcon />, name: "New Client", form: "Client" }
       ]);
-    }
-    else if (addWorkout) {
+    } else if (addWorkout) {
       return setActions([
         { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
       ]);
-    }
-    else {
+    } else {
       return setActions([
         { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
         { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
