@@ -50,7 +50,7 @@ function ClientProfilePage({ clients, workouts }) {
         {<ClientProfile client={thisClient} />}
       </Paper>
       <Paper className={classes.workouts} variant="outlined">
-        <ClientWorkoutsTable workouts={thisWorkouts} />
+        <ClientWorkoutsTable workouts={thisWorkouts} client={thisClient} />
       </Paper>
     </div>
   );

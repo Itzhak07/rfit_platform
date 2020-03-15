@@ -15,7 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { FitnessCenter as FitnessCenterIcon } from "@material-ui/icons";
 import DateFnsUtils from "@date-io/date-fns";
 import {
-  DatePicker,
+  DateTimePicker,
   TimePicker,
   MuiPickersUtilsProvider
 } from "@material-ui/pickers";
@@ -61,13 +61,12 @@ const AddWorkout = ({
 }) => {
   const [formData, setFormData] = useState({
     client: "",
-    date: new Date(),
     startDate: new Date(),
     endDate: new Date(),
     notes: ""
   });
 
-  const { endDate, startDate, date, notes } = formData;
+  const { endDate, startDate, notes } = formData;
 
   const clientsOptions = activeClients.map(client => {
     return {
@@ -78,16 +77,12 @@ const AddWorkout = ({
 
   const classes = useStyles();
 
-  const onChange = e => {
+  const onWorkoutChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const onClientChange = id => {
     setFormData({ ...formData, client: id });
-  };
-
-  const onDateChange = e => {
-    setFormData({ ...formData, date: e });
   };
 
   const onStartChange = e => {
@@ -101,6 +96,12 @@ const AddWorkout = ({
   const onSubmit = e => {
     e.preventDefault();
     createWorkout(formData);
+    setFormData({
+      client: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      notes: ""
+    });
     closeModal();
     closeMenu();
   };
@@ -136,18 +137,7 @@ const AddWorkout = ({
             )}
           />
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
-              emptyLabel="Date"
-              disablePast
-              label="Date"
-              className={classes.input}
-              inputVariant="outlined"
-              value={date}
-              onChange={e => onDateChange(e)}
-            />
-          </MuiPickersUtilsProvider>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <TimePicker
+            <DateTimePicker
               clearable
               ampm={false}
               label="From"
@@ -155,6 +145,7 @@ const AddWorkout = ({
               className={classes.input}
               inputVariant="outlined"
               value={startDate}
+              disablePast
               onChange={e => onStartChange(e)}
             />
           </MuiPickersUtilsProvider>
@@ -174,7 +165,7 @@ const AddWorkout = ({
             id="outlined-multiline-static"
             name="notes"
             label="Workout"
-            onChange={e => onChange(e)}
+            onChange={e => onWorkoutChange(e)}
             className={classes.input}
             multiline
             rows="5"

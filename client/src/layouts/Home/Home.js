@@ -2,8 +2,6 @@ import React, { useState, Suspense, lazy } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SimpleCard from "../../components/Cards/SimpleCard";
-import { fetchWorkouts } from "../../actions/workoutActions";
-import { fetchClients } from "../../actions/clientActions";
 import DaySchedule from "../../components/Schedule/DaySchedule";
 import bgwhite from "../../assets/images/bgwhite.png";
 import { CircularProgress, Button } from "@material-ui/core";
@@ -13,6 +11,7 @@ import {
   AccountBox as AccountBoxIcon
 } from "@material-ui/icons";
 import MenuButton from "../../components/Buttons/MenuButton";
+import { CardsHeader } from "./CardsHeader";
 
 const TodaysWorkoutsModal = lazy(() =>
   import(
@@ -99,6 +98,9 @@ function Home({
           openModal={modalOpen}
         />
       </div>
+
+      {/* <CardsHeader /> */}
+
       <div style={styles.schedule}>
         <Link style={styles.linkBtn} to="./dashboard/schedule">
           <Button variant="outlined" startIcon={<CalendarTodayIcon />}>
@@ -110,7 +112,7 @@ function Home({
             Account
           </Button>
         </Link>
-        <DaySchedule workouts={today} loading={loading} />
+        <DaySchedule />
       </div>
       <MenuButton />
 
@@ -143,4 +145,4 @@ const mapStateToProps = state => ({
   clientLoading: state.clients.loading
 });
 
-export default connect(mapStateToProps, { fetchWorkouts, fetchClients })(Home);
+export default connect(mapStateToProps, {})(Home);

@@ -270,10 +270,12 @@ class AppointmentFormContainerBasic extends React.PureComponent {
               <MuiPickersUtilsProvider utils={MomentUtils}>
                 <KeyboardDateTimePicker
                   label="Start Date"
+                  disablePast
                   {...pickerEditorProps("startDate")}
                 />
                 <KeyboardDateTimePicker
                   label="End Date"
+                  disablePast
                   {...pickerEditorProps("endDate")}
                 />
               </MuiPickersUtilsProvider>

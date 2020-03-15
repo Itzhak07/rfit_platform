@@ -1,45 +1,15 @@
 import React, { useState, lazy, Suspense } from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import { CircularProgress } from "@material-ui/core";
 import {
-  Zoom,
-  ListItemText,
-  ListItemIcon,
-  MenuItem,
-  Menu,
-  Button,
-  CircularProgress
-} from "@material-ui/core";
-import {
-  Add as AddIcon,
   PersonAdd as PersonAddIcon,
   FitnessCenter as FitnessCenterIcon
 } from "@material-ui/icons/";
+import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
 
 const AddModal = lazy(() =>
   import(/* webpackChunkName: "AuthModal"*/ "../../layouts/Modal/AddModal")
 );
-
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5"
-  }
-})(props => (
-  <Menu
-    disableAutoFocusItem
-    elevation={20}
-    getContentAnchorEl={null}
-    TransitionComponent={Zoom}
-    anchorOrigin={{
-      vertical: "top",
-      horizontal: "center"
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center"
-    }}
-    {...props}
-  />
-));
 
 const useStyles = makeStyles({
   root: {
@@ -47,87 +17,61 @@ const useStyles = makeStyles({
     right: 32,
     bottom: 24,
     zIndex: 2
-  },
-  button: {
-    borderRadius: "50%",
-    height: 60,
-    width: 56
-  },
-  icon: {
-    fontSize: "1.5rem"
   }
 });
 
-const StyledMenuItem = withStyles(theme => ({
-  root: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white
-      }
-    }
-  }
-}))(MenuItem);
-
 export default function MenuButton() {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [formType, setFormType] = useState();
   const classes = useStyles();
 
-  const modalOpen = type => {
-    setOpen(true);
-    setFormType(type);
-  };
+  const actions = [
+    { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
+    { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
+  ];
 
-  const modalClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+  const handleOpen = () => {
+    setOpen(true);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const modalOpen = type => {
+    setOpenModal(true);
+    setFormType(type);
+    setOpen(false);
+  };
+
+  const modalClose = () => {
+    setOpenModal(false);
   };
 
   return (
     <div className={classes.root}>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        color="secondary"
-        onClick={handleClick}
-        className={classes.button}
-        variant="contained"
-      >
-        <AddIcon className={classes.icon} />
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
+      <SpeedDial
+        ariaLabel="SpeedDial Button"
+        icon={<SpeedDialIcon />}
         onClose={handleClose}
+        onOpen={handleOpen}
+        open={open}
+        direction={"up"}
+        FabProps={{ color: "secondary" }}
       >
-        <StyledMenuItem onClick={() => modalOpen("Client")}>
-          <ListItemIcon>
-            <PersonAddIcon />
-          </ListItemIcon>
-          <ListItemText primary="New Client" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={() => modalOpen("Workout")}>
-          <ListItemIcon>
-            <FitnessCenterIcon />
-          </ListItemIcon>
-          <ListItemText primary="New Workout" />
-        </StyledMenuItem>
-      </StyledMenu>
-
+        {actions.map(action => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            onClick={() => modalOpen(action.form)}
+          />
+        ))}
+      </SpeedDial>
       <Suspense fallback={<CircularProgress />}>
         <AddModal
-          open={open}
+          open={openModal}
           closeModal={modalClose}
           closeMenu={handleClose}
           type={formType}

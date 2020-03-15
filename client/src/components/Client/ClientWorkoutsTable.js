@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ClientWorkoutsTable({ workouts }) {
+export default function ClientWorkoutsTable({ workouts, client }) {
   const columns = [
     { title: "Date", field: "date", type: "date" },
     { title: "Start", field: "startDate", type: "time" },
@@ -28,8 +28,7 @@ export default function ClientWorkoutsTable({ workouts }) {
   return (
     <div className={classes.root}>
       <MaterialTable
-        title="Anakin's Workouts History:
-        "
+        title={`${client.firstName}'s Workouts History:`}
         className={classes.table}
         columns={columns}
         data={data}

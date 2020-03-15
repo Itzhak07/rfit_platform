@@ -36,13 +36,16 @@ export const createWorkout = data => async dispatch => {
   const { title, startDate, endDate, notes, client } = data;
 
   try {
-    let newWorkout = await Axios.post(`https://rfit-platform.herokuapp.com/api/workouts/`, {
-      client: title ? title : client,
-      notes: notes,
-      date: startDate,
-      startDate: startDate,
-      endDate: endDate
-    }).then(res => {
+    let newWorkout = await Axios.post(
+      `https://rfit-platform.herokuapp.com/api/workouts/`,
+      {
+        client: title ? title : client,
+        notes: notes,
+        date: startDate,
+        startDate: startDate,
+        endDate: endDate
+      }
+    ).then(res => {
       return setWorkoutsData(res.data);
     });
 
