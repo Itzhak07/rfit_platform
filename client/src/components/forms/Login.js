@@ -73,7 +73,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <form className={classes.form} onSubmit={e => onSubmit(e)}>
           <TextField
@@ -111,7 +111,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Login
           </Button>
         </form>
       </div>
