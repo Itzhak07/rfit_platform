@@ -71,7 +71,7 @@ function AppAppBar(props) {
               onClick={() => openModal("Login")}
               className={classes.rightLink}
             >
-              {"Sign In"}
+              {"Login"}
             </Button>
             <Button
               onClick={() => openModal("Register")}

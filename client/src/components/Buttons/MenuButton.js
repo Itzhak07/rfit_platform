@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress } from "@material-ui/core";
 import {
@@ -20,16 +20,36 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MenuButton() {
+export default function MenuButton({ addClient, addWorkout }) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [formType, setFormType] = useState();
   const classes = useStyles();
+  const [actions, setActions] = useState([]);
 
-  const actions = [
-    { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
-    { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
-  ];
+  // const actions = [
+  //   { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
+  //   { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
+  // ];
+
+  useEffect(() => {
+    if (addClient) {
+      return setActions([
+        { icon: <PersonAddIcon />, name: "New Client", form: "Client" }
+      ]);
+    }
+    else if (addWorkout) {
+      return setActions([
+        { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
+      ]);
+    }
+    else {
+      return setActions([
+        { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
+        { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
+      ]);
+    }
+  }, [addWorkout, addClient]);
 
   const handleClose = () => {
     setOpen(false);

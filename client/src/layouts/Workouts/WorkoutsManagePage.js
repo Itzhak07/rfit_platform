@@ -8,6 +8,7 @@ import {
 } from "../../actions/workoutActions";
 import WorkoutsTable from "../../components/Workouts/workoutsTable";
 import { Spinner } from "../Loader/Spinner";
+import MenuButton from "../../components/Buttons/MenuButton";
 
 const AllWorkoutsPage = ({
   createWorkout,
@@ -33,6 +34,7 @@ const AllWorkoutsPage = ({
           alerts={alerts}
         />
       )}
+      <MenuButton addWorkout />
     </div>
   );
 };

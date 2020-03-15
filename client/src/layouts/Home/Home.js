@@ -114,7 +114,7 @@ function Home({
         </Link>
         <DaySchedule />
       </div>
-      <MenuButton />
+      <MenuButton/>
 
       <Suspense fallback={<CircularProgress />}>
         <TodaysWorkoutsModal

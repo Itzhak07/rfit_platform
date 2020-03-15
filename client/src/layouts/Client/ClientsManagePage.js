@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { createClient, updateClient } from "../../actions/clientActions";
 import ClientsTable from "../../components/Client/ClientsTable";
 import { Spinner } from "../Loader/Spinner";
+import MenuButton from "../../components/Buttons/MenuButton";
+
 
 const ClientsManagePage = ({
   createClient,
@@ -24,6 +26,7 @@ const ClientsManagePage = ({
           alerts={alerts}
         />
       )}
+       <MenuButton addClient/>
     </div>
   );
 };
