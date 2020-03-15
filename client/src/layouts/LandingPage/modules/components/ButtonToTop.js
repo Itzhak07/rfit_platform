@@ -1,17 +1,13 @@
 import React from "react";
 import { animateScroll as scroll } from "react-scroll";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, Fab } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
     position: "fixed",
     right: 20,
-    bottom: 50,
-    // background: "#ff3366;",
-    borderRadius: 120,
-    height: 60,
-    width: 60
+    bottom: 50
   }
 });
 
@@ -23,13 +19,14 @@ export const ButtonToTop = () => {
   };
 
   return (
-    <Button
+    <Fab
       color="secondary"
-      variant="contained"
+      aria-label="toTop"
+      size="medium"
       className={classes.root}
       onClick={scrollToTop}
     >
       <ArrowDropUpIcon color="action" fontSize="large" />
-    </Button>
+    </Fab>
   );
 };
