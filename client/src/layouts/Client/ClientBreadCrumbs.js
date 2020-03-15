@@ -14,7 +14,7 @@ const styles = {
 export const ClientBreadCrumbs = ({ clientName }) => {
   return (
     <Breadcrumbs style={styles.root} aria-label="breadcrumb">
-      <Link to="../clients">Clients Mangament</Link>
+      <Link to="../clients">Clients Management</Link>
       <Typography color="primary" style={styles.active}>
         {clientName}
       </Typography>

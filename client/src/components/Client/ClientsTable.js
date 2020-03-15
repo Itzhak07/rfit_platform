@@ -72,7 +72,7 @@ export default function ClientsTable({
     <Paper variant="outlined">
       <div className={classes.root}>
         <MaterialTable
-          title="Clients Mangament"
+          title="Clients Management"
           columns={state.columns}
           data={state.data}
           onRowClick={(event, rowData) => {}}

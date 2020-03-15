@@ -54,7 +54,7 @@ export default function WorkoutsTable({
   return (
     <div className={classes.root}>
       <MaterialTable
-        title="Workouts Mangament"
+        title="Workouts Management"
         className={classes.table}
         columns={state.columns}
         data={state.data}
