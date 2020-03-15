@@ -32,7 +32,8 @@ export default function MenuButton({ addClient, addWorkout }) {
       return setActions([
         { icon: <PersonAddIcon />, name: "New Client", form: "Client" }
       ]);
-    } else if (addWorkout) {
+    }
+    if (addWorkout) {
       return setActions([
         { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
       ]);
