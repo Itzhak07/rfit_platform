@@ -10,7 +10,7 @@ const TodaysWorkoutsModal = lazy(() =>
   )
 );
 
-export const CardsHeader = ({
+const CardsHeader = ({
   workouts,
   clients,
   activeClients,
@@ -31,7 +31,7 @@ export const CardsHeader = ({
     cardsWrapper: {
       display: "flex",
       flexFlow: "row wrap",
-      justifyContent: "space-evenly",
+      justifyContent: "center",
       marginBottom: 50,
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
       background: "#000000bf",

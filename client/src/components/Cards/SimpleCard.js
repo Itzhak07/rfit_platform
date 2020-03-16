@@ -17,8 +17,7 @@ const useStyles = makeStyles({
     width: 250,
     textAlign: "center",
     margin: 20,
-    paddinTop: 5
-    // boxShadow: "0px 0px 28px -9px rgb(100, 181, 246)"
+    paddinTop: 5,
   },
 
   title: {
@@ -40,7 +39,8 @@ export default function SimpleCard({
   urlName,
   url,
   btnName,
-  openModal
+  openModal,
+  bgColor
 }) {
   const classes = useStyles();
   return (

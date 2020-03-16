@@ -52,7 +52,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddWorkout = ({ createWorkout, activeClients, alerts, closeModal, isNewWorkout }) => {
+const AddWorkout = ({
+  createWorkout,
+  activeClients,
+  alerts,
+  closeModal,
+  isNewWorkout
+}) => {
   const [formData, setFormData] = useState({
     client: "",
     startDate: new Date(),
@@ -64,7 +70,7 @@ const AddWorkout = ({ createWorkout, activeClients, alerts, closeModal, isNewWor
     if (isNewWorkout) {
       closeModal();
     }
-  }, [isNewWorkout]);
+  }, [isNewWorkout, closeModal]);
 
   const { endDate, startDate, notes } = formData;
 

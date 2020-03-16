@@ -59,7 +59,7 @@ const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
     if (isNewClient) {
       closeModal();
     }
-  }, [isNewClient]);
+  }, [isNewClient, closeModal]);
 
   const { firstName, lastName, email, phone, gender } = formData;
 

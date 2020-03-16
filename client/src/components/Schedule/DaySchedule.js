@@ -22,7 +22,8 @@ const DaySchedule = ({ today, loading, deleteWorkout, updateWorkout }) => {
   const styles = {
     root: {
       maxWidth: 400,
-      height: 800
+      height: 800,
+      margin: "auto"
     },
     title: {
       margin: 20,
