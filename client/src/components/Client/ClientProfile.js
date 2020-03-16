@@ -29,7 +29,9 @@ export const ClientProfile = ({ client }) => {
       </div>
       <div className={classes.item}>
         <Typography variant="subtitle2">Phone</Typography>
-        <Typography variant="h6">{client.phone}</Typography>
+        <Typography variant="h6">
+          <a href={"tel:" + client.phone}>{client.phone}</a>
+        </Typography>
       </div>
       <div className={classes.item}>
         <Typography variant="subtitle2">Gender</Typography>
@@ -37,7 +39,10 @@ export const ClientProfile = ({ client }) => {
       </div>
       <div className={classes.item}>
         <Typography variant="subtitle2">Status</Typography>
-        <Typography variant="h6">
+        <Typography
+          color={client.status === 1 ? "primary" : "error"}
+          variant="h6"
+        >
           {client.status === 1 ? "Active" : "Not-Active"}
         </Typography>
       </div>

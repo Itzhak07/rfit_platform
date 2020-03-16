@@ -46,13 +46,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddClient = ({
-  createClient,
-  alerts,
-  closeModal,
-  closeMenu,
-  isNewClient
-}) => {
+const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
