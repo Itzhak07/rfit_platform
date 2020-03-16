@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     width: 250,
     textAlign: "center",
     margin: 20,
-    paddinTop: 5,
+    paddingTop: 5
   },
 
   title: {
@@ -40,7 +40,6 @@ export default function SimpleCard({
   url,
   btnName,
   openModal,
-  bgColor
 }) {
   const classes = useStyles();
   return (

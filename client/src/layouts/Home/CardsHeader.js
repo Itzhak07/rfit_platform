@@ -43,20 +43,29 @@ const CardsHeader = ({
     <div style={styles.cardsWrapper}>
       <SimpleCard
         title="Total Workouts"
-        count={!loading && workouts.length === 0 ? "0" : workouts.length}
+        count={
+          (!loading && workouts.length === 0) || workouts == null
+            ? "0"
+            : workouts.length
+        }
         urlName="Workouts"
         url="dashboard/workouts"
       />
       <SimpleCard
         title="Clients"
-        count={!clientLoading && clients.length === 0 ? "0" : clients.length}
+        count={
+          (!clientLoading && clients.length === 0) || clients == null
+            ? "0"
+            : clients.length
+        }
         urlName="Clients"
         url="dashboard/clients"
       />
       <SimpleCard
         title="Active Clients"
         count={
-          !clientLoading && activeClients.length === 0
+          (!clientLoading && activeClients.length === 0) ||
+          activeClients == null
             ? "0"
             : activeClients.length
         }
@@ -65,7 +74,9 @@ const CardsHeader = ({
       />
       <SimpleCard
         title="Workouts Today"
-        count={!loading && today.length === 0 ? "0" : today.length}
+        count={
+          (!loading && today.length === 0) || today == null ? "0" : today.length
+        }
         btnName="More"
         openModal={modalOpen}
       />
