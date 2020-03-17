@@ -65,16 +65,41 @@ router.get("/singleclient", async function(req, res, next) {
 });
 
 // Update Workout
-router.put("/update", auth, async function(req, res, next) {
-  try {
-    const { id } = req.user;
-    const clients = await ClientController.updateClient(req, id);
+router.put(
+  "/update",
+  [
+    check("firstName", "please metion First Name")
+      .not()
+      .isEmpty(),
+    check("lastName", "Please mention Last Name")
+      .not()
+      .isEmpty(),
+    check("email", "Please mention Email").isEmail(),
+    check("phone", "Please mention Phone number")
+      .not()
+      .isEmpty(),
+    check("gender", "Please mention Gender")
+      .not()
+      .isEmpty()
+  ],
+  auth,
+  async function(req, res, next) {
+    const reqErrors = validationResult(req);
+    if (!reqErrors.isEmpty()) {
+      return res.status(400).json({
+        error: reqErrors.array()
+      });
+    }
+    try {
+      const { id } = req.user;
+      const clients = await ClientController.updateClient(req, id);
 
-    res.json(clients);
-  } catch (err) {
-    console.log(err);
-    res.status(409).json(err);
+      res.json(clients);
+    } catch (err) {
+      console.log(err);
+      res.status(409).json(err);
+    }
   }
-});
+);
 
 module.exports = router;
