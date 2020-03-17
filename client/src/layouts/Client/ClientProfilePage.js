@@ -16,12 +16,12 @@ const useStyles = makeStyles({
   },
   info: {
     padding: 20,
-    width: 430
+    maxWidth: 430
   },
   workouts: {
     padding: 20,
     width: "100%",
-    margin: "20px auto"
+    marginTop: "20px"
   },
   item: { padding: "0 0 20px 0" }
 });
@@ -48,7 +48,9 @@ function ClientProfilePage({ clients, workouts }) {
 
   return (
     <div className={classes.root}>
-      <ClientBreadCrumbs clientName={thisClient.firstName + " " + thisClient.lastName } />
+      <ClientBreadCrumbs
+        clientName={thisClient.firstName + " " + thisClient.lastName}
+      />
       <Paper className={classes.info} variant="outlined">
         {<ClientProfile client={thisClient} />}
       </Paper>

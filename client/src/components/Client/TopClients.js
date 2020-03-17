@@ -12,7 +12,7 @@ import {
   CircularProgress,
   Fade
 } from "@material-ui/core";
-import StarIcon from "@material-ui/icons/Star";
+import StarRateIcon from "@material-ui/icons/StarRate";
 
 const TopClients = ({ topClients, loading }) => {
   console.log(topClients);
@@ -59,7 +59,7 @@ const TopClients = ({ topClients, loading }) => {
                 <div key={client}>
                   <ListItem disableGutters>
                     <ListItemIcon>
-                      <StarIcon style={styles.icon} fontSize="large" />
+                      <StarRateIcon style={styles.icon} fontSize="large" />
                     </ListItemIcon>
                     <Fade in timeout={1000}>
                       <ListItemText primary={client} />
