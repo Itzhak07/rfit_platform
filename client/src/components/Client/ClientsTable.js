@@ -76,7 +76,7 @@ export default function ClientsTable({
           columns={state.columns}
           data={state.data}
           onRowClick={(event, rowData) => {}}
-          options={{ pageSize: 10, filtering: true }}
+          options={{ pageSize: 10, filtering: true, draggable: false }}
           editable={{
             onRowAdd: newData =>
               new Promise(resolve => {

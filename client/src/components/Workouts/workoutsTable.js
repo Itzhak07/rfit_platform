@@ -3,7 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
 import { CircularProgress } from "@material-ui/core";
-const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
+const ErrorAlert = lazy(() =>
+  import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
+);
 
 const useStyles = makeStyles({
   root: {
@@ -58,7 +60,7 @@ export default function WorkoutsTable({
         className={classes.table}
         columns={state.columns}
         data={state.data}
-        options={{ pageSize: 10, filtering: true }}
+        options={{ pageSize: 10, filtering: true, draggable: false }}
         onRowClick={(event, rowData) => {}}
         editable={{
           onRowAdd: newData =>

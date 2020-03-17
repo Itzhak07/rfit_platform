@@ -34,7 +34,8 @@ export default function ClientWorkoutsTable({ workouts, client }) {
         data={data}
         onRowClick={(event, rowData) => {}}
         options={{
-          search: false
+          search: false,
+          draggable: false
         }}
       />
     </div>
