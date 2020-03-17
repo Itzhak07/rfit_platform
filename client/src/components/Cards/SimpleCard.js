@@ -17,7 +17,12 @@ const useStyles = makeStyles({
     width: 250,
     textAlign: "center",
     margin: 20,
-    paddingTop: 5
+    paddingTop: 5,
+    transition: "all 0.3s ease",
+    "&:hover": {
+      transform: "scale(1.02)",
+      transition: "all 0.3s ease"
+    }
   },
 
   title: {
@@ -39,7 +44,7 @@ export default function SimpleCard({
   urlName,
   url,
   btnName,
-  openModal,
+  openModal
 }) {
   const classes = useStyles();
   return (

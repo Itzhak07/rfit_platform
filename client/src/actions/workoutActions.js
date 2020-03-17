@@ -6,6 +6,7 @@ import {
 } from "./types";
 import Axios from "axios";
 import { setAlert } from "./alertActions";
+import { setTopClients } from "./clientActions";
 
 const setWorkoutsData = data => {
   return data.map(data => {
@@ -24,6 +25,7 @@ const setWorkoutsData = data => {
 export const fetchWorkouts = () => dispatch => {
   Axios.get(`https://rfit-platform.herokuapp.com/api/workouts/`).then(res => {
     const workouts = setWorkoutsData(res.data);
+    dispatch(setTopClients(workouts));
 
     dispatch({
       type: FETCH_WORKOUTS,
@@ -48,9 +50,15 @@ export const createWorkout = data => async dispatch => {
     ).then(res => {
       return setWorkoutsData(res.data);
     });
+    dispatch(setTopClients(newWorkout));
 
     dispatch({
       type: NEW_WORKOUT,
+      payload: true
+    });
+
+    dispatch({
+      type: FETCH_WORKOUTS,
       payload: newWorkout
     });
   } catch (err) {
@@ -64,6 +72,7 @@ export const deleteWorkout = id => dispatch => {
   Axios.delete(`https://rfit-platform.herokuapp.com/api/workouts/delete/${id}`)
     .then(res => {
       const workouts = setWorkoutsData(res.data);
+      dispatch(setTopClients(workouts));
       dispatch({
         type: DELETE_WORKOUT,
         payload: workouts
@@ -78,7 +87,7 @@ export const updateWorkout = data => dispatch => {
   Axios.put(`https://rfit-platform.herokuapp.com/api/workouts/update`, data)
     .then(res => {
       const workouts = setWorkoutsData(res.data);
-
+      dispatch(setTopClients(workouts));
       dispatch({
         type: UPDATE_WORKOUT,
         payload: workouts

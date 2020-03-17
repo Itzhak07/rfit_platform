@@ -92,7 +92,7 @@ const AddWorkout = ({
   };
 
   const onStartChange = e => {
-    setFormData({ ...formData, startDate: e });
+    setFormData({ ...formData, startDate: e, endDate: e });
   };
 
   const onEndChange = e => {
@@ -133,7 +133,6 @@ const AddWorkout = ({
               <TextField
                 {...params}
                 className={classes.input}
-                // margin="normal"
                 label="Client"
                 variant="outlined"
                 type="search"
@@ -161,6 +160,7 @@ const AddWorkout = ({
               name="endDate"
               className={classes.input}
               inputVariant="outlined"
+              autoOk
               value={endDate}
               onChange={e => onEndChange(e)}
             />

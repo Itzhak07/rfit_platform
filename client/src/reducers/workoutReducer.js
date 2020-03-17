@@ -33,15 +33,7 @@ export default (state = initialState, action) => {
     case NEW_WORKOUT:
       return {
         ...state,
-        workouts: payload,
-        today: payload.filter(workout => {
-          return (
-            moment(workout.startDate).format("MMM Do YY") ===
-            moment().format("MMM Do YY")
-          );
-        }),
-        loading: false,
-        isNewWorkout: true
+        isNewWorkout: payload
       };
     case DELETE_WORKOUT:
       return {

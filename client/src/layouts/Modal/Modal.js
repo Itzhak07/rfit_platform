@@ -35,7 +35,7 @@ export default function Modal({ handleClose, open, modalBody, modalTitle }) {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="secondary">
           Close
         </Button>
       </DialogActions>

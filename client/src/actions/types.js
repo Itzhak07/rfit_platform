@@ -9,6 +9,7 @@ export const UPDATE_WORKOUT = "UPDATE_WORKOUT";
 export const FETCH_CLIENTS = "FETCH_CLIENTS";
 export const NEW_CLIENT = "NEW_CLIENT";
 export const UPDATE_CLIENT = "UPDATE_CLIENT";
+export const SET_TOP_CLIENTS = "SET_TOP_CLIENTS";
 
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";

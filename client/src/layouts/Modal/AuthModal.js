@@ -42,7 +42,7 @@ export default function AuthModal({ open, handleCLose, type }) {
         </Suspense>
 
         <DialogActions>
-          <Button onClick={handleCLose} color="primary">
+          <Button onClick={handleCLose} color="secondary">
             Close
           </Button>
         </DialogActions>

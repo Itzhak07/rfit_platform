@@ -53,7 +53,7 @@ export default function AddModal({ open, closeModal, closeMenu, type }) {
         </Suspense>
 
         <DialogActions>
-          <Button onClick={closeModal} color="primary">
+          <Button onClick={closeModal} color="secondary">
             Close
           </Button>
         </DialogActions>

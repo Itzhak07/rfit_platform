@@ -167,12 +167,15 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       ...appointmentChanges
     };
 
-    const clientsOptions = activeClients.map(client => {
-      return {
-        id: client._id,
-        text: client.firstName + " " + client.lastName
-      };
-    });
+    const clientsOptions =
+      activeClients !== null
+        ? activeClients.map(client => {
+            return {
+              id: client._id,
+              text: client.firstName + " " + client.lastName
+            };
+          })
+        : "";
 
     const isNewAppointment = appointmentData.id === undefined;
     const applyChanges = isNewAppointment

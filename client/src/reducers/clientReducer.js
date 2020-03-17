@@ -1,8 +1,14 @@
-import { FETCH_CLIENTS, NEW_CLIENT, UPDATE_CLIENT } from "../actions/types";
+import {
+  FETCH_CLIENTS,
+  NEW_CLIENT,
+  UPDATE_CLIENT,
+  SET_TOP_CLIENTS
+} from "../actions/types";
 
 const initialState = {
   clients: null,
   active: null,
+  topClients: null,
   loading: true,
   isNewClient: false
 };
@@ -23,12 +29,7 @@ export default (state = initialState, action) => {
     case NEW_CLIENT:
       return {
         ...state,
-        clients: payload,
-        active: payload.filter(client => {
-          return client.status !== 2;
-        }),
-        loading: false,
-        isNewClient: true
+        isNewClient: payload
       };
     case UPDATE_CLIENT:
       return {
@@ -39,6 +40,11 @@ export default (state = initialState, action) => {
         }),
         loading: false,
         isNewClient: false
+      };
+    case SET_TOP_CLIENTS:
+      return {
+        ...state,
+        topClients: payload
       };
 
     default:

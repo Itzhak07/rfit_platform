@@ -73,6 +73,13 @@ const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
   const onSubmit = e => {
     e.preventDefault();
     createClient(formData);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      gender: ""
+    });
   };
 
   return (

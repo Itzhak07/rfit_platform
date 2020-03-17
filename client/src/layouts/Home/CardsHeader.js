@@ -32,10 +32,10 @@ const CardsHeader = ({
       display: "flex",
       flexFlow: "row wrap",
       justifyContent: "center",
-      marginBottom: 50,
+      marginBottom: 20,
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
-      background: "#000000bf",
-      height: "100%"
+      backgroundImage:
+        " radial-gradient(circle, #666666, #4c4c4c, #343434, #1d1d1d, #000000)"
     }
   };
 
