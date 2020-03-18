@@ -41,7 +41,7 @@ export default function ClientsTable({
           ),
           cellStyle: {
             fontWeight: 600,
-            color: "#039be5",
+            color: "#3f51b5",
             transform: " scale(1.2)"
           }
         },
