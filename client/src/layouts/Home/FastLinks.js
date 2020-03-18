@@ -17,6 +17,9 @@ const styles = {
   },
   linkBtn: {
     margin: 5
+  },
+  button: {
+    width: 150
   }
 };
 
@@ -27,6 +30,7 @@ export const FastLinks = () => {
         <Button
           variant="contained"
           color="secondary"
+          style={styles.button}
           startIcon={<CalendarTodayIcon />}
         >
           Scheduele
@@ -36,13 +40,19 @@ export const FastLinks = () => {
         <Button
           variant="contained"
           color="secondary"
+          style={styles.button}
           startIcon={<FitnessCenterIcon />}
         >
           Workouts
         </Button>
       </Link>
       <Link style={styles.linkBtn} to="./dashboard/clients">
-        <Button variant="contained" color="secondary" startIcon={<GroupIcon />}>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={styles.button}
+          startIcon={<GroupIcon />}
+        >
           Clients
         </Button>
       </Link>
@@ -50,6 +60,7 @@ export const FastLinks = () => {
         <Button
           variant="contained"
           color="secondary"
+          style={styles.button}
           startIcon={<AccountBoxIcon />}
         >
           Account
