@@ -33,6 +33,8 @@ import {
 
 import logo from "../../assets/images/logo.png";
 import { drawerItems } from "./DrawerItems";
+import { Spring, config } from "react-spring/renderprops";
+import { isMobile } from "react-device-detect";
 
 const drawerWidth = 240;
 
@@ -62,10 +64,7 @@ const useStyles = makeStyles(theme => ({
       display: "none"
     }
   },
-  // toolbar: theme.mixins.toolbar,
-  toolbar: {
-    minHeight: 50
-  },
+  toolbar: theme.mixins.toolbar,
 
   logoWrapper: {
     textAlign: "center"
@@ -135,6 +134,9 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
   const onViewChange = viewName => {
     setPageName(viewName);
     localStorage.setItem("lastPageView", viewName);
+    if (isMobile) {
+      setMobileOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -232,11 +234,14 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
     </div>
   );
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar variant="dense">
+  const toolbar = (
+    <Spring
+      from={{ opacity: 0, marginTop: -500 }}
+      to={{ opacity: 1, marginTop: 0 }}
+      config={config.slow}
+    >
+      {props => (
+        <Toolbar style={props}>
           <IconButton
             color="inherit"
             aria-label="Open drawer"
@@ -261,6 +266,15 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
             </Button>
           </Link>
         </Toolbar>
+      )}
+    </Spring>
+  );
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar position="fixed" className={classes.appBar}>
+        {toolbar}
       </AppBar>
       <nav className={classes.drawer} aria-label="Mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}

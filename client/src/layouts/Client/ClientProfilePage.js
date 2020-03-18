@@ -16,12 +16,13 @@ const useStyles = makeStyles({
   },
   info: {
     padding: 20,
-    maxWidth: 430
+    maxWidth: 500,
+    width: "100%"
   },
   workouts: {
     padding: 20,
     width: "100%",
-    marginTop: "20px"
+    marginTop: 20
   },
   item: { padding: "0 0 20px 0" }
 });
@@ -45,8 +46,6 @@ function ClientProfilePage({ clients, workouts }) {
     });
     setState({ thisClient: thisClient[0], thisWorkouts: clientWorkouts });
   }, [clients, workouts, id]);
-
- 
 
   return (
     <div className={classes.root}>

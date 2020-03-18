@@ -41,7 +41,7 @@ export default function TodaysWorkoutsModal({
             {data.length !== 0 ? (
               <SimpleWorkoutsTable data={data} />
             ) : (
-              <h1>No Workouts Today!</h1>
+              <h1>No Appointments For Today!</h1>
             )}
           </Suspense>
         </DialogContent>

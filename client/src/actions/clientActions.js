@@ -56,23 +56,15 @@ export const updateClient = data => dispatch => {
 };
 
 export const setTopClients = workouts => dispatch => {
-  console.log(workouts);
-
   let counts = workouts.reduce((a, c) => {
     a[c.title] = (a[c.title] || 0) + 1;
 
     return a;
   }, {});
 
-  console.log(counts);
-
   let minCount = 3;
 
-  console.log(counts);
-
   let mostFrequent = Object.keys(counts).filter(k => counts[k] >= minCount);
-
-  console.log(mostFrequent);
 
   if (mostFrequent.length === 0) {
     mostFrequent = null;

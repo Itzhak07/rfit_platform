@@ -15,12 +15,9 @@ import {
 import StarRateIcon from "@material-ui/icons/StarRate";
 
 const TopClients = ({ topClients, loading }) => {
-  console.log(topClients);
-
   const styles = {
     root: {
       maxWidth: 500,
-      marginLeft: "auto",
       flexGrow: 1
     },
     paper: {

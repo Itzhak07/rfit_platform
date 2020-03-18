@@ -43,7 +43,7 @@ const CardsHeader = ({
   return (
     <div style={styles.cardsWrapper}>
       <SimpleCard
-        title="Workouts This Month"
+        title="Appointments For This Month"
         count={
           (!loading && thisMonthWorkouts.length === 0) ||
           thisMonthWorkouts == null
@@ -72,13 +72,12 @@ const CardsHeader = ({
         url="dashboard/clients"
       />
       <SimpleCard
-        title="Workouts Today"
+        title="Appointments For Today"
         count={
           (!loading && todayWorkouts.length === 0) || todayWorkouts == null
             ? "0"
             : todayWorkouts.length
         }
-        // url="dashboard/workouts"
         btnName="More"
         openModal={modalOpen}
       />
@@ -88,7 +87,7 @@ const CardsHeader = ({
           open={open}
           handleClose={modalClose}
           data={todayWorkouts}
-          title="Today's Workouts"
+          title="Today's Appointments"
         />
       </Suspense>
     </div>

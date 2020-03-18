@@ -27,11 +27,12 @@ const useStyles = makeStyles({
 
   title: {
     color: "black",
-    fontSize: 20
+    fontSize: 16,
+    fontWeight: 500
   },
   countNum: {
-    marginTop: 5,
-    fontSize: 26
+    // marginTop: 5,
+    fontSize: 35
   },
   content: {
     padding: "5px 0"
@@ -43,10 +44,11 @@ const useStyles = makeStyles({
 
 export default function SimpleCard({ title, count, url, btnName, openModal }) {
   const classes = useStyles();
+
   return (
     <div>
       <Card className={classes.root}>
-        <Link to={url}>
+        <Link to={url ? url : ""}>
           <CardContent className={classes.content}>
             <Typography
               className={classes.title}
@@ -55,7 +57,7 @@ export default function SimpleCard({ title, count, url, btnName, openModal }) {
             >
               {title}
             </Typography>
-            <Divider />
+            <Divider light />
             {count ? (
               <Typography className={classes.countNum}>{count}</Typography>
             ) : (

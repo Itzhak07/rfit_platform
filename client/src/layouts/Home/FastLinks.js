@@ -11,9 +11,9 @@ const styles = {
   root: {
     display: "flex",
     flexFlow: "row wrap",
-    justifyContent: "flex-start",
+    justifyContent: "center",
     height: "100%",
-    marginBottom: 10
+    marginBottom: 20
   },
   linkBtn: {
     margin: 5
