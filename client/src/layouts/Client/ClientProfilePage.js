@@ -46,6 +46,8 @@ function ClientProfilePage({ clients, workouts }) {
     setState({ thisClient: thisClient[0], thisWorkouts: clientWorkouts });
   }, [clients, workouts, id]);
 
+ 
+
   return (
     <div className={classes.root}>
       <ClientBreadCrumbs

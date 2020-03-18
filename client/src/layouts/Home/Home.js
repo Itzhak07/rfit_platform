@@ -12,24 +12,29 @@ const Home = () => {
       display: "flex",
       flexFlow: "row-reverse wrap",
       justifyContent: "space-evenly",
-      background: `url(${bgwhite})`,
-      padding: 10
+      background: `url(${bgwhite})`
     },
     leftSection: {
       display: "flex"
     },
     rightSection: {
       marginBottom: 20
+    },
+    rightBottom: {
+      display: "flex",
+      flexFlow: "row wrap",
+      justifyContent: "space-around"
     }
   };
 
   return (
     <div style={styles.root}>
-      <FastLinks />
       <div style={styles.rightSection}>
         <CardsHeader />
-
-        <TopClients />
+        <div style={styles.rightBottom}>
+          <FastLinks />
+          <TopClients />
+        </div>
       </div>
 
       <div style={styles.leftSection}>

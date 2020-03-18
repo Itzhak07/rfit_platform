@@ -75,6 +75,7 @@ class WorkoutsController {
       });
     });
   }
+
 }
 
 module.exports = WorkoutsController;

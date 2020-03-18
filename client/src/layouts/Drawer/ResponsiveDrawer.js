@@ -34,13 +34,6 @@ import {
 import logo from "../../assets/images/logo.png";
 import { drawerItems } from "./DrawerItems";
 
-// if (process.env.NODE_ENV === 'development') {
-//   const whyDidYouRender = require('@welldone-software/why-did-you-render');
-//   whyDidYouRender(React, {
-//     trackAllPureComponents: true,
-//   });
-// }
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -69,7 +62,10 @@ const useStyles = makeStyles(theme => ({
       display: "none"
     }
   },
-  toolbar: theme.mixins.toolbar,
+  // toolbar: theme.mixins.toolbar,
+  toolbar: {
+    minHeight: 50
+  },
 
   logoWrapper: {
     textAlign: "center"
@@ -119,7 +115,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 10,
       transition: "all 0.3s ease"
     }
-  },
+  }
 }));
 
 function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
@@ -158,7 +154,6 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
         </div>
       </div>
       <Divider />
-
       {user ? (
         <div className={classes.user}>
           <Avatar alt="Avatar" src={user.avatar} className={classes.avatar} />
@@ -216,7 +211,6 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                               onClick={() => {
                                 onViewChange(subitem.viewName);
                               }}
-              
                             >
                               <ListItem button className={classes.nested}>
                                 <ListItemIcon>{subitem.icon}</ListItemIcon>
@@ -242,7 +236,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar variant="dense">
           <IconButton
             color="inherit"
             aria-label="Open drawer"

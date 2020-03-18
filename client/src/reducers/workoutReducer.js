@@ -8,6 +8,7 @@ import moment from "moment";
 
 const initialState = {
   workouts: [],
+  thisMonth: [],
   today: [],
   loading: true,
   isNewWorkout: false
@@ -24,6 +25,18 @@ export default (state = initialState, action) => {
           return (
             moment(workout.startDate).format("MMM Do YY") ===
             moment().format("MMM Do YY")
+          );
+        }),
+        thisMonth: payload.filter(workout => {
+          return (
+            moment(workout.startDate).format("YYYY-MM-DD ") >=
+              moment()
+                .startOf("month")
+                .format("YYYY-MM-DD ") &&
+            moment(workout.startDate).format("YYYY-MM-DD ") <=
+              moment()
+                .endOf("month")
+                .format("YYYY-MM-DD ")
           );
         }),
         loading: false,
@@ -45,6 +58,18 @@ export default (state = initialState, action) => {
             moment().format("MMM Do YY")
           );
         }),
+        thisMonth: payload.filter(workout => {
+          return (
+            moment(workout.startDate).format("YYYY-MM-DD ") >=
+              moment()
+                .startOf("month")
+                .format("YYYY-MM-DD ") &&
+            moment(workout.startDate).format("YYYY-MM-DD ") <=
+              moment()
+                .endOf("month")
+                .format("YYYY-MM-DD ")
+          );
+        }),
         loading: false,
         isNewWorkout: false
       };
@@ -56,6 +81,18 @@ export default (state = initialState, action) => {
           return (
             moment(workout.startDate).format("MMM Do YY") ===
             moment().format("MMM Do YY")
+          );
+        }),
+        thisMonth: payload.filter(workout => {
+          return (
+            moment(workout.startDate).format("YYYY-MM-DD ") >=
+              moment()
+                .startOf("month")
+                .format("YYYY-MM-DD ") &&
+            moment(workout.startDate).format("YYYY-MM-DD ") <=
+              moment()
+                .endOf("month")
+                .format("YYYY-MM-DD ")
           );
         }),
         loading: false,

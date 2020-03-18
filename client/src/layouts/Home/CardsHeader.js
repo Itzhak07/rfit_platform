@@ -12,10 +12,11 @@ const TodaysWorkoutsModal = lazy(() =>
 
 const CardsHeader = ({
   workouts,
+  thisMonthWorkouts,
   clients,
   activeClients,
   loading,
-  today,
+  todayWorkouts,
   clientLoading
 }) => {
   const [open, setOpen] = useState(false);
@@ -42,13 +43,13 @@ const CardsHeader = ({
   return (
     <div style={styles.cardsWrapper}>
       <SimpleCard
-        title="Total Workouts"
+        title="Workouts This Month"
         count={
-          (!loading && workouts.length === 0) || workouts == null
+          (!loading && thisMonthWorkouts.length === 0) ||
+          thisMonthWorkouts == null
             ? "0"
-            : workouts.length
+            : thisMonthWorkouts.length
         }
-        urlName="Workouts"
         url="dashboard/workouts"
       />
       <SimpleCard
@@ -58,7 +59,6 @@ const CardsHeader = ({
             ? "0"
             : clients.length
         }
-        urlName="Clients"
         url="dashboard/clients"
       />
       <SimpleCard
@@ -69,14 +69,16 @@ const CardsHeader = ({
             ? "0"
             : activeClients.length
         }
-        urlName="Clients"
         url="dashboard/clients"
       />
       <SimpleCard
         title="Workouts Today"
         count={
-          (!loading && today.length === 0) || today == null ? "0" : today.length
+          (!loading && todayWorkouts.length === 0) || todayWorkouts == null
+            ? "0"
+            : todayWorkouts.length
         }
+        // url="dashboard/workouts"
         btnName="More"
         openModal={modalOpen}
       />
@@ -85,7 +87,7 @@ const CardsHeader = ({
         <TodaysWorkoutsModal
           open={open}
           handleClose={modalClose}
-          data={today}
+          data={todayWorkouts}
           title="Today's Workouts"
         />
       </Suspense>
@@ -95,15 +97,17 @@ const CardsHeader = ({
 
 CardsHeader.propTypes = {
   workouts: PropTypes.array,
-  today: PropTypes.array,
+  todayWorkouts: PropTypes.array,
   clients: PropTypes.array,
   activeClients: PropTypes.array,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  thisMonthWorkouts: PropTypes.array
 };
 
 const mapStateToProps = state => ({
   workouts: state.workouts.workouts,
-  today: state.workouts.today,
+  todayWorkouts: state.workouts.today,
+  thisMonthWorkouts: state.workouts.thisMonth,
   clients: state.clients.clients,
   activeClients: state.clients.active,
   loading: state.workouts.loading,

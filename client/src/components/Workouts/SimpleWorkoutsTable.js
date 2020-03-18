@@ -23,6 +23,7 @@ const useStyles = makeStyles({
 export default function SimpleWorkoutsTable({ data }) {
   const classes = useStyles();
 
+
   return (
     <TableContainer>
       <Table className={classes.table} aria-label="a dense table">

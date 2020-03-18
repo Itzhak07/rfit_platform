@@ -20,12 +20,14 @@ const TopClients = ({ topClients, loading }) => {
   const styles = {
     root: {
       maxWidth: 500,
-      marginLeft: "auto"
+      marginLeft: "auto",
+      flexGrow: 1
     },
     paper: {
       padding: "0 16px",
       background: "#3f51b5",
-      color: "white"
+      color: "white",
+      width: "100%"
     },
     title: {
       paddingTop: 10,

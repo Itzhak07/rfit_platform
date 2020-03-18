@@ -8,15 +8,15 @@ import {
   Button,
   Typography,
   Divider,
-  CircularProgress,
-  Paper
+  CircularProgress
 } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    width: 250,
+    width: 270,
+    height: 130,
     textAlign: "center",
-    margin: 20,
+    margin: 10,
     paddingTop: 5,
     transition: "all 0.3s ease",
     "&:hover": {
@@ -35,22 +35,18 @@ const useStyles = makeStyles({
   },
   content: {
     padding: "5px 0"
+  },
+  actions: {
+    padding: "0 0 0 8px"
   }
 });
 
-export default function SimpleCard({
-  title,
-  count,
-  urlName,
-  url,
-  btnName,
-  openModal
-}) {
+export default function SimpleCard({ title, count, url, btnName, openModal }) {
   const classes = useStyles();
   return (
     <div>
-      <Paper variant="outlined" className={classes.root}>
-        <Card>
+      <Card className={classes.root}>
+        <Link to={url}>
           <CardContent className={classes.content}>
             <Typography
               className={classes.title}
@@ -66,14 +62,8 @@ export default function SimpleCard({
               <CircularProgress />
             )}
           </CardContent>
-          <CardActions>
-            {url && urlName ? (
-              <Link to={url}>
-                <Button variant="outlined" color="primary" size="small">
-                  {urlName}
-                </Button>
-              </Link>
-            ) : (
+          {openModal ? (
+            <CardActions className={classes.actions}>
               <Button
                 variant="outlined"
                 color="secondary"
@@ -82,10 +72,12 @@ export default function SimpleCard({
               >
                 {btnName}
               </Button>
-            )}
-          </CardActions>
-        </Card>
-      </Paper>
+            </CardActions>
+          ) : (
+            ""
+          )}
+        </Link>
+      </Card>
     </div>
   );
 }

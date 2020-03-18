@@ -14,7 +14,7 @@ import {
   IntegratedEditing
 } from "@devexpress/dx-react-scheduler";
 
-import WeightlifterPic from "../../assets/images/weightlifter.png";
+import NoAppointments from "../../assets/images/no_appointments.png";
 import { Typography, LinearProgress, Paper } from "@material-ui/core";
 import { deleteWorkout, updateWorkout } from "../../actions/workoutActions";
 
@@ -23,7 +23,6 @@ const DaySchedule = ({ today, loading, deleteWorkout, updateWorkout }) => {
     root: {
       maxWidth: 400,
       height: 800,
-      // margin: "auto"
       marginBottom: 20
     },
     title: {
@@ -32,7 +31,7 @@ const DaySchedule = ({ today, loading, deleteWorkout, updateWorkout }) => {
     },
     message: {
       margin: 20,
-      fontSize: 32
+      fontSize: 25
     },
     wrapper: {
       display: "flex",
@@ -40,7 +39,7 @@ const DaySchedule = ({ today, loading, deleteWorkout, updateWorkout }) => {
       alignItems: "center"
     },
     img: {
-      width: 300,
+      width: 250,
       marginTop: 50
     }
   };
@@ -64,11 +63,13 @@ const DaySchedule = ({ today, loading, deleteWorkout, updateWorkout }) => {
       {loading ? <LinearProgress variant="query" /> : ""}
       {!loading && today.length === 0 ? (
         <div style={styles.wrapper}>
-          <Typography style={styles.message}>No Appointments Today!</Typography>
+          <Typography style={styles.message}>
+            No Appointments For Today!
+          </Typography>
           <img
-            src={WeightlifterPic}
-            title="weightlifter"
-            alt="weightlifter"
+            src={NoAppointments}
+            title="No Appointments"
+            alt="No Appointments"
             style={styles.img}
           />
         </div>
