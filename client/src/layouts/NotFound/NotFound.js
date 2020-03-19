@@ -2,6 +2,7 @@ import React from "react";
 import notFoundBg from "../../assets/images/404.jpg";
 import notFoundLeft from "../../assets/images/404-left.jpg";
 import notFoundRight from "../../assets/images/404-right.jpg";
+import { Hidden } from "@material-ui/core";
 
 const styles = {
   root: {
@@ -10,7 +11,8 @@ const styles = {
     textAlign: "center",
     display: "flex",
     flexDirection: "row",
-    height: "100vh"
+    height: "100vh",
+    background: "#151515",
   },
   bgContainer: {
     background: "#151515",
@@ -22,13 +24,22 @@ const styles = {
     maxHeight: 400,
     marginBottom: 50
   },
-  h1: {},
-  h2: {}
+  side_bg: {
+    height: "100vh",
+    width: "100%"
+  }
 };
 export const NotFound = () => {
   return (
     <div style={styles.root}>
-      <img src={notFoundLeft} title="left_bg" alt="left_bg" />
+      <Hidden implementation="css" mdDown>
+        <img
+          src={notFoundLeft}
+          title="left_bg"
+          alt="left_bg"
+          style={styles.side_bg}
+        />
+      </Hidden>
       <div style={styles.bgContainer}>
         <img
           src={notFoundBg}
@@ -39,7 +50,14 @@ export const NotFound = () => {
         <h2>THIS PAGE IS NOT FULLY ARMED AND OPERATIONAL.</h2>
         <h1>TRY SOMETHING ELSE?</h1>
       </div>
-      <img src={notFoundRight} title="right_bg" alt="right_bg" />
+      <Hidden implementation="css" mdDown>
+        <img
+          src={notFoundRight}
+          title="right_bg"
+          alt="right_bg"
+          style={styles.side_bg}
+        />
+      </Hidden>
     </div>
   );
 };

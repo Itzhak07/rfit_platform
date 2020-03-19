@@ -48,7 +48,7 @@ export default function SimpleCard({ title, count, url, btnName, openModal }) {
   return (
     <div>
       <Card className={classes.root}>
-        <Link to={url ? url : ""}>
+        <Link to={url}>
           <CardContent className={classes.content}>
             <Typography
               className={classes.title}

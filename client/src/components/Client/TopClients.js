@@ -18,7 +18,8 @@ const TopClients = ({ topClients, loading }) => {
   const styles = {
     root: {
       maxWidth: 500,
-      flexGrow: 1
+      flexGrow: 1,
+      marginBottom: 10
     },
     paper: {
       padding: "0 16px",

@@ -87,6 +87,7 @@ const CardsHeader = ({
           open={open}
           handleClose={modalClose}
           data={todayWorkouts}
+          url="dashboard/"
           title="Today's Appointments"
         />
       </Suspense>
