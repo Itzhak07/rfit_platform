@@ -56,7 +56,9 @@ export const updateClient = data => dispatch => {
       dispatch(fetchWorkouts());
     })
     .catch(err => {
-      console.log(err);
+      const { error } = err.response.data;
+
+      dispatch(setAlert(error));
     });
 };
 
