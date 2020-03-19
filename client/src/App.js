@@ -11,6 +11,7 @@ import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./routing/PrivateRoute";
 import { fetchClients } from "./actions/clientActions";
 import LandingPage from "./layouts/LandingPage/LandingPage";
+import MySnackbar from "./components/Snackbar/MySnackbar";
 
 // const LandingPage = lazy(() =>
 //   import(
@@ -147,6 +148,7 @@ function App() {
                 />
                 <PrivateRoute component={NotFound} />
               </Switch>
+              <MySnackbar />
             </ResponsiveDrawer>
           </Suspense>
         </Switch>

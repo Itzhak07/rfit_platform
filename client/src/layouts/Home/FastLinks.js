@@ -6,7 +6,8 @@ import {
   FitnessCenter as FitnessCenterIcon,
   Group as GroupIcon
 } from "@material-ui/icons";
-import { Button } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
+
 const styles = {
   root: {
     display: "flex",
@@ -20,51 +21,60 @@ const styles = {
   },
   button: {
     width: 150
-  }
+  },
+  icon: { marginRight: 5 }
 };
 
 export const FastLinks = () => {
   return (
     <div style={styles.root}>
       <Link style={styles.linkBtn} to="./dashboard/schedule">
-        <Button
-          variant="contained"
+        <Fab
+          variant="extended"
+          size="large"
           color="secondary"
+          aria-label="schedule"
           style={styles.button}
-          startIcon={<CalendarTodayIcon />}
         >
+          <CalendarTodayIcon style={styles.icon} />
           Scheduele
-        </Button>
+        </Fab>
       </Link>
       <Link style={styles.linkBtn} to="./dashboard/workouts">
-        <Button
-          variant="contained"
+        <Fab
+          variant="extended"
+          size="large"
           color="secondary"
+          aria-label="workouts"
           style={styles.button}
-          startIcon={<FitnessCenterIcon />}
         >
+          <FitnessCenterIcon style={styles.icon} />
           Workouts
-        </Button>
+        </Fab>
       </Link>
       <Link style={styles.linkBtn} to="./dashboard/clients">
-        <Button
-          variant="contained"
+        <Fab
+          variant="extended"
+          size="large"
           color="secondary"
+          aria-label="clients"
           style={styles.button}
-          startIcon={<GroupIcon />}
         >
+          <GroupIcon style={styles.icon} />
           Clients
-        </Button>
+        </Fab>
       </Link>
       <Link style={styles.linkBtn} to="./dashboard/account">
-        <Button
-          variant="contained"
+        <Fab
+          variant="extended"
+          size="large"
           color="secondary"
+          aria-label="account"
           style={styles.button}
-          startIcon={<AccountBoxIcon />}
         >
+          <AccountBoxIcon style={styles.icon} />
           Account
-        </Button>
+        </Fab>
       </Link>
     </div>
   );
