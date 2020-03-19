@@ -45,12 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EditClient = ({
-  updateClient,
-  alerts,
-  closeModal,
-  clients
-}) => {
+const EditClient = ({ updateClient, alerts, closeModal, clients }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -59,6 +54,7 @@ const EditClient = ({
     gender: "",
     status: ""
   });
+  const [disable, setDisable] = useState(true);
 
   const { firstName, lastName, email, phone, gender, status } = formData;
 
@@ -78,13 +74,16 @@ const EditClient = ({
     setFormData(thisClient[0]);
   }, [clients, id]);
 
-  const onChange = e =>
+  const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setDisable(false);
+  };
 
   const onSubmit = e => {
     e.preventDefault();
     updateClient(formData);
     closeModal();
+    setDisable(true);
   };
 
   return (
@@ -196,6 +195,7 @@ const EditClient = ({
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={disable}
           >
             Submit
           </Button>

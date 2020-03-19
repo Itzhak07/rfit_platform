@@ -45,6 +45,11 @@ export const updateClient = data => dispatch => {
     .then(res => {
       dispatch({
         type: UPDATE_CLIENT,
+        payload: true
+      });
+
+      dispatch({
+        type: FETCH_CLIENTS,
         payload: res.data
       });
 

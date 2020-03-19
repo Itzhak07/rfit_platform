@@ -10,7 +10,8 @@ const initialState = {
   active: null,
   topClients: null,
   loading: true,
-  isNewClient: false
+  isNewClient: false,
+  isClientUpdate: false
 };
 
 export default (state = initialState, action) => {
@@ -24,7 +25,8 @@ export default (state = initialState, action) => {
           return client.status !== 2;
         }),
         loading: false,
-        isNewClient: false
+        isNewClient: false,
+        isClientUpdate: false
       };
     case NEW_CLIENT:
       return {
@@ -34,12 +36,7 @@ export default (state = initialState, action) => {
     case UPDATE_CLIENT:
       return {
         ...state,
-        clients: payload,
-        active: payload.filter(client => {
-          return client.status === 1;
-        }),
-        loading: false,
-        isNewClient: false
+        isClientUpdate: payload
       };
     case SET_TOP_CLIENTS:
       return {

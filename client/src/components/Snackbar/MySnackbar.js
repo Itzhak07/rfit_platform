@@ -8,7 +8,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function MySnackbar({ isNewWorkout, isNewClient }) {
+function MySnackbar({ isNewWorkout, isNewClient, isClientUpdate }) {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -21,7 +21,11 @@ function MySnackbar({ isNewWorkout, isNewClient }) {
       setMessage("Client has been added!");
       setOpen(true);
     }
-  }, [isNewClient, isNewWorkout]);
+    if (isClientUpdate) {
+      setMessage("Client has been updated!");
+      setOpen(true);
+    }
+  }, [isNewClient, isNewWorkout, isClientUpdate]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -44,12 +48,14 @@ function MySnackbar({ isNewWorkout, isNewClient }) {
 
 MySnackbar.propTypes = {
   isNewWorkout: PropTypes.bool.isRequired,
-  isNewClient: PropTypes.bool.isRequired
+  isNewClient: PropTypes.bool.isRequired,
+  isClientUpdate: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   isNewWorkout: state.workouts.isNewWorkout,
-  isNewClient: state.clients.isNewClient
+  isNewClient: state.clients.isNewClient,
+  isClientUpdate: state.clients.isClientUpdate
 });
 
 export default connect(mapStateToProps, {})(MySnackbar);
