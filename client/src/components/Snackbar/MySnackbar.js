@@ -33,7 +33,7 @@ function MySnackbar({ isNewWorkout, isNewClient }) {
 
   return (
     <div>
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           {message}
         </Alert>
