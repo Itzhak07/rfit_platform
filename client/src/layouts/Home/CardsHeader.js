@@ -36,7 +36,8 @@ const CardsHeader = ({
       marginBottom: 20,
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
       backgroundImage:
-        " radial-gradient(circle, #666666, #4c4c4c, #343434, #1d1d1d, #000000)"
+        " radial-gradient(circle, #666666, #4c4c4c, #343434, #1d1d1d, #000000)",
+        borderRadius: 4
     }
   };
 

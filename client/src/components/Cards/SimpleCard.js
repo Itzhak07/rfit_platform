@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     margin: 10,
     paddingTop: 5,
     transition: "all 0.3s ease",
+    background: "linear-gradient(200deg,#ffffff,#a9a9a9)",
     "&:hover": {
       transform: "scale(1.02)",
       transition: "all 0.3s ease"

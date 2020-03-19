@@ -68,7 +68,6 @@ export const setTopClients = workouts => dispatch => {
   }, {});
 
   let minCount = 3;
-
   let mostFrequent = Object.keys(counts).filter(k => counts[k] >= minCount);
 
   if (mostFrequent.length === 0) {
