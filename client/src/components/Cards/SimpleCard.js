@@ -67,12 +67,7 @@ export default function SimpleCard({ title, count, url, btnName, openModal }) {
           </CardContent>
           {openModal ? (
             <CardActions className={classes.actions}>
-              <Button
-                variant="outlined"
-                color="secondary"
-                onClick={() => openModal()}
-                size="small"
-              >
+              <Button size="small" color="primary" onClick={() => openModal()}>
                 {btnName}
               </Button>
             </CardActions>
