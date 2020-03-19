@@ -79,7 +79,9 @@ export const deleteWorkout = id => dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const { error } = err.response.data;
+
+      dispatch(setAlert(error));
     });
 };
 
@@ -94,6 +96,8 @@ export const updateWorkout = data => dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
+      const { error } = err.response.data;
+
+      dispatch(setAlert(error));
     });
 };
