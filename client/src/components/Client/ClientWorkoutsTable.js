@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     overflowX: "auto"
   },
   table: {
-    maxWidth: 600,
+    maxWidth: 500,
     paddind: 80
   }
 });

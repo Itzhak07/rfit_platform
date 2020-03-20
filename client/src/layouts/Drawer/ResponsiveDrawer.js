@@ -95,7 +95,8 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    width: "100%"
   },
   listItem: {
     padding: "15px 0 15px 15px;",
