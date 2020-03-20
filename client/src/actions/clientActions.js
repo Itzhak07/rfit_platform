@@ -63,25 +63,33 @@ export const updateClient = data => dispatch => {
 };
 
 export const setTopClients = workouts => dispatch => {
-  let counts = workouts.reduce((a, c) => {
-    a[c.title] = (a[c.title] || 0) + 1;
+  let counter = {};
+  const minCount = 3;
+  const keyArray = workouts.map(function(item) {
+    return { name: item["title"], id: item["client"] };
+  });
 
-    return a;
-  }, {});
+  keyArray.forEach(function(obj) {
+    let key = JSON.stringify(obj);
 
-  let minCount = 3;
-  let mostFrequent = Object.keys(counts).filter(k => counts[k] >= minCount);
+    counter[key] = (counter[key] || 0) + 1;
+  });
 
-  if (mostFrequent.length === 0) {
-    mostFrequent = null;
+  const mostFrequent = Object.keys(counter).filter(k => counter[k] >= minCount);
+  let payload = mostFrequent.map(client => {
+    return JSON.parse(client);
+  });
+
+  if (payload.length === 0) {
+    payload = null;
     dispatch({
       type: SET_TOP_CLIENTS,
-      payload: mostFrequent
+      payload: payload
     });
   } else {
     dispatch({
       type: SET_TOP_CLIENTS,
-      payload: mostFrequent
+      payload: payload
     });
   }
 };

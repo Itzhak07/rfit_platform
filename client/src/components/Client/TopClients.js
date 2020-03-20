@@ -13,65 +13,84 @@ import {
   Fade
 } from "@material-ui/core";
 import StarRateIcon from "@material-ui/icons/StarRate";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 500,
+    flexGrow: 1,
+    marginBottom: 10,
+    color: "white"
+  },
+  paper: {
+    padding: "0 16px",
+    background: "#3f51b5",
+    color: "white",
+    width: "100%"
+  },
+  title: {
+    paddingTop: 10,
+    fontSize: 20
+  },
+  icon: {
+    color: "#ffb100"
+  },
+  divider: {
+    background: "#ffffff7a"
+  },
+  loader: {
+    color: "white",
+    margin: 20
+  },
+  message: {
+    color: "white"
+  },
+  itemtext: {
+    color: "white",
+    "&:hover": {
+      color: "#dcdcdc"
+    }
+  }
+}));
 
 const TopClients = ({ topClients, loading }) => {
-  const styles = {
-    root: {
-      maxWidth: 500,
-      flexGrow: 1,
-      marginBottom: 10
-    },
-    paper: {
-      padding: "0 16px",
-      background: "#3f51b5",
-      color: "white",
-      width: "100%"
-    },
-    title: {
-      paddingTop: 10,
-      fontSize: 20
-    },
-    icon: {
-      color: "#ffb100"
-    },
-    divider: {
-      background: "#ffffff7a"
-    },
-    loader: {
-      color: "white",
-      margin: 20
-    },
-    message: {
-      color: "white"
-    }
-  };
+  const classes = useStyles();
 
   return (
-    <div style={styles.root}>
-      <Paper style={styles.paper} elevation={3}>
-        <Typography style={styles.title}>Top Clients:</Typography>
-        {loading ? <CircularProgress style={styles.loader} /> : ""}
+    <div className={classes.root}>
+      <Paper className={classes.paper} elevation={3}>
+        <Typography className={classes.title}>Top Clients:</Typography>
+        {loading ? <CircularProgress className={classes.loader} /> : ""}
 
         {!loading && topClients !== null ? (
           <List>
             {topClients.map(client => {
               return (
-                <div key={client}>
-                  <ListItem disableGutters>
-                    <ListItemIcon>
-                      <StarRateIcon style={styles.icon} fontSize="large" />
-                    </ListItemIcon>
-                    <Fade in timeout={1000}>
-                      <ListItemText primary={client} />
-                    </Fade>
-                  </ListItem>
-                  <Divider style={styles.divider} variant="middle" />
+                <div key={client.name}>
+                  <Link to={"./dashboard/clients/" + client.id}>
+                    <ListItem disableGutters>
+                      <ListItemIcon>
+                        <StarRateIcon
+                          className={classes.icon}
+                          fontSize="large"
+                        />
+                      </ListItemIcon>
+                      <Fade in timeout={1000}>
+                        <ListItemText
+                          className={classes.itemtext}
+                          primary={client.name}
+                        />
+                      </Fade>
+                    </ListItem>
+                  </Link>
+                  <Divider className={classes.divider} variant="middle" />
                 </div>
               );
             })}
           </List>
         ) : !loading && topClients == null ? (
-          <Typography style={styles.message}>
+          <Typography className={classes.message}>
             Clients with minimum of 3 appointments will be shown here
           </Typography>
         ) : (
