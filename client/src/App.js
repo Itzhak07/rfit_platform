@@ -19,37 +19,41 @@ import MySnackbar from "./components/Snackbar/MySnackbar";
 // );
 
 // const Schedule = lazy(() =>
-//   import(/* webpackChunkName: "Schedule"*/ "./components/Schedule2")
+//   import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule")
 // );
 
 // const WorkoutesManager = lazy(() =>
 //   import(
-//     /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/WorkoutsManagePage"
+//     /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/Workouts/WorkoutsManagePage"
 //   )
 // );
 
-// const ClientsManager = lazy(() =>
+// const ClientsManager = lazy(
+//   async () => await store.dispatch(fetchClients()),
 //   import(
-//     /* webpackChunkName: "ClientsManagePage"*/ "./layouts/ClientsManagePage"
+//     /* webpackChunkName: "ClientsManagePage"*/ "./layouts/Client/ClientsManagePage"
 //   )
 // );
 
-// const Home = lazy(() => import(/* webpackChunkName: "Home"*/ "./layouts/Home"));
+// const Home = lazy(() =>
+//   import(/* webpackChunkName: "Home"*/ "./layouts/Home/Home")
+// );
 
-// const Account = lazy(() =>
-//   import(/* webpackChunkName: "Account"*/ "./layouts/Account")
+// const Account = lazy(
+//   async () => await store.dispatch(loadUser()),
+//   import(/* webpackChunkName: "Account"*/ "./layouts/Account/Account")
 // );
 
 // const ClientProfilePage = lazy(() =>
 //   import(
-//     /* webpackChunkName: "ClientProfilePage"*/ "./layouts/ClientProfilePage"
+//     /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
 //   )
 // );
 
 const Schedule = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule"),
-    new Promise(resolve => setTimeout(resolve, 600))
+    new Promise(resolve => setTimeout(resolve, 300))
   ]);
   return moduleExports;
 });
@@ -59,7 +63,7 @@ const WorkoutesManager = lazy(async () => {
     import(
       /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/Workouts/WorkoutsManagePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 600))
+    new Promise(resolve => setTimeout(resolve, 300))
   ]);
   return moduleExports;
 });
@@ -69,7 +73,7 @@ const ClientsManager = lazy(async () => {
     import(
       /* webpackChunkName: "ClientsManagePage"*/ "./layouts/Client/ClientsManagePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 600))
+    new Promise(resolve => setTimeout(resolve, 300))
   ]);
   return moduleExports;
 });
@@ -77,7 +81,7 @@ const ClientsManager = lazy(async () => {
 const Home = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Home"*/ "./layouts/Home/Home"),
-    new Promise(resolve => setTimeout(resolve, 600))
+    new Promise(resolve => setTimeout(resolve, 300))
   ]);
   return moduleExports;
 });
@@ -86,7 +90,7 @@ const Account = lazy(async () => {
   await store.dispatch(loadUser());
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Account"*/ "./layouts/Account/Account"),
-    new Promise(resolve => setTimeout(resolve, 600))
+    new Promise(resolve => setTimeout(resolve, 300))
   ]);
   return moduleExports;
 });
@@ -97,7 +101,7 @@ const ClientProfilePage = lazy(async () => {
     import(
       /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 600))
+    new Promise(resolve => setTimeout(resolve, 300))
   ]);
   return moduleExports;
 });
