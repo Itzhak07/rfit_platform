@@ -12,12 +12,6 @@ import PrivateRoute from "./routing/PrivateRoute";
 import { fetchClients } from "./actions/clientActions";
 // import LandingPage from "./layouts/LandingPage/LandingPage";
 import MySnackbar from "./components/Snackbar/MySnackbar";
-import { CircularProgress } from "@material-ui/core";
-const LandingPage = lazy(() =>
-  import(
-    /* webpackChunkName: "LandingPage"*/ "./layouts/LandingPage/LandingPage"
-  )
-);
 
 // const Schedule = lazy(() =>
 //   import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule")
@@ -50,6 +44,12 @@ const LandingPage = lazy(() =>
 //     /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
 //   )
 // );
+
+const LandingPage = lazy(() =>
+  import(
+    /* webpackChunkName: "LandingPage"*/ "./layouts/LandingPage/LandingPage"
+  )
+);
 
 const Schedule = lazy(async () => {
   const [moduleExports] = await Promise.all([
