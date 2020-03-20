@@ -4,20 +4,20 @@ import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../components/AppBar";
 import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
-import {
-  CircularProgress,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import { CircularProgress, Button, Typography } from "@material-ui/core";
+import { Spring } from "react-spring/renderprops";
 
 const AuthModal = lazy(() =>
   import(/* webpackChunkName: "AuthModal"*/ "../../../Modal/AuthModal")
 );
 
 const styles = theme => ({
+  root: {
+    position: "absolute"
+  },
   title: {
     fontSize: 24,
-    color: 'white'
+    color: "white"
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
@@ -41,8 +41,7 @@ const styles = theme => ({
   },
   linkSecondary: {
     color: theme.palette.secondary.main
-  },
-
+  }
 });
 
 function AppAppBar(props) {
@@ -59,34 +58,42 @@ function AppAppBar(props) {
   };
 
   return (
-    <div>
-      <AppBar position="fixed">
-        <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
-          <Typography className={classes.title} variant="h5">
-            RFit Platform
-          </Typography>
-          <div className={classes.right}>
-            <Button
-              onClick={() => openModal("Login")}
-              className={classes.rightLink}
-            >
-              {"Login"}
-            </Button>
-            <Button
-              onClick={() => openModal("Register")}
-              className={clsx(classes.rightLink, classes.linkSecondary)}
-            >
-              {"Sign Up"}
-            </Button>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.placeholder} />
-      <Suspense fallback={<CircularProgress />}>
-        <AuthModal open={open} handleCLose={modalClose} type={formType} />
-      </Suspense>
-    </div>
+    <Spring
+      from={{ opacity: 0, marginTop: -500 }}
+      to={{ opacity: 1, marginTop: 0 }}
+      config={{ velocity: 10 }}
+    >
+      {props => (
+        <div className={classes.root}>
+          <AppBar style={props} position="fixed">
+            <Toolbar className={classes.toolbar}>
+              <div className={classes.left} />
+              <Typography className={classes.title} variant="h5">
+                RFit Platform
+              </Typography>
+              <div className={classes.right}>
+                <Button
+                  onClick={() => openModal("Login")}
+                  className={classes.rightLink}
+                >
+                  {"Login"}
+                </Button>
+                <Button
+                  onClick={() => openModal("Register")}
+                  className={clsx(classes.rightLink, classes.linkSecondary)}
+                >
+                  {"Sign Up"}
+                </Button>
+              </div>
+            </Toolbar>
+          </AppBar>
+          <div className={classes.placeholder} />
+          <Suspense fallback={<CircularProgress />}>
+            <AuthModal open={open} handleCLose={modalClose} type={formType} />
+          </Suspense>
+        </div>
+      )}
+    </Spring>
   );
 }
 

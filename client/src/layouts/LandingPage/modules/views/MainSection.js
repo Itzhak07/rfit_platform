@@ -6,6 +6,7 @@ import Typography from "../components/Typography";
 import MainSectionLayout from "./MainSectionLayout";
 import Background from "../../../../assets/images/landing-bg.jpg";
 import { CircularProgress } from "@material-ui/core";
+import LogoLight from "../../../../assets/images/logo_light.png";
 
 const AuthModal = lazy(() =>
   import(/* webpackChunkName: "AuthModal"*/ "../../../Modal/AuthModal")
@@ -22,22 +23,44 @@ const styles = theme => ({
     borderRadius: "50px"
   },
   titlePrimary: {
-    fontSize: 42,
-    [theme.breakpoints.up("lg")]: {
+    fontSize: 40,
+    // marginTop: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
       fontSize: 50
+      // marginTop: theme.spacing(4),
     }
   },
   titleSecondary: {
     fontSize: 26,
+    maxWidth: 500,
     marginBottom: theme.spacing(4),
-    marginTop: theme.spacing(4),
-    [theme.breakpoints.up("lg")]: {
-      marginTop: theme.spacing(10),
-      fontSize: 36
+    marginTop: theme.spacing(2),
+    transition: "all 0.3s ease",
+    [theme.breakpoints.up("md")]: {
+      // marginTop: theme.spacing(4),
+      fontSize: 40,
+      maxWidth: 817,
+      transition: "all 0.3s ease"
     }
   },
   more: {
     marginTop: theme.spacing(2)
+  },
+  logo: {
+    maxWidth: 600,
+    transition: "all 0.3s ease",
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 500,
+      transition: "all 0.3s ease"
+    },
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: 400,
+      transition: "all 0.3s ease"
+    },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: 350,
+      transition: "all 0.3s ease"
+    }
   }
 });
 
@@ -56,14 +79,11 @@ function MainSection(props) {
   return (
     <MainSectionLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
-      <img
-        style={{ display: "none" }}
-        src={Background}
-        alt="increase priority"
-      />
-
+      <img style={{ display: "none" }} src={Background} alt="main_bg" />
+      <img className={classes.logo} src={LogoLight} alt="logo_light" />
       <Typography
         className={classes.titlePrimary}
+        // className={classes.titleSecondary}
         color="inherit"
         align="center"
         marked="center"

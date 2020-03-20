@@ -12,13 +12,14 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     [theme.breakpoints.up("sm")]: {
-      height: "90vh",
+      height: "100vh",
       minHeight: 500,
       maxHeight: 1300
     }
   },
   container: {
-    margin: "100px auto",
+    margin: "0 auto",
+    padding: "100px 0",
     display: "flex",
     flexDirection: "column",
     alignItems: "center"

@@ -13,6 +13,7 @@ import Subscribe from "./modules/views/Subscribe";
 import AppAppBar from "./modules/views/AppAppBar.js";
 import { Element } from "react-scroll";
 import { ButtonToTop } from "./modules/components/ButtonToTop";
+import { Spring } from "react-spring/renderprops";
 
 function LandingPage({ isAuthenticated }) {
   if (isAuthenticated) {
@@ -27,6 +28,7 @@ function LandingPage({ isAuthenticated }) {
     <div style={rootStyle}>
       <AppAppBar />
       <MainSection />
+
       <Element name="mockup-section">
         <MockUpSection />
       </Element>
