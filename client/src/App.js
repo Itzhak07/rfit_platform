@@ -10,13 +10,14 @@ import { loadUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./routing/PrivateRoute";
 import { fetchClients } from "./actions/clientActions";
-import LandingPage from "./layouts/LandingPage/LandingPage";
+// import LandingPage from "./layouts/LandingPage/LandingPage";
 import MySnackbar from "./components/Snackbar/MySnackbar";
-// const LandingPage = lazy(() =>
-//   import(
-//     /* webpackChunkName: "LandingPage"*/ "./layouts/LandingPage/LandingPage"
-//   )
-// );
+import { CircularProgress } from "@material-ui/core";
+const LandingPage = lazy(() =>
+  import(
+    /* webpackChunkName: "LandingPage"*/ "./layouts/LandingPage/LandingPage"
+  )
+);
 
 // const Schedule = lazy(() =>
 //   import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule")
@@ -118,43 +119,45 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Suspense fallback={<Spinner />}>
-            <ResponsiveDrawer>
-              <Switch>
-                <PrivateRoute exact path="/dashboard" component={Home} />
-                <PrivateRoute
-                  exact
-                  path="/dashboard/schedule"
-                  component={Schedule}
-                />
-                <PrivateRoute
-                  exact
-                  path="/dashboard/workouts"
-                  component={WorkoutesManager}
-                />
-                <PrivateRoute
-                  exact
-                  path="/dashboard/clients"
-                  component={ClientsManager}
-                />
-                <PrivateRoute
-                  exact
-                  path="/dashboard/clients/:id"
-                  component={ClientProfilePage}
-                />
-                <PrivateRoute
-                  exact
-                  path="/dashboard/account"
-                  component={Account}
-                />
-                <PrivateRoute component={NotFound} />
-              </Switch>
-              <MySnackbar />
-            </ResponsiveDrawer>
-          </Suspense>
-        </Switch>
+        <Suspense fallback={<Spinner />}>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Suspense fallback={<Spinner />}>
+              <ResponsiveDrawer>
+                <Switch>
+                  <PrivateRoute exact path="/dashboard" component={Home} />
+                  <PrivateRoute
+                    exact
+                    path="/dashboard/schedule"
+                    component={Schedule}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/dashboard/workouts"
+                    component={WorkoutesManager}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/dashboard/clients"
+                    component={ClientsManager}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/dashboard/clients/:id"
+                    component={ClientProfilePage}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/dashboard/account"
+                    component={Account}
+                  />
+                  <PrivateRoute component={NotFound} />
+                </Switch>
+                <MySnackbar />
+              </ResponsiveDrawer>
+            </Suspense>
+          </Switch>
+        </Suspense>
       </Router>
     </Provider>
   );
