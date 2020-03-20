@@ -13,12 +13,15 @@ const styles = theme => ({
   root: {
     display: "flex",
     overflow: "hidden",
-    backgroundColor: "#c5e5ff69"
+    backgroundColor: " #7fc7d9;"
   },
   container: {
     padding: 50,
     display: "flex",
     position: "relative"
+  },
+  itemsContainer: {
+    zIndex: 1
   },
   item: {
     display: "flex",
@@ -33,7 +36,8 @@ const styles = theme => ({
     "&:hover": {
       transform: " scale(1.2)",
       transition: "all 0.3s ease"
-    }
+    },
+    color: "white"
   },
   title: {
     marginTop: theme.spacing(5),
@@ -43,7 +47,8 @@ const styles = theme => ({
   curvyLines: {
     pointerEvents: "none",
     position: "absolute",
-    top: -180
+    top: -180,
+    zIndex: 0
   }
 });
 
@@ -58,21 +63,13 @@ function ProductValues(props) {
           className={classes.curvyLines}
           alt="curvy lines"
         />
-        <Grid container spacing={5}>
+        <Grid className={classes.itemsContainer} container spacing={5}>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
               <DashboardIcon className={classes.image} />
               <Typography variant="h6" className={classes.title}>
                 Reactive Dashboard
               </Typography>
-              {/* <Typography variant="h5">
-                {
-                  "From the latest trendy boutique hotel to the iconic palace with XXL pool"
-                }
-                {
-                  ", go for a mini-vacation just a few subway stops away from your home."
-                }
-              </Typography> */}
             </div>
           </Grid>
           <Grid item xs={12} md={4}>

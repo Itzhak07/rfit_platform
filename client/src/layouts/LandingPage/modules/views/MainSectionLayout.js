@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import { Link } from "react-scroll";
+import { Spring, config } from "react-spring/renderprops";
 
 const styles = theme => ({
   root: {
@@ -63,7 +64,15 @@ function ProductHeroLayout(props) {
       <div className={classes.container}>
         {children}
         <div className={classes.backdrop} />
-        <div className={clsx(classes.background, backgroundClassName)} />
+        <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} config={config.slow}>
+          {props => (
+            <div
+              style={props}
+              className={clsx(classes.background, backgroundClassName)}
+            />
+          )}
+        </Spring>
+        {/* <div className={clsx(classes.background, backgroundClassName)} /> */}
         <Link
           to="mockup-section"
           spy={true}

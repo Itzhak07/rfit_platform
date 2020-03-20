@@ -16,7 +16,8 @@ const styles = theme => ({
   background: {
     backgroundImage: `url(${Background})`,
     backgroundColor: "#7fc7d9", // Average color of the background image.
-    backgroundPosition: "center"
+    backgroundPosition: "center",
+    transition: "all 0.3s ease"
   },
   button: {
     minWidth: 200,
@@ -78,8 +79,6 @@ function MainSection(props) {
 
   return (
     <MainSectionLayout backgroundClassName={classes.background}>
-      {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: "none" }} src={Background} alt="main_bg" />
       <img className={classes.logo} src={LogoLight} alt="logo_light" />
       <Typography
         className={classes.titlePrimary}
