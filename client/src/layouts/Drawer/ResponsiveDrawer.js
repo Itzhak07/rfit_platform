@@ -35,6 +35,7 @@ import logo from "../../assets/images/logo.png";
 import { drawerItems } from "./DrawerItems";
 import { Spring, config } from "react-spring/renderprops";
 import { isMobile } from "react-device-detect";
+import  SearchBar  from "./SearchBar";
 
 const drawerWidth = 240;
 
@@ -255,6 +256,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
           <Typography className={classes.pageName} variant="h6" noWrap>
             {pageName}
           </Typography>
+          <SearchBar />
           <Link to="/">
             <Button
               className={classes.logout}

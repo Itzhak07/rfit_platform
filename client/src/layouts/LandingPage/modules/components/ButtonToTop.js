@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
-import {makeStyles, Fab } from "@material-ui/core";
+import { makeStyles, Fab } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
@@ -12,7 +12,28 @@ const useStyles = makeStyles({
 });
 
 export const ButtonToTop = () => {
+  const [scrollPos, setScrollPos] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    setScrollPos(document.body.getBoundingClientRect().top);
+  };
+
   const classes = useStyles();
+
+  const btnVisability = {
+    hide: {
+      opacity: 0,
+      transition: "all 0.2s ease"
+    },
+    show: {
+      opacity: 1,
+      transition: "all 0.2s ease"
+    }
+  };
 
   const scrollToTop = () => {
     scroll.scrollToTop();
@@ -20,9 +41,10 @@ export const ButtonToTop = () => {
 
   return (
     <Fab
+      style={scrollPos < 0 ? btnVisability.show : btnVisability.hide}
       color="secondary"
       aria-label="toTop"
-      size="medium"
+      size="large"
       className={classes.root}
       onClick={scrollToTop}
     >
