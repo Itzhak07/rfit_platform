@@ -119,9 +119,9 @@ const SearchBar = ({ clients }) => {
     if (value.length > 0) {
       const searchMatch = clients.filter(client => {
         return (
-          !client.firstName.toLowerCase().indexOf(value) ||
-          !client.lastName.toLowerCase().indexOf(value) ||
-          !client.email.toLowerCase().indexOf(value)
+          !client.firstName.toLowerCase().indexOf(value.toLowerCase()) ||
+          !client.lastName.toLowerCase().indexOf(value.toLowerCase()) ||
+          !client.email.toLowerCase().indexOf(value.toLowerCase())
         );
       });
 
