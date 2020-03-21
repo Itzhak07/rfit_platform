@@ -49,7 +49,8 @@ const useStyles = makeStyles(theme => ({
   xIcon: {
     position: "absolute",
     top: 7,
-    right: 5
+    right: 5,
+    cursor: "pointer"
   },
   inputRoot: {
     color: "inherit"
@@ -93,7 +94,7 @@ function useOutsideAlerter(ref, setResult) {
    */
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {
-      setResult({ results: "Search...", show: false });
+      setResult({ clientResults: "Search...", show: false });
     }
   }
 
@@ -110,10 +111,10 @@ function useOutsideAlerter(ref, setResult) {
 const SearchBar = ({ clients }) => {
   const [result, setResult] = useState({
     show: false,
-    results: ""
+    clientResults: ""
   });
   const [value, setValue] = useState("");
-  const { show, results } = result;
+  const { show, clientResults } = result;
   const classes = useStyles();
   const wrapperRef = useRef(null);
   const [debouncedCallback] = useDebouncedCallback(value => {
@@ -127,25 +128,28 @@ const SearchBar = ({ clients }) => {
       });
 
       if (searchMatch.length === 0) {
-        setResult({ results: `No results found for "${value}"`, show: true });
+        setResult({
+          clientResults: `No results found for "${value}"`,
+          show: true
+        });
       } else {
-        setResult({ results: searchMatch, show: true });
+        setResult({ clientResults: searchMatch, show: true });
       }
     } else {
-      setResult({ results: "Search...", show: false });
+      setResult({ clientResults: "Search...", show: false });
     }
   }, 500);
   useOutsideAlerter(wrapperRef, setResult);
 
   const handleChange = value => {
     setValue(value);
-    setResult({ results: <CircularProgress size={25} />, show: true });
+    setResult({ clientResults: <CircularProgress size={25} />, show: true });
     debouncedCallback(value);
   };
 
   const linkClick = () => {
     setValue("");
-    setResult({ ...results, show: false });
+    setResult({ ...clientResults, show: false });
   };
 
   return (
@@ -183,7 +187,7 @@ const SearchBar = ({ clients }) => {
         // elevation={3}
         className={show ? classes.show : classes.hide}
       >
-        {Array.isArray(results) ? (
+        {Array.isArray(clientResults) ? (
           <List
             component="nav"
             aria-label="main mailbox folders"
@@ -194,7 +198,7 @@ const SearchBar = ({ clients }) => {
             }
           >
             {/* <Divider /> */}
-            {results.map(match => {
+            {clientResults.map(match => {
               return (
                 <Link
                   to={"./dashboard/clients/" + match._id}
@@ -212,7 +216,7 @@ const SearchBar = ({ clients }) => {
             })}
           </List>
         ) : (
-          <div className={classes.matchMessage}>{results}</div>
+          <div className={classes.matchMessage}>{clientResults}</div>
         )}
       </Paper>
     </div>
