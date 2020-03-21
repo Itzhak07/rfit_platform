@@ -46,8 +46,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   xIcon: {
-    position: "inherit",
-    top: 5,
+    position: "absolute",
+    top: 7,
     right: 5
   },
   inputRoot: {
@@ -218,7 +218,7 @@ const SearchBar = ({ clients }) => {
 };
 
 SearchBar.propTypes = {
-  clients: PropTypes.array
+  clients: PropTypes.array.isRequired
 };
 
 const mapStateToPros = state => ({
