@@ -122,40 +122,38 @@ function App() {
         <Suspense fallback={<Spinner />}>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-            <Suspense fallback={<Spinner />}>
-              <ResponsiveDrawer>
-                <Switch>
-                  <PrivateRoute exact path="/dashboard" component={Home} />
-                  <PrivateRoute
-                    exact
-                    path="/dashboard/schedule"
-                    component={Schedule}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/dashboard/workouts"
-                    component={WorkoutesManager}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/dashboard/clients"
-                    component={ClientsManager}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/dashboard/clients/:id"
-                    component={ClientProfilePage}
-                  />
-                  <PrivateRoute
-                    exact
-                    path="/dashboard/account"
-                    component={Account}
-                  />
-                  <PrivateRoute component={NotFound} />
-                </Switch>
-                <MySnackbar />
-              </ResponsiveDrawer>
-            </Suspense>
+            <ResponsiveDrawer>
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Home} />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/schedule"
+                  component={Schedule}
+                />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/workouts"
+                  component={WorkoutesManager}
+                />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/clients"
+                  component={ClientsManager}
+                />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/clients/:id"
+                  component={ClientProfilePage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/account"
+                  component={Account}
+                />
+                <PrivateRoute component={NotFound} />
+              </Switch>
+              <MySnackbar />
+            </ResponsiveDrawer>
           </Switch>
         </Suspense>
       </Router>

@@ -2,7 +2,7 @@ import React from "react";
 import notFoundBg from "../../assets/images/404.jpg";
 import notFoundLeft from "../../assets/images/404-left.jpg";
 import notFoundRight from "../../assets/images/404-right.jpg";
-import { Hidden } from "@material-ui/core";
+import { Hidden, Container } from "@material-ui/core";
 
 const styles = {
   root: {
@@ -12,27 +12,31 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     height: "100vh",
-    background: "#151515",
+    background: "#151515"
   },
   bgContainer: {
     background: "#151515",
-    width: "100%",
-    paddingTop: 150
+    padding: "0 20px",
+    alignSelf: "center",
+    width: "100%"
   },
   bg: {
     maxWidth: 600,
-    maxHeight: 400,
+    width: "100%",
+    padding: "0 10px",
     marginBottom: 50
   },
   side_bg: {
     height: "100vh",
-    width: "100%"
+    width: "100%",
+    flexGrow: 0.5
   }
 };
+
 export const NotFound = () => {
   return (
     <div style={styles.root}>
-      <Hidden implementation="css" mdDown>
+      <Hidden style={{ flexGrow: 1 }} implementation="css" mdDown>
         <img
           src={notFoundLeft}
           title="left_bg"

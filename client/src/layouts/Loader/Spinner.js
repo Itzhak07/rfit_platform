@@ -1,10 +1,10 @@
 import React from "react";
-import { CircularProgress, makeStyles } from "@material-ui/core";
+import { CircularProgress, makeStyles, Container } from "@material-ui/core";
 import logo from "../../assets/images/logo.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: "100vh"
+    // height: "100vh"
   },
   spinner: {
     display: "flex",
@@ -23,11 +23,11 @@ export const Spinner = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Container>
       <div className={classes.spinner}>
         <img className={classes.logo} src={logo} alt="logo" />
         <CircularProgress size={300} thickness={2} />
       </div>
-    </div>
+    </Container>
   );
 };

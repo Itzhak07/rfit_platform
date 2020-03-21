@@ -7,6 +7,7 @@ import { Paper, makeStyles, Container } from "@material-ui/core";
 import { ClientProfile } from "../../components/Client/ClientProfile";
 import MenuButton from "../../components/Buttons/MenuButton";
 import { ClientBreadCrumbs } from "./ClientBreadCrumbs";
+import { NotFound } from "../NotFound/NotFound";
 
 const useStyles = makeStyles({
   root: {
@@ -16,12 +17,10 @@ const useStyles = makeStyles({
   },
   info: {
     padding: 20,
-    maxWidth: 500,
- 
+    maxWidth: 500
   },
   workouts: {
     padding: 20,
-    // width: "100%",
     marginTop: 20
   },
   item: { padding: "0 0 20px 0" }
@@ -41,6 +40,7 @@ function ClientProfilePage({ clients, workouts }) {
     const thisClient = clients.filter(client => {
       return client._id === id;
     });
+
     const clientWorkouts = workouts.filter(workouts => {
       return workouts.client === id;
     });
@@ -48,21 +48,31 @@ function ClientProfilePage({ clients, workouts }) {
   }, [clients, workouts, id]);
 
   return (
-    <div className={classes.root}>
-      <ClientBreadCrumbs
-        clientName={thisClient.firstName + " " + thisClient.lastName}
-      />
-      <Container maxWidth="xl" disableGutters>
-        <Paper className={classes.info} variant="outlined">
-          {<ClientProfile client={thisClient} />}
-        </Paper>
-        <Paper className={classes.workouts} variant="outlined">
-          <ClientWorkoutsTable workouts={thisWorkouts} client={thisClient} />
-        </Paper>
-        <div>
-          <MenuButton editClient />
+    <div>
+      {!thisClient ? (
+        <NotFound />
+      ) : (
+        <div className={classes.root}>
+          {" "}
+          <ClientBreadCrumbs
+            clientName={thisClient.firstName + " " + thisClient.lastName}
+          />
+          <Container maxWidth="xl" disableGutters>
+            <Paper className={classes.info} variant="outlined">
+              {<ClientProfile client={thisClient} />}
+            </Paper>
+            <Paper className={classes.workouts} variant="outlined">
+              <ClientWorkoutsTable
+                workouts={thisWorkouts}
+                client={thisClient}
+              />
+            </Paper>
+            <div>
+              <MenuButton editClient />
+            </div>
+          </Container>{" "}
         </div>
-      </Container>
+      )}
     </div>
   );
 }

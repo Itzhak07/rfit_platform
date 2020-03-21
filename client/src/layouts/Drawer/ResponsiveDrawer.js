@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { connect } from "react-redux";
 import { logout } from "../../actions/authActions";
 import PropTypes from "prop-types";
@@ -35,7 +35,8 @@ import logo from "../../assets/images/logo.png";
 import { drawerItems } from "./DrawerItems";
 import { Spring, config } from "react-spring/renderprops";
 import { isMobile } from "react-device-detect";
-import  SearchBar  from "./SearchBar";
+import SearchBar from "./SearchBar";
+import { Spinner } from "../Loader/Spinner";
 
 const drawerWidth = 240;
 
@@ -113,9 +114,13 @@ const useStyles = makeStyles(theme => ({
   collapsed: {
     transition: "all 0.3s ease",
     "&:hover": {
-      paddingLeft: 10,
+      paddingLeft: 5,
       transition: "all 0.3s ease"
     }
+  },
+  active: {
+    transition: "all 0.3s ease-in",
+    borderLeft: "7px solid #3f51b5"
   }
 }));
 
@@ -124,9 +129,11 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [pageName, setPageName] = useState();
+  const [active, setActive] = useState();
   const [open, setOpen] = useState({
-    workouts: false,
-    clients: false
+    clients: false,
+    workouts:
+      localStorage.getItem("lastPageView") === "Workouts Manager" ? true : false
   });
 
   function handleDrawerToggle() {
@@ -135,6 +142,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
 
   const onViewChange = viewName => {
     setPageName(viewName);
+    setActive(viewName);
     localStorage.setItem("lastPageView", viewName);
     if (isMobile) {
       setMobileOpen(false);
@@ -144,6 +152,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
   useEffect(() => {
     const viewName = localStorage.getItem("lastPageView");
     setPageName(viewName);
+    setActive(viewName);
   }, []);
 
   const openCollapse = state => {
@@ -174,7 +183,10 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
       <List disablePadding>
         {drawerItems.map(item => {
           return (
-            <div key={item.key}>
+            <div
+              key={item.key}
+              className={active === item.viewName ? classes.active : ""}
+            >
               {!item.isCollapse ? (
                 <Link
                   to={item.link}
@@ -209,7 +221,12 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
                     >
                       {item.subMenu.map(subitem => {
                         return (
-                          <div key={subitem.key}>
+                          <div
+                            key={subitem.key}
+                            className={
+                              active === subitem.viewName ? classes.active : ""
+                            }
+                          >
                             <Link
                               to={subitem.link}
                               onClick={() => {
@@ -253,9 +270,13 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.pageName} variant="h6" noWrap>
-            {pageName}
-          </Typography>
+          {!isMobile ? (
+            <Typography className={classes.pageName} variant="h6" noWrap>
+              {pageName}
+            </Typography>
+          ) : (
+            ""
+          )}
           <SearchBar />
           <Link to="/">
             <Button
@@ -312,7 +333,7 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {children}
+        <Suspense fallback={<Spinner />}>{children}</Suspense>
       </main>
     </div>
   );
