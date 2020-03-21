@@ -193,20 +193,20 @@ const SearchBar = ({ clients }) => {
               </ListSubheader>
             }
           >
-            <Divider />
+            {/* <Divider /> */}
             {results.map(match => {
               return (
                 <Link
                   to={"./dashboard/clients/" + match._id}
                   onClick={linkClick}
                 >
+                  <Divider />
                   <ListItem button>
                     <ListItemText
                       primary={match.firstName + " " + match.lastName}
                       secondary={match.email}
                     />
                   </ListItem>
-                  <Divider />
                 </Link>
               );
             })}
