@@ -127,7 +127,7 @@ const SearchBar = ({ clients }) => {
       });
 
       if (searchMatch.length === 0) {
-        setResult({ results: "No Match...", show: true });
+        setResult({ results: `No results found for "${value}"`, show: true });
       } else {
         setResult({ results: searchMatch, show: true });
       }
