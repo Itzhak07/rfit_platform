@@ -2,7 +2,7 @@ import React from "react";
 import notFoundBg from "../../assets/images/404.jpg";
 import notFoundLeft from "../../assets/images/404-left.jpg";
 import notFoundRight from "../../assets/images/404-right.jpg";
-import { Hidden, Container } from "@material-ui/core";
+import { Hidden } from "@material-ui/core";
 
 const styles = {
   root: {

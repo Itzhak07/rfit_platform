@@ -121,7 +121,10 @@ const SearchBar = ({ clients }) => {
         return (
           !client.firstName.toLowerCase().indexOf(value.toLowerCase()) ||
           !client.lastName.toLowerCase().indexOf(value.toLowerCase()) ||
-          !client.email.toLowerCase().indexOf(value.toLowerCase())
+          !client.email.toLowerCase().indexOf(value.toLowerCase()) ||
+          !(client.firstName + " " + client.lastName)
+            .toLocaleLowerCase()
+            .indexOf(value.toLowerCase())
         );
       });
 
