@@ -9,7 +9,8 @@ import {
   List,
   ListItemText,
   ListSubheader,
-  Paper
+  Paper,
+  CircularProgress
 } from "@material-ui/core";
 import { Search as SearchIcon, Clear as ClearIcon } from "@material-ui/icons";
 import { fade, makeStyles } from "@material-ui/core/styles";
@@ -138,6 +139,7 @@ const SearchBar = ({ clients }) => {
 
   const handleChange = value => {
     setValue(value);
+    setResult({ results: <CircularProgress size={25} />, show: true });
     debouncedCallback(value);
   };
 
