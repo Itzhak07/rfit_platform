@@ -85,13 +85,13 @@ const useStyles = makeStyles(theme => ({
     fontSize: "1rem",
     fontWeight: 400,
     padding: 16
+  },
+  loading: {
+    padding: 10
   }
 }));
 
 function useOutsideAlerter(ref, setResult) {
-  /**
-   * Alert if clicked on outside of element
-   */
   function handleClickOutside(event) {
     if (ref.current && !ref.current.contains(event.target)) {
       setResult({ clientResults: "Search...", show: false });
@@ -99,10 +99,8 @@ function useOutsideAlerter(ref, setResult) {
   }
 
   useEffect(() => {
-    // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
@@ -111,10 +109,11 @@ function useOutsideAlerter(ref, setResult) {
 const SearchBar = ({ clients }) => {
   const [result, setResult] = useState({
     show: false,
-    clientResults: ""
+    clientResults: "",
+    searching: true
   });
   const [value, setValue] = useState("");
-  const { show, clientResults } = result;
+  const { show, clientResults, searching } = result;
   const classes = useStyles();
   const wrapperRef = useRef(null);
   const [debouncedCallback] = useDebouncedCallback(value => {
@@ -130,27 +129,33 @@ const SearchBar = ({ clients }) => {
       if (searchMatch.length === 0) {
         setResult({
           clientResults: `No results found for "${value}"`,
-          show: true
+          show: true,
+          searching: false
         });
       } else {
-        setResult({ clientResults: searchMatch, show: true });
+        setResult({ clientResults: searchMatch, show: true, searching: false });
       }
     } else {
-      setResult({ clientResults: "Search...", show: false });
+      setResult({ clientResults: "", show: false, searching: false });
     }
   }, 500);
-  useOutsideAlerter(wrapperRef, setResult);
 
   const handleChange = value => {
     setValue(value);
-    setResult({ clientResults: <CircularProgress size={25} />, show: true });
+    setResult({
+      ...clientResults,
+      show: true,
+      searching: true
+    });
     debouncedCallback(value);
   };
 
   const linkClick = () => {
     setValue("");
-    setResult({ ...clientResults, show: false });
+    setResult({ ...clientResults, show: false, searching: false });
   };
+
+  useOutsideAlerter(wrapperRef, setResult);
 
   return (
     <div>
@@ -166,28 +171,26 @@ const SearchBar = ({ clients }) => {
             input: classes.inputInput
           }}
           inputProps={{ "aria-label": "search" }}
-          onChange={
-            // (e => debouncedCallback(e.target.value),
-            // e => setValue(e.target.value))
-            e => handleChange(e.target.value)
+          onChange={e => handleChange(e.target.value)}
+          endAdornment={
+            value ? (
+              <ClearIcon
+                className={classes.xIcon}
+                fontSize="small"
+                onClick={() => setValue("")}
+              />
+            ) : (
+              ""
+            )
           }
         />
-        {value ? (
-          <ClearIcon
-            className={classes.xIcon}
-            fontSize="small"
-            onClick={() => setValue("")}
-          />
-        ) : (
-          ""
-        )}
       </div>
-      <Paper
-        ref={wrapperRef}
-        // elevation={3}
-        className={show ? classes.show : classes.hide}
-      >
-        {Array.isArray(clientResults) ? (
+      <Paper ref={wrapperRef} className={show ? classes.show : classes.hide}>
+        {searching ? (
+          <div className={classes.loading}>
+            <CircularProgress size={25} />
+          </div>
+        ) : !searching && Array.isArray(clientResults) ? (
           <List
             component="nav"
             aria-label="main mailbox folders"
@@ -197,12 +200,12 @@ const SearchBar = ({ clients }) => {
               </ListSubheader>
             }
           >
-            {/* <Divider /> */}
             {clientResults.map(match => {
               return (
                 <Link
                   to={"./dashboard/clients/" + match._id}
                   onClick={linkClick}
+                  key={match._id}
                 >
                   <Divider />
                   <ListItem button>
@@ -224,7 +227,7 @@ const SearchBar = ({ clients }) => {
 };
 
 SearchBar.propTypes = {
-  clients: PropTypes.array.isRequired
+  clients: PropTypes.array
 };
 
 const mapStateToPros = state => ({

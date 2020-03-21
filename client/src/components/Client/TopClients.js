@@ -61,8 +61,13 @@ const TopClients = ({ topClients, loading }) => {
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={3}>
         <Typography className={classes.title}>Top Clients:</Typography>
-        {loading ? <CircularProgress className={classes.loader} /> : ""}
-
+        {loading ? (
+          <div className={classes.loader}>
+            <CircularProgress />
+          </div>
+        ) : (
+          ""
+        )}
         {!loading && topClients !== null ? (
           <List>
             {topClients.map(client => {
