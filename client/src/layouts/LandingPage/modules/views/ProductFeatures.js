@@ -68,8 +68,6 @@ export const ProductFeatures = () => {
     secondaryTitle: ""
   });
 
-  console.log(DashboardMockUp);
-
   const classes = useStyles();
 
   const { featureList, index, title, secondaryTitle } = state;
@@ -110,7 +108,7 @@ export const ProductFeatures = () => {
           <FeatureCard
             handleClick={handleClick}
             index={1}
-            text="Fits To Any Device"
+            text="Fits Any Device"
             secondaryTitle="Full compatibility with any device! carry our platform anywhere you go!"
             color="135deg,#f093fb,#f5576c"
           />
