@@ -29,18 +29,26 @@ const useStyles = makeStyles(theme => ({
       flexFlow: "column wrap"
     }
   },
-  img: {
+  imgContainer: {
     transition: "all 0.3s ease",
     [theme.breakpoints.down("lg")]: {
-      maxWidth: 650,
-      transition: "all 0.3s ease"
+      maxWidth: 600,
+      transition: "all 0.3s ease",
+      margin: "auto"
     }
+  },
+  img: {
+    width: "100%",
+    margin: "auto"
   },
   column: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    margin: "auto"
+    margin: "auto",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "row"
+    }
   }
 }));
 
@@ -114,7 +122,7 @@ export const ProductFeatures = () => {
 
         <div
           style={{ minWidth: 400 }}
-          className={classes.img}
+          className={classes.imgContainer}
           key={featureList[index]}
         >
           <Spring
@@ -126,7 +134,7 @@ export const ProductFeatures = () => {
               <img
                 style={props}
                 src={featureList[index]}
-                width="100%"
+                className={classes.img}
                 alt={featureList[index]}
               />
             )}
