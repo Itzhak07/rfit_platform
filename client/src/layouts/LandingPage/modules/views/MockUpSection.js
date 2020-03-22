@@ -87,7 +87,7 @@ function MockUpSection(props) {
 
   return (
     <Container className={classes.root} component="section">
-      <Typography variant="h4" marked="center" align="center" component="h2">
+      <Typography variant="h2" marked="center" align="center" component="h2">
         Everything you need in one place
       </Typography>
       <div className={classes.imagesWrapper}>

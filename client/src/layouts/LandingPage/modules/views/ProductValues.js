@@ -90,7 +90,7 @@ function ProductValues(props) {
             <div className={classes.item}>
               <PeopleAltIcon className={classes.image} />
               <Typography variant="h6" className={classes.title}>
-                Clients Managment
+                Clients Management
               </Typography>
               {/* <Typography variant="h5">
                 {"By registering, you will access specially negotiated rates "}

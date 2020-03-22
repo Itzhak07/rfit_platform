@@ -12,6 +12,7 @@ import Subscribe from "./modules/views/Subscribe";
 import AppAppBar from "./modules/views/AppAppBar.js";
 import { Element } from "react-scroll";
 import { ButtonToTop } from "./modules/components/ButtonToTop";
+import { ProductFeatures } from "./modules/views/ProductFeatures";
 
 function LandingPage({ isAuthenticated }) {
   if (isAuthenticated) {
@@ -30,6 +31,7 @@ function LandingPage({ isAuthenticated }) {
         <MockUpSection />
       </Element>
       <ProductValues />
+      <ProductFeatures />
       <Subscribe />
       <GetInTouch />
       <ButtonToTop />
