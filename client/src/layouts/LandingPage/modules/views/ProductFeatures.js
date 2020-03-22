@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Fade } from "@material-ui/core";
 import { FeatureCard } from "../components/FeatureCard";
-import { Spring } from "react-spring/renderprops";
 import DashboardMockUp from "../../../../assets/images/mockups/dashboard.png";
 import ScheduleMockUp from "../../../../assets/images/mockups/schedule.png";
 import ClientsMockUp from "../../../../assets/images/mockups/clients.png";
@@ -31,8 +30,10 @@ const useStyles = makeStyles(theme => ({
   },
   imgContainer: {
     transition: "all 0.3s ease",
+    width: "100%",
+    maxWidth: 900,
     [theme.breakpoints.down("lg")]: {
-      maxWidth: 600,
+      maxWidth: 588,
       transition: "all 0.3s ease",
       margin: "auto"
     }
@@ -63,9 +64,11 @@ export const ProductFeatures = () => {
       ClientsMockUp,
       ClientProfile
     ],
-    title: "Everything you need in one place",
-    secondaryTitle: "Explore Our Features"
+    title: "Explore Our Features",
+    secondaryTitle: ""
   });
+
+  console.log(DashboardMockUp);
 
   const classes = useStyles();
 
@@ -120,25 +123,14 @@ export const ProductFeatures = () => {
           />
         </div>
 
-        <div
-          style={{ minWidth: 400 }}
-          className={classes.imgContainer}
-          key={featureList[index]}
-        >
-          <Spring
-            from={{ opacity: 0 }}
-            to={{ opacity: 1 }}
-            config={{ tension: 120, friction: 60, delay: 200 }}
-          >
-            {props => (
-              <img
-                style={props}
-                src={featureList[index]}
-                className={classes.img}
-                alt={featureList[index]}
-              />
-            )}
-          </Spring>
+        <div className={classes.imgContainer} key={featureList[index]}>
+          <Fade in timeout={1000}>
+            <img
+              src={featureList[index]}
+              className={classes.img}
+              alt={featureList[index]}
+            />
+          </Fade>
         </div>
 
         <div className={classes.column}>

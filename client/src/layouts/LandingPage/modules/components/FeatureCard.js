@@ -15,8 +15,12 @@ const useStyles = makeStyles(theme => ({
       transition: "all 0.3s ease"
     },
     [theme.breakpoints.down("sm")]: {
-      width: 80,
-      height: 60,
+      width: 150,
+      margin: 10
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: 100,
+      height: 80,
       margin: 10
     }
   },
@@ -28,10 +32,10 @@ const useStyles = makeStyles(theme => ({
   text: {
     fontSize: 20,
     [theme.breakpoints.down("md")]: {
-      fontSize: 14
+      fontSize: 16
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: 9
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 11
     }
   }
 }));
