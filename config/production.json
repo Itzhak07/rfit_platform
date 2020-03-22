@@ -1,4 +1,4 @@
 {
     "jwtSecret": "// JWT Secret,
-    "mongoURI": "/// MongoDB URI"
+    "mongoURI": "// MongoDB URI"
 }
