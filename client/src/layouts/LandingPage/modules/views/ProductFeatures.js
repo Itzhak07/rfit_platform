@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
       margin: "auto"
     },
     [theme.breakpoints.down(1500)]: {
-      width: 588,
+      width: 581,
       transition: "all 0.3s ease",
       margin: "auto"
     },
