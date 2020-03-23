@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import {
   CalendarToday as CalendarTodayIcon,
   AccountBox as AccountBoxIcon,
@@ -7,6 +8,9 @@ import {
   Group as GroupIcon
 } from "@material-ui/icons";
 import { Fab } from "@material-ui/core";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { setPageName } from "../../actions/pageActions";
 
 const styles = {
   root: {
@@ -25,10 +29,14 @@ const styles = {
   icon: { marginRight: 5 }
 };
 
-export const FastLinks = () => {
+const FastLinks = ({ setPageName }) => {
   return (
     <div style={styles.root}>
-      <Link style={styles.linkBtn} to="./dashboard/schedule">
+      <Link
+        style={styles.linkBtn}
+        to="./dashboard/schedule"
+        onClick={() => setPageName("Schedule")}
+      >
         <Fab
           variant="extended"
           size="large"
@@ -40,7 +48,11 @@ export const FastLinks = () => {
           Scheduele
         </Fab>
       </Link>
-      <Link style={styles.linkBtn} to="./dashboard/workouts">
+      <Link
+        style={styles.linkBtn}
+        to="./dashboard/workouts"
+        onClick={() => setPageName("Workouts Manager")}
+      >
         <Fab
           variant="extended"
           size="large"
@@ -52,7 +64,11 @@ export const FastLinks = () => {
           Workouts
         </Fab>
       </Link>
-      <Link style={styles.linkBtn} to="./dashboard/clients">
+      <Link
+        style={styles.linkBtn}
+        to="./dashboard/clients"
+        onClick={() => setPageName("Clients Manager")}
+      >
         <Fab
           variant="extended"
           size="large"
@@ -64,7 +80,11 @@ export const FastLinks = () => {
           Clients
         </Fab>
       </Link>
-      <Link style={styles.linkBtn} to="./dashboard/account">
+      <Link
+        style={styles.linkBtn}
+        to="./dashboard/account"
+        onClick={() => setPageName("Account")}
+      >
         <Fab
           variant="extended"
           size="large"
@@ -79,3 +99,13 @@ export const FastLinks = () => {
     </div>
   );
 };
+
+FastLinks.propTypes = {
+  setPageName: PropTypes.func.isRequired
+};
+
+const mapStateToPros = state => ({
+  pageName: state.page.pageName
+});
+
+export default connect(mapStateToPros, { setPageName })(FastLinks);

@@ -13,6 +13,7 @@ import { setAlert } from "./alertActions";
 import setAuthToken from "../utils/setAuthToken";
 import { fetchClients } from "./clientActions";
 import { fetchWorkouts } from "./workoutActions";
+import { setPageName } from "./pageActions";
 
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
@@ -109,6 +110,7 @@ export const login = (email, password) => async dispatch => {
 
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
+  dispatch(setPageName("Dashboard"))
 };
 
 export const updateUser = data => dispatch => {

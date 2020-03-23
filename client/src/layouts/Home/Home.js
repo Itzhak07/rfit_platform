@@ -4,7 +4,7 @@ import bgwhite from "../../assets/images/bgwhite.png";
 import MenuButton from "../../components/Buttons/MenuButton";
 import CardsHeader from "./CardsHeader";
 import TopClients from "../../components/Client/TopClients";
-import { FastLinks } from "./FastLinks";
+import FastLinks from "./FastLinks";
 import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({

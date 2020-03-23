@@ -40,10 +40,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 export const FeatureCard = ({
-  text,
   color,
   handleClick,
   index,
+  text,
   secondaryTitle
 }) => {
   const classes = useStyles(color);

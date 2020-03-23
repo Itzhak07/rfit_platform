@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     alignContent: "center",
     marginTop: 20,
     transition: "all 0.3s ease",
+    height: 700,
     [theme.breakpoints.down("md")]: {
       transition: "all 0.3s ease",
       flexFlow: "column wrap"
@@ -30,10 +31,24 @@ const useStyles = makeStyles(theme => ({
   },
   imgContainer: {
     transition: "all 0.3s ease",
-    width: "100%",
-    maxWidth: 900,
-    [theme.breakpoints.down("lg")]: {
-      maxWidth: 588,
+    width: 900,
+    [theme.breakpoints.down(1600)]: {
+      width: 800,
+      transition: "all 0.3s ease",
+      margin: "auto"
+    },
+    [theme.breakpoints.down(1500)]: {
+      width: 588,
+      transition: "all 0.3s ease",
+      margin: "auto"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: 500,
+      transition: "all 0.3s ease",
+      margin: "auto"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: 400,
       transition: "all 0.3s ease",
       margin: "auto"
     }
@@ -50,6 +65,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("md")]: {
       flexDirection: "row"
     }
+  },
+  headers: {
+    padding: 5
   }
 }));
 
@@ -65,7 +83,7 @@ export const ProductFeatures = () => {
       ClientProfile
     ],
     title: "Explore Our Features",
-    secondaryTitle: ""
+    secondaryTitle: "The RFit Platform is here for your need"
   });
 
   const classes = useStyles();
@@ -83,18 +101,20 @@ export const ProductFeatures = () => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h2" marked="center" align="center" component="h2">
-        {title}
-      </Typography>
+      <div className={classes.headers}>
+        <Typography variant="h2" marked="center" align="center" component="h2">
+          {title}
+        </Typography>
 
-      <Typography
-        style={{ marginTop: 10, fontSize: 30 }}
-        variant="h5"
-        align="center"
-        component="h5"
-      >
-        {secondaryTitle}
-      </Typography>
+        <Typography
+          style={{ marginTop: 10, fontSize: 30 }}
+          variant="h5"
+          align="center"
+          component="h5"
+        >
+          {secondaryTitle}
+        </Typography>
+      </div>
 
       <div className={classes.container}>
         <div className={classes.column}>
@@ -122,7 +142,7 @@ export const ProductFeatures = () => {
         </div>
 
         <div className={classes.imgContainer} key={featureList[index]}>
-          <Fade in timeout={1000}>
+          <Fade in timeout={{ enter: 1000, exit: 5000 }}>
             <img
               src={featureList[index]}
               className={classes.img}

@@ -37,6 +37,7 @@ import { Spring, config } from "react-spring/renderprops";
 import { isMobile } from "react-device-detect";
 import SearchBar from "./SearchBar";
 import { Spinner } from "../Loader/Spinner";
+import { setPageName } from "../../actions/pageActions";
 
 const drawerWidth = 240;
 
@@ -124,16 +125,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
+function ResponsiveDrawer({
+  container,
+  children,
+  logout,
+  auth: { user },
+  setPageName,
+  pageName
+}) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [pageName, setPageName] = useState();
   const [active, setActive] = useState();
   const [open, setOpen] = useState({
     clients: false,
-    workouts:
-      localStorage.getItem("lastPageView") === "Workouts Manager" ? true : false
+    workouts: pageName === "Workouts Manager" ? true : false
   });
 
   function handleDrawerToggle() {
@@ -144,16 +150,20 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
     setPageName(viewName);
     setActive(viewName);
     localStorage.setItem("lastPageView", viewName);
+
     if (isMobile) {
       setMobileOpen(false);
     }
   };
 
   useEffect(() => {
-    const viewName = localStorage.getItem("lastPageView");
-    setPageName(viewName);
-    setActive(viewName);
-  }, []);
+    setActive(pageName);
+    if (pageName === "Workouts Manager") {
+      setOpen(open => ({ ...open, workouts: true }));
+    } else {
+      setOpen(open => ({ ...open, workouts: false }));
+    }
+  }, [pageName]);
 
   const openCollapse = state => {
     setOpen({ ...open, [state]: !open[state] });
@@ -342,11 +352,16 @@ function ResponsiveDrawer({ container, children, logout, auth: { user } }) {
 ResponsiveDrawer.propTypes = {
   container: PropTypes.object,
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  setPageName: PropTypes.func.isRequired,
+  pageName: PropTypes.string.isRequired
 };
 
 const mapStateToPros = state => ({
-  auth: state.auth
+  auth: state.auth,
+  pageName: state.page.pageName
 });
 
-export default connect(mapStateToPros, { logout })(ResponsiveDrawer);
+export default connect(mapStateToPros, { logout, setPageName })(
+  ResponsiveDrawer
+);
