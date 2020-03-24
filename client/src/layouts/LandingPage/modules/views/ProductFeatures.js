@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
     backgroundColor: "#f6f6f6",
-    padding: "100px 0"
+    padding: "50px 0 50px"
   },
   container: {
     display: "flex",
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
       height: 650
     },
     [theme.breakpoints.down("xs")]: {
-      height: 600,
+      height: 500,
       justifyContent: "unset"
     }
   },
