@@ -23,10 +23,18 @@ const useStyles = makeStyles(theme => ({
     alignContent: "center",
     marginTop: 20,
     transition: "all 0.3s ease",
-    height: 700,
+    height: 590,
     [theme.breakpoints.down("md")]: {
       transition: "all 0.3s ease",
-      flexFlow: "column wrap"
+      flexFlow: "column wrap",
+      height: 700
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 650
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: 600,
+      justifyContent: "unset"
     }
   },
   imgContainer: {
@@ -35,39 +43,67 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down(1600)]: {
       width: 800,
       transition: "all 0.3s ease",
-      margin: "auto"
+      margin: "0 auto"
     },
     [theme.breakpoints.down(1500)]: {
       width: 581,
+      height: 400,
       transition: "all 0.3s ease",
-      margin: "auto"
+      margin: "0 auto"
     },
     [theme.breakpoints.down("sm")]: {
       width: 500,
       transition: "all 0.3s ease",
-      margin: "auto"
+      margin: "0 auto"
     },
     [theme.breakpoints.down("xs")]: {
       width: 400,
+      height: 260,
       transition: "all 0.3s ease",
-      margin: "auto"
+      margin: "0 auto"
     }
   },
   img: {
     width: "100%",
-    margin: "auto"
+    margin: "0 auto"
   },
   column: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    margin: "auto",
+    margin: "0 auto",
     [theme.breakpoints.down("md")]: {
       flexDirection: "row"
     }
   },
   headers: {
-    padding: 5
+    padding: 10,
+    height: 140,
+    [theme.breakpoints.down("sm")]: {
+      height: 200
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: 225
+    }
+  },
+  title: {
+    fontSize: 48,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 40
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 36
+    }
+  },
+  seconadryTitle: {
+    fontSize: 30,
+    marginTop: 10,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: 26
+    },
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 22
+    }
   }
 }));
 
@@ -102,12 +138,18 @@ export const ProductFeatures = () => {
   return (
     <div className={classes.root}>
       <div className={classes.headers}>
-        <Typography variant="h2" marked="center" align="center" component="h2">
+        <Typography
+          className={classes.title}
+          variant="h2"
+          marked="center"
+          align="center"
+          component="h2"
+        >
           {title}
         </Typography>
 
         <Typography
-          style={{ marginTop: 10, fontSize: 30 }}
+          className={classes.seconadryTitle}
           variant="h5"
           align="center"
           component="h5"
