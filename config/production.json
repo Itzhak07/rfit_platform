@@ -1,4 +1,8 @@
 {
     "jwtSecret": "// JWT Secret//",
-    "mongoURI": "// MongoDBURI//"
+    "mongoURI": "// MongoDBURI//",
+    "mail": {
+        "user": "Email",
+        "password": "Password"
+    }
 }
