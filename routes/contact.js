@@ -25,22 +25,21 @@ router.post(
       let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 587,
-        secure: false, // true for 465, false for other ports
+        secure: false,
         auth: {
-          user: user, // generated ethereal user
-          pass: password // generated ethereal password
+          user: user,
+          pass: password
         },
         tls: {
           rejectUnauthorized: false
         }
       });
 
-      // send mail with defined transport object
       let info = transporter.sendMail({
         from: `RFit Platform <${user}>`,
-        to: user, // sender address
-        subject: "New RFit Platform Message", // Subject line
-        text: message, // plain text body
+        to: user,
+        subject: "New RFit Platform Message",
+        text: message,
         html: `<h1>You Have a new contact</h1>
                 <ul>
                     <li>Name: ${name}</li>
