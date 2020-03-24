@@ -1,8 +1,7 @@
 {
-    "jwtSecret": "// JWT Secret//",
-    "mongoURI": "// MongoDBURI//",
+    "jwtSecret": "Execute_Order_66",
+    "mongoURI": "mongodb+srv://Itzhak07:Itzhak07@cluster0-tuoql.mongodb.net/RFit_DB?retryWrites=true&w=majority",
     "mail": {
-        "user": "Email",
-        "password": "Password"
+        "user": "itzhak07@gmail.com",
+        "password": "Itzhak77"
     }
-}
