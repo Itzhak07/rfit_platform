@@ -52,7 +52,11 @@ const AccountProfile = ({ user }) => {
           </Typography>
         </div>
         <div className={classes.avatarWrapper}>
-          <Avatar className={classes.avatar} src={user.avatar} />
+          <Avatar
+            className={classes.avatar}
+            src={user.avatar}
+            alt="User's Avatar"
+          />
         </div>
       </CardContent>
     </Card>
@@ -61,7 +65,7 @@ const AccountProfile = ({ user }) => {
 
 AccountProfile.propTypes = {
   className: PropTypes.string,
-  user: PropTypes.object,
+  user: PropTypes.object
 };
 
 const mapStateToPros = state => ({
