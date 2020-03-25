@@ -1,13 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-scroll";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Drawer } from "@material-ui/core";
+import {
+  List,
+  Button,
+  ListItem,
+  ListItemText,
+  Drawer
+} from "@material-ui/core/";
+
 import { menuList } from "../views/utils";
 
 const useStyles = makeStyles({
@@ -15,10 +17,11 @@ const useStyles = makeStyles({
     width: "100%"
   },
   listItem: {
-    margin: "auto"
+    textAlign: "center"
   },
   rightLink: {
     fontSize: 14,
+
     color: "black",
     "&:hover": {
       color: "#dcdcdc"
@@ -40,7 +43,7 @@ export default function MobileMenu({ open, setOpen }) {
       component="div"
       aria-label="mobile-menu-list"
     >
-      {menuList.map(item => {
+      {menuList.map((item, index) => {
         return (
           <Link
             className={classes.rightLink}
@@ -50,10 +53,9 @@ export default function MobileMenu({ open, setOpen }) {
             offset={item.offset}
             duration={500}
             onClick={setOpen}
+            key={index}
           >
             <ListItem divider button className={classes.listItem}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-
               <ListItemText primary={item.primary} />
             </ListItem>
           </Link>
@@ -65,9 +67,9 @@ export default function MobileMenu({ open, setOpen }) {
   return (
     <div>
       <Button onClick={setOpen} className={classes.menuButton}>
-        <MenuIcon />
+        <MenuIcon fontSize="large" />
       </Button>
-      <Drawer anchor="top" open={open} onClose={setOpen} onOpen={setOpen}>
+      <Drawer anchor="bottom" open={open} onClose={setOpen} onOpen={setOpen}>
         {list}
       </Drawer>
     </div>

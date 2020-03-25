@@ -82,9 +82,9 @@ function AppAppBar(props) {
     setOpen({ ...open, menu: !menu });
   };
 
-  const appBarDesktopItems = menuList.map(item => {
+  const appBarDesktopItems = menuList.map((item, index) => {
     return (
-      <Button className={classes.rightLink}>
+      <Button className={classes.rightLink} key={index}>
         <Link
           to={item.to}
           spy={true}
@@ -150,7 +150,7 @@ function AppAppBar(props) {
               </div>
             </Toolbar>
           </AppBar>
-          <div className={classes.placeholder} />
+          {/* <div className={classes.placeholder} /> */}
           <Suspense fallback={<CircularProgress />}>
             <AuthModal
               open={open.modal}
