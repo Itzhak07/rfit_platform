@@ -1,6 +1,6 @@
 {
-    "jwtSecret": //JWT SECRET//,
+    "jwtSecret": "//JWT SECRET//",
     "mongoURI": //MONGODB URI//,
-    "sendgrid_API_KEY": //SENDGRID API KEY//,
-    "myMail": //MY EMAIL ADDRESS//
+    "sendgrid_API_KEY": "//SENDGRID API KEY//",
+    "myMail": "//MY EMAIL ADDRESS//"
 }
