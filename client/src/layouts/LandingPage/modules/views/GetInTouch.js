@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "../components/Typography";
 import HelpIcon from "@material-ui/icons/Help";
+import { Link } from "react-scroll";
 
 const styles = theme => ({
   root: {
@@ -35,11 +36,19 @@ function GetInTouch(props) {
 
   return (
     <Container className={classes.root} component="section">
-      <Button className={classes.button}>
-        <Typography variant="h4" component="span">
-          Got any questions? Need help?
-        </Typography>
-      </Button>
+      <Link
+        to="contact-section"
+        spy={true}
+        smooth={true}
+        offset={-100}
+        duration={500}
+      >
+        <Button className={classes.button}>
+          <Typography variant="h4" component="span">
+            Got any questions? Need help?
+          </Typography>
+        </Button>
+      </Link>
       <Typography variant="subtitle1" className={classes.link}>
         We are here to help. Get in touch!
       </Typography>

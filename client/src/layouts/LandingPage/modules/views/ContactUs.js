@@ -50,6 +50,7 @@ export const ContactUs = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+
     axios
       .post(`https://rfit-platform.herokuapp.com/api/contact`, formData)
       .then(

@@ -26,13 +26,19 @@ function LandingPage({ isAuthenticated }) {
   return (
     <div style={rootStyle}>
       <AppAppBar />
-      <MainSection />
-      <Element name="mockup-section">
+      <Element name="main-section">
+        <MainSection />
+      </Element>
+      <Element name="about-section">
         <MockUpSection />
       </Element>
       <ProductValues />
-      <ProductFeatures />
-      <ContactUs />
+      <Element name="features-section">
+        <ProductFeatures />
+      </Element>
+      <Element name="contact-section">
+        <ContactUs />
+      </Element>
       <GetInTouch />
       <ButtonToTop />
       <AppFooter />

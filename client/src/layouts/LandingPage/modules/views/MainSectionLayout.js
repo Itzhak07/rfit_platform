@@ -74,7 +74,7 @@ function ProductHeroLayout(props) {
         </Spring>
         {/* <div className={clsx(classes.background, backgroundClassName)} /> */}
         <Link
-          to="mockup-section"
+          to="about-section"
           spy={true}
           smooth={true}
           offset={-100}
