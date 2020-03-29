@@ -34,7 +34,13 @@ const useStyles = makeStyles(theme => ({
     padding: 20,
     marginTop: 20
   },
-  emailsPaper: { width: "100%", maxWidth: 500, padding: 10, marginBottom: 20 },
+  emailsPaper: {
+    width: "100%",
+    maxWidth: 500,
+    height: 412,
+    padding: 10,
+    marginBottom: 20
+  },
   item: { padding: "0 0 20px 0" }
 }));
 
@@ -86,7 +92,6 @@ function ClientProfilePage({ clients, workouts, emails }) {
         <NotFound />
       ) : (
         <div className={classes.root}>
-          {" "}
           <ClientBreadCrumbs
             clientName={thisClient.firstName + " " + thisClient.lastName}
           />
