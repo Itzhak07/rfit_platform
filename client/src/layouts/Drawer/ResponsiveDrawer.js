@@ -37,7 +37,6 @@ import { Spring, config } from "react-spring/renderprops";
 import { isMobile } from "react-device-detect";
 import SearchBar from "./SearchBar";
 import { Spinner } from "../Loader/Spinner";
-import { setPageName } from "../../actions/pageActions";
 
 const drawerWidth = 240;
 
@@ -130,7 +129,6 @@ function ResponsiveDrawer({
   children,
   logout,
   auth: { user },
-  setPageName,
   pageName
 }) {
   const classes = useStyles();
@@ -148,16 +146,6 @@ function ResponsiveDrawer({
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   }
-
-  const onViewChange = viewName => {
-    setPageName(viewName);
-    setActive(viewName);
-    localStorage.setItem("lastPageView", viewName);
-
-    if (isMobile) {
-      setMobileOpen(false);
-    }
-  };
 
   useEffect(() => {
     setActive(pageName);
@@ -209,7 +197,9 @@ function ResponsiveDrawer({
                 <Link
                   to={item.link}
                   onClick={() => {
-                    onViewChange(item.viewName);
+                    if (isMobile) {
+                      setMobileOpen(false);
+                    }
                   }}
                 >
                   <ListItem button className={classes.listItem} divider>
@@ -243,7 +233,9 @@ function ResponsiveDrawer({
                             <Link
                               to={subitem.link}
                               onClick={() => {
-                                onViewChange(subitem.viewName);
+                                if (isMobile) {
+                                  setMobileOpen(false);
+                                }
                               }}
                             >
                               <ListItem
@@ -359,7 +351,6 @@ ResponsiveDrawer.propTypes = {
   container: PropTypes.object,
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  setPageName: PropTypes.func.isRequired,
   pageName: PropTypes.string.isRequired
 };
 
@@ -368,6 +359,4 @@ const mapStateToPros = state => ({
   pageName: state.page.pageName
 });
 
-export default connect(mapStateToPros, { logout, setPageName })(
-  ResponsiveDrawer
-);
+export default connect(mapStateToPros, { logout })(ResponsiveDrawer);

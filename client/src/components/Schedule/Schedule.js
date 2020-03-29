@@ -43,9 +43,11 @@ import {
   deleteWorkout,
   updateWorkout
 } from "../../actions/workoutActions";
+import { setPageName } from "../../actions/pageActions";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { CircularProgress, LinearProgress } from "@material-ui/core";
 import { Info } from "@material-ui/icons";
+
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -403,6 +405,10 @@ class Schedule extends React.PureComponent {
     });
   }
 
+  componentDidMount() {
+    this.props.setPageName("Schedule");
+  }
+
   componentDidUpdate() {
     this.appointmentForm.update();
   }
@@ -628,6 +634,7 @@ Schedule.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   deleteWorkout: PropTypes.func.isRequired,
   updateWorkout: PropTypes.func.isRequired,
+  setPageName: PropTypes.func.isRequired,
   workouts: PropTypes.array.isRequired,
   clients: PropTypes.array.isRequired,
   activeClients: PropTypes.array.isRequired,
@@ -646,5 +653,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   createWorkout,
   deleteWorkout,
-  updateWorkout
+  updateWorkout,
+  setPageName
 })(withStyles(styles, { name: "Schedule" })(Schedule));

@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
 import { Chip } from "@material-ui/core";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   root: {
     width: "100%",
@@ -29,11 +29,13 @@ const AllMessagesTable = ({ emails }) => {
       render: rowData =>
         rowData.participants.map(client => {
           return (
-            <Chip
-              size="small"
-              label={`${client.firstName} ${client.lastName} `}
-              className={classes.chip}
-            />
+            <Link to={"../dashboard/clients/" + client._id}>
+              <Chip
+                size="small"
+                label={`${client.firstName} ${client.lastName} `}
+                className={classes.chip}
+              />
+            </Link>
           );
         }),
       filtering: false

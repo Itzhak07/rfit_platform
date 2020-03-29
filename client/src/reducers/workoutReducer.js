@@ -9,6 +9,7 @@ import moment from "moment";
 const initialState = {
   workouts: [],
   thisMonth: [],
+  thisWeek: [],
   today: [],
   loading: true,
   isNewWorkout: false
@@ -36,6 +37,18 @@ export default (state = initialState, action) => {
             moment(workout.startDate).format("YYYY-MM-DD ") <=
               moment()
                 .endOf("month")
+                .format("YYYY-MM-DD ")
+          );
+        }),
+        thisWeek: payload.filter(workout => {
+          return (
+            moment(workout.startDate).format("YYYY-MM-DD ") >=
+              moment()
+                .startOf("week")
+                .format("YYYY-MM-DD ") &&
+            moment(workout.startDate).format("YYYY-MM-DD ") <=
+              moment()
+                .endOf("week")
                 .format("YYYY-MM-DD ")
           );
         }),
@@ -70,6 +83,18 @@ export default (state = initialState, action) => {
                 .format("YYYY-MM-DD ")
           );
         }),
+        thisWeek: payload.filter(workout => {
+          return (
+            moment(workout.startDate).format("YYYY-MM-DD ") >=
+              moment()
+                .startOf("week")
+                .format("YYYY-MM-DD ") &&
+            moment(workout.startDate).format("YYYY-MM-DD ") <=
+              moment()
+                .endOf("week")
+                .format("YYYY-MM-DD ")
+          );
+        }),
         loading: false,
         isNewWorkout: false
       };
@@ -92,6 +117,18 @@ export default (state = initialState, action) => {
             moment(workout.startDate).format("YYYY-MM-DD ") <=
               moment()
                 .endOf("month")
+                .format("YYYY-MM-DD ")
+          );
+        }),
+        thisWeek: payload.filter(workout => {
+          return (
+            moment(workout.startDate).format("YYYY-MM-DD ") >=
+              moment()
+                .startOf("week")
+                .format("YYYY-MM-DD ") &&
+            moment(workout.startDate).format("YYYY-MM-DD ") <=
+              moment()
+                .endOf("week")
                 .format("YYYY-MM-DD ")
           );
         }),

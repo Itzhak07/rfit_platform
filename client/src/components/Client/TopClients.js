@@ -15,7 +15,6 @@ import {
 import StarRateIcon from "@material-ui/icons/StarRate";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
-import { setPageName } from "../../actions/pageActions";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -55,7 +54,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const TopClients = ({ topClients, loading, setPageName }) => {
+const TopClients = ({ topClients, loading }) => {
   const classes = useStyles();
 
   return (
@@ -74,10 +73,7 @@ const TopClients = ({ topClients, loading, setPageName }) => {
             {topClients.map(client => {
               return (
                 <div key={client.name}>
-                  <Link
-                    to={"./dashboard/clients/" + client.id}
-                    onClick={() => setPageName("Clients Manager")}
-                  >
+                  <Link to={"./dashboard/clients/" + client.id}>
                     <ListItem disableGutters>
                       <ListItemIcon>
                         <StarRateIcon
@@ -112,8 +108,7 @@ const TopClients = ({ topClients, loading, setPageName }) => {
 
 TopClients.propTypes = {
   topClients: PropTypes.array,
-  loading: PropTypes.bool,
-  setPageName: PropTypes.func
+  loading: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -121,4 +116,4 @@ const mapStateToProps = state => ({
   loading: state.clients.loading
 });
 
-export default connect(mapStateToProps, { setPageName })(TopClients);
+export default connect(mapStateToProps, {})(TopClients);

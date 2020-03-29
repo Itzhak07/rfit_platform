@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { setPageName } from "../../actions/pageActions";
 import DaySchedule from "../../components/Schedule/DaySchedule";
 import bgwhite from "../../assets/images/bgwhite.png";
 import MenuButton from "../../components/Buttons/MenuButton";
@@ -32,8 +35,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Home = () => {
+const Home = ({ setPageName }) => {
   const classes = useStyles();
+  useEffect(() => {
+    setPageName("Dashboard");
+  }, [setPageName]);
 
   return (
     <div className={classes.root}>
@@ -53,4 +59,12 @@ const Home = () => {
   );
 };
 
-export default Home;
+Home.propTypes = {
+  setPageName: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps, {
+  setPageName
+})(Home);

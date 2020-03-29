@@ -12,6 +12,7 @@ import PrivateRoute from "./routing/PrivateRoute";
 import { fetchClients } from "./actions/clientActions";
 // import LandingPage from "./layouts/LandingPage/LandingPage";
 import MySnackbar from "./components/Snackbar/MySnackbar";
+import { setPageName } from "./actions/pageActions";
 // import { MessagesLayout } from "./layouts/Messages/MessagesLayout";
 
 // const Schedule = lazy(() =>
@@ -99,6 +100,7 @@ const Account = lazy(async () => {
 
 const ClientProfilePage = lazy(async () => {
   await store.dispatch(fetchClients());
+  await store.dispatch(setPageName("Clients Manager"));
   const [moduleExports] = await Promise.all([
     import(
       /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
@@ -109,6 +111,7 @@ const ClientProfilePage = lazy(async () => {
 });
 
 const SendMessagePage = lazy(async () => {
+  localStorage.setItem("lastPageView", "New Message");
   await store.dispatch(fetchClients());
   const [moduleExports] = await Promise.all([
     import(
@@ -120,6 +123,7 @@ const SendMessagePage = lazy(async () => {
 });
 
 const AllMessagesPage = lazy(async () => {
+  localStorage.setItem("lastPageView", "Messages Center");
   const [moduleExports] = await Promise.all([
     import(
       /* webpackChunkName: "AllMessagesPage"*/ "./layouts/Messages/AllMessagesPage"

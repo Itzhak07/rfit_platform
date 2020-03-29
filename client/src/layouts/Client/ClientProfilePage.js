@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { setPageName } from "../../actions/pageActions";
 import { useParams } from "react-router-dom";
 import ClientWorkoutsTable from "../../components/Client/ClientWorkoutsTable";
 import { Paper, makeStyles, Container } from "@material-ui/core";
@@ -16,14 +17,14 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexFlow: "column wrap"
   },
-  infoSection: {
+  profileSection: {
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "flex-start"
   },
-  paper: {
+  profilePaper: {
     width: "100%",
-    padding: 20,
+    padding: 10,
     maxWidth: 500,
     margin: "0 20px 20px 0",
     [theme.breakpoints.down("sm")]: {
@@ -37,14 +38,14 @@ const useStyles = makeStyles(theme => ({
   emailsPaper: {
     width: "100%",
     maxWidth: 500,
-    height: 412,
+    height: 443,
     padding: 10,
     marginBottom: 20
   },
   item: { padding: "0 0 20px 0" }
 }));
 
-function ClientProfilePage({ clients, workouts, emails }) {
+function ClientProfilePage({ clients, workouts, emails, setPageName }) {
   const [state, setState] = useState({
     thisClient: "",
     thisWorkouts: "",
@@ -54,6 +55,9 @@ function ClientProfilePage({ clients, workouts, emails }) {
   const { id } = useParams();
 
   const classes = useStyles();
+  useEffect(() => {
+    setPageName("Clients Manager");
+  }, [setPageName]);
 
   useEffect(() => {
     const thisClient = clients.filter(client => {
@@ -96,8 +100,8 @@ function ClientProfilePage({ clients, workouts, emails }) {
             clientName={thisClient.firstName + " " + thisClient.lastName}
           />
           <Container maxWidth="xl" disableGutters>
-            <div className={classes.infoSection}>
-              <Paper className={classes.paper} variant="outlined">
+            <div className={classes.profileSection}>
+              <Paper className={classes.profilePaper} variant="outlined">
                 {<ClientProfile client={thisClient} />}
               </Paper>
               <Paper className={classes.emailsPaper} variant="outlined">
@@ -124,7 +128,8 @@ function ClientProfilePage({ clients, workouts, emails }) {
 ClientProfilePage.propTypes = {
   clients: PropTypes.array,
   workouts: PropTypes.array,
-  emails: PropTypes.array
+  emails: PropTypes.array,
+  setPageName: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -133,4 +138,4 @@ const mapStateToProps = state => ({
   emails: state.messages.emails
 });
 
-export default connect(mapStateToProps)(ClientProfilePage);
+export default connect(mapStateToProps, { setPageName })(ClientProfilePage);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -6,20 +6,26 @@ import {
   deleteWorkout,
   updateWorkout
 } from "../../actions/workoutActions";
+
 import WorkoutsTable from "../../components/Workouts/workoutsTable";
 import { Spinner } from "../Loader/Spinner";
 import MenuButton from "../../components/Buttons/MenuButton";
+import { setPageName } from "../../actions/pageActions";
 
 const AllWorkoutsPage = ({
   createWorkout,
   deleteWorkout,
   updateWorkout,
-
+  setPageName,
   workouts,
   clients,
   loading,
   alerts
 }) => {
+  useEffect(() => {
+    setPageName("Workouts Manager");
+  }, [setPageName]);
+
   return (
     <div className="conatiner">
       {loading ? (
@@ -43,6 +49,7 @@ AllWorkoutsPage.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   deleteWorkout: PropTypes.func.isRequired,
   updateWorkout: PropTypes.func.isRequired,
+  setPageName: PropTypes.func.isRequired,
   workouts: PropTypes.array.isRequired,
   clients: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -59,5 +66,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   createWorkout,
   deleteWorkout,
-  updateWorkout
+  updateWorkout,
+  setPageName
 })(AllWorkoutsPage);

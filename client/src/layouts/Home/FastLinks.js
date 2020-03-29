@@ -8,9 +8,6 @@ import {
   Group as GroupIcon
 } from "@material-ui/icons";
 import { Fab } from "@material-ui/core";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { setPageName } from "../../actions/pageActions";
 
 const styles = {
   root: {
@@ -29,14 +26,10 @@ const styles = {
   icon: { marginRight: 5 }
 };
 
-const FastLinks = ({ setPageName }) => {
+const FastLinks = () => {
   return (
     <div style={styles.root}>
-      <Link
-        style={styles.linkBtn}
-        to="./dashboard/schedule"
-        onClick={() => setPageName("Schedule")}
-      >
+      <Link style={styles.linkBtn} to="./dashboard/schedule">
         <Fab
           variant="extended"
           size="large"
@@ -48,11 +41,7 @@ const FastLinks = ({ setPageName }) => {
           Scheduele
         </Fab>
       </Link>
-      <Link
-        style={styles.linkBtn}
-        to="./dashboard/workouts"
-        onClick={() => setPageName("Workouts Manager")}
-      >
+      <Link style={styles.linkBtn} to="./dashboard/workouts">
         <Fab
           variant="extended"
           size="large"
@@ -64,11 +53,7 @@ const FastLinks = ({ setPageName }) => {
           Workouts
         </Fab>
       </Link>
-      <Link
-        style={styles.linkBtn}
-        to="./dashboard/clients"
-        onClick={() => setPageName("Clients Manager")}
-      >
+      <Link style={styles.linkBtn} to="./dashboard/clients">
         <Fab
           variant="extended"
           size="large"
@@ -80,11 +65,7 @@ const FastLinks = ({ setPageName }) => {
           Clients
         </Fab>
       </Link>
-      <Link
-        style={styles.linkBtn}
-        to="./dashboard/account"
-        onClick={() => setPageName("Account")}
-      >
+      <Link style={styles.linkBtn} to="./dashboard/account">
         <Fab
           variant="extended"
           size="large"
@@ -100,12 +81,4 @@ const FastLinks = ({ setPageName }) => {
   );
 };
 
-FastLinks.propTypes = {
-  setPageName: PropTypes.func.isRequired
-};
-
-const mapStateToPros = state => ({
-  pageName: state.page.pageName
-});
-
-export default connect(mapStateToPros, { setPageName })(FastLinks);
+export default FastLinks;

@@ -17,7 +17,8 @@ const CardsHeader = ({
   activeClients,
   loading,
   todayWorkouts,
-  clientLoading
+  clientLoading,
+  thisWeekWorkouts
 }) => {
   const [open, setOpen] = useState(false);
   const modalOpen = () => {
@@ -37,21 +38,21 @@ const CardsHeader = ({
       boxShadow: "0px 0px 10px 9px rgb(255, 255, 255)",
       backgroundImage:
         " radial-gradient(circle, #666666, #4c4c4c, #343434, #1d1d1d, #000000)",
-        borderRadius: 4
+      borderRadius: 4
     }
   };
 
   return (
     <div style={styles.cardsWrapper}>
       <SimpleCard
-        title="Appointments For This Month"
+        title="Appointments This Week"
         count={
-          (!loading && thisMonthWorkouts.length === 0) ||
-          thisMonthWorkouts == null
+          (!loading && thisWeekWorkouts.length === 0) ||
+          thisWeekWorkouts == null
             ? "0"
-            : thisMonthWorkouts.length
+            : thisWeekWorkouts.length
         }
-        url="dashboard/workouts"
+        url="dashboard/schedule"
       />
       <SimpleCard
         title="Clients"
@@ -102,12 +103,14 @@ CardsHeader.propTypes = {
   clients: PropTypes.array,
   activeClients: PropTypes.array,
   loading: PropTypes.bool,
-  thisMonthWorkouts: PropTypes.array
+  thisMonthWorkouts: PropTypes.array,
+  thisWeekWorkouts: PropTypes.array
 };
 
 const mapStateToProps = state => ({
   workouts: state.workouts.workouts,
   todayWorkouts: state.workouts.today,
+  thisWeekWorkouts: state.workouts.thisWeek,
   thisMonthWorkouts: state.workouts.thisMonth,
   clients: state.clients.clients,
   activeClients: state.clients.active,

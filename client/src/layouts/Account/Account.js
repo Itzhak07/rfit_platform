@@ -1,14 +1,19 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { setPageName } from "../../actions/pageActions";
 import { makeStyles } from "@material-ui/styles";
 import { CircularProgress } from "@material-ui/core";
 
 const AccountDetails = lazy(() =>
-  import(/* webpackChunkName: "AccountDetails"*/"../../components/Account/AccountDetails")
+  import(
+    /* webpackChunkName: "AccountDetails"*/ "../../components/Account/AccountDetails"
+  )
 );
 const AccountProfile = lazy(() =>
-  import(/* webpackChunkName: "AccountProfile"*/"../../components/Account/AccountProfile")
+  import(
+    /* webpackChunkName: "AccountProfile"*/ "../../components/Account/AccountProfile"
+  )
 );
 
 const useStyles = makeStyles(() => ({
@@ -23,8 +28,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function Account({ user }) {
+function Account({ user, setPageName }) {
   const classes = useStyles();
+  useEffect(() => {
+    setPageName("Account");
+  }, [setPageName]);
+
   return (
     <div className={classes.root}>
       <Suspense fallback={<CircularProgress />}>
@@ -36,11 +45,12 @@ function Account({ user }) {
 }
 
 Account.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  setPageName: PropTypes.func.isRequired
 };
 
 const mapStateToPros = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToPros)(Account);
+export default connect(mapStateToPros, { setPageName })(Account);

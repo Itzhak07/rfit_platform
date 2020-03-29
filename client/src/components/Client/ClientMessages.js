@@ -38,7 +38,7 @@ const EmailItemList = ({ date, subject, message }) => {
 
   return (
     <div>
-      <ListItem button onClick={handleClick}>
+      <ListItem button onClick={handleClick} divider>
         <ListItemIcon>
           <MailOutlineIcon color="primary" />
         </ListItemIcon>
@@ -47,7 +47,7 @@ const EmailItemList = ({ date, subject, message }) => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested} dense>
+          <ListItem className={classes.nested} dense divider>
             <ListItemIcon>
               <MessageIcon fontSize="small" />
             </ListItemIcon>
@@ -91,9 +91,9 @@ export default function ClientMessages({ client, emails }) {
     >
       <List
         component="nav"
-        aria-labelledby="nested-list-subheader"
+        aria-labelledby="client-email-list"
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
+          <ListSubheader component="div" id="client-email-list">
             Messages
           </ListSubheader>
         }
