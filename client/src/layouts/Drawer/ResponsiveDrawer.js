@@ -138,7 +138,10 @@ function ResponsiveDrawer({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState();
   const [open, setOpen] = useState({
-    clients: false,
+    messages:
+      pageName === "New Message" || pageName === "Messages Center"
+        ? true
+        : false,
     workouts: pageName === "Workouts Manager" ? true : false
   });
 
@@ -162,6 +165,11 @@ function ResponsiveDrawer({
       setOpen(open => ({ ...open, workouts: true }));
     } else {
       setOpen(open => ({ ...open, workouts: false }));
+    }
+    if (pageName === "New Message" || pageName === "Messages Center") {
+      setOpen(open => ({ ...open, messages: true }));
+    } else {
+      setOpen(open => ({ ...open, messages: false }));
     }
   }, [pageName]);
 
@@ -194,7 +202,7 @@ function ResponsiveDrawer({
         {drawerItems.map(item => {
           return (
             <div
-              key={item.key}
+              key={item.name}
               className={active === item.viewName ? classes.active : ""}
             >
               {!item.isCollapse ? (
@@ -204,12 +212,11 @@ function ResponsiveDrawer({
                     onViewChange(item.viewName);
                   }}
                 >
-                  <ListItem button className={classes.listItem}>
+                  <ListItem button className={classes.listItem} divider>
                     <div className={classes.itemBalckBar} />
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText primary={item.name} />
                   </ListItem>
-                  <Divider />
                 </Link>
               ) : (
                 <div>
@@ -217,25 +224,21 @@ function ResponsiveDrawer({
                     button
                     onClick={() => openCollapse(item.state)}
                     className={classes.listItem}
+                    divider
                   >
                     <ListItemIcon>{item.icon}</ListItemIcon>
                     <ListItemText primary={item.name} />
                     {open[item.state] ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
                   <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
-                    <Divider />
-                    <List
-                      component="div"
-                      className={classes.collapsed}
-                      disablePadding
-                    >
+                    <List component="div" disablePadding>
                       {item.subMenu.map(subitem => {
                         return (
                           <div
                             key={subitem.key}
-                            className={
+                            className={` ${
                               active === subitem.viewName ? classes.active : ""
-                            }
+                            }  ${classes.collapsed}`}
                           >
                             <Link
                               to={subitem.link}
@@ -243,7 +246,11 @@ function ResponsiveDrawer({
                                 onViewChange(subitem.viewName);
                               }}
                             >
-                              <ListItem button className={classes.nested}>
+                              <ListItem
+                                button
+                                className={classes.nested}
+                                divider
+                              >
                                 <ListItemIcon>{subitem.icon}</ListItemIcon>
                                 <ListItemText primary={subitem.name} />
                               </ListItem>
@@ -253,7 +260,6 @@ function ResponsiveDrawer({
                       })}
                     </List>
                   </Collapse>
-                  <Divider />
                 </div>
               )}
             </div>

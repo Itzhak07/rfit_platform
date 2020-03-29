@@ -12,14 +12,15 @@ import PrivateRoute from "./routing/PrivateRoute";
 import { fetchClients } from "./actions/clientActions";
 // import LandingPage from "./layouts/LandingPage/LandingPage";
 import MySnackbar from "./components/Snackbar/MySnackbar";
+// import { MessagesLayout } from "./layouts/Messages/MessagesLayout";
 
 // const Schedule = lazy(() =>
 //   import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule")
 // );
 
-// const WorkoutesManager = lazy(() =>
+// const MessagesPage = lazy(() =>
 //   import(
-//     /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/Workouts/WorkoutsManagePage"
+//     /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/Messages/MessagesLayout"
 //   )
 // );
 
@@ -107,6 +108,27 @@ const ClientProfilePage = lazy(async () => {
   return moduleExports;
 });
 
+const SendMessagePage = lazy(async () => {
+  await store.dispatch(fetchClients());
+  const [moduleExports] = await Promise.all([
+    import(
+      /* webpackChunkName: "SendMessagePage"*/ "./layouts/Messages/SendMessagePage"
+    ),
+    new Promise(resolve => setTimeout(resolve, 300))
+  ]);
+  return moduleExports;
+});
+
+const AllMessagesPage = lazy(async () => {
+  const [moduleExports] = await Promise.all([
+    import(
+      /* webpackChunkName: "AllMessagesPage"*/ "./layouts/Messages/AllMessagesPage"
+    ),
+    new Promise(resolve => setTimeout(resolve, 300))
+  ]);
+  return moduleExports;
+});
+
 function App() {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -144,6 +166,16 @@ function App() {
                   exact
                   path="/dashboard/clients/:id"
                   component={ClientProfilePage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/messages/new"
+                  component={SendMessagePage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/dashboard/messages"
+                  component={AllMessagesPage}
                 />
                 <PrivateRoute
                   exact

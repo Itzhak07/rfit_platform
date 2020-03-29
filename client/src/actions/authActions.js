@@ -14,6 +14,7 @@ import setAuthToken from "../utils/setAuthToken";
 import { fetchClients } from "./clientActions";
 import { fetchWorkouts } from "./workoutActions";
 import { setPageName } from "./pageActions";
+import { getEmails } from "./messageActions";
 
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
@@ -30,6 +31,7 @@ export const loadUser = () => async dispatch => {
 
     await dispatch(fetchClients());
     await dispatch(fetchWorkouts());
+    await dispatch(getEmails());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR
@@ -110,7 +112,7 @@ export const login = (email, password) => async dispatch => {
 
 export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
-  dispatch(setPageName("Dashboard"))
+  dispatch(setPageName("Dashboard"));
 };
 
 export const updateUser = data => dispatch => {

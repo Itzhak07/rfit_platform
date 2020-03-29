@@ -10,6 +10,7 @@ var authRouter = require("./routes/auth");
 var clientsRouter = require("./routes/clients");
 var workoutsRouter = require("./routes/workouts");
 var contactRouter = require("./routes/contact");
+var messagesRouter = require("./routes/messages");
 const config = require("config");
 
 const db_atlas = config.get("mongoURI");
@@ -38,6 +39,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/clients", clientsRouter);
 app.use("/api/workouts", workoutsRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/messages", messagesRouter);
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {

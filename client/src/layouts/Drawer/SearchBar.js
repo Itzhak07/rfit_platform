@@ -205,7 +205,10 @@ const SearchBar = ({ clients }) => {
             {clientResults.map(match => {
               return (
                 <Link
-                  to={"./dashboard/clients/" + match._id}
+                  to={
+                    "https://rfit-platform.herokuapp.com/dashboard/clients/" +
+                    match._id
+                  }
                   onClick={linkClick}
                   key={match._id}
                 >

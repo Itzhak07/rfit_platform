@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
 import { CircularProgress } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -42,7 +43,8 @@ export default function WorkoutsTable({
         {
           title: "Name",
           field: "client",
-          lookup: clientsLookUp
+          lookup: clientsLookUp,
+          render: rowData => <Chip size="small" label={`${rowData.title}`} />
         },
         { title: "Date", field: "date", type: "date" },
         { title: "Start", field: "startDate", type: "time", filtering: false },
