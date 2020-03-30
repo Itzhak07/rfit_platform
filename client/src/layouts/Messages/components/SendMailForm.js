@@ -112,13 +112,7 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
   }, [id]);
 
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
-  useEffect(() => {
     if (isNewMessage && closeModal) {
-      console.log("is new message");
-
       closeModal();
     }
   }, [isNewMessage, closeModal]);
@@ -150,7 +144,7 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
     }
   };
 
-  const handleCheckAll = e => {
+  const handleCheckAll = () => {
     if (to.length < clients.length) {
       let allClients = clients.map(client => {
         return {
