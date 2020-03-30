@@ -1,6 +1,7 @@
 import { GET_EMAILS, SEND_EMAIL } from "../actions/types";
 const initialState = {
-  emails: []
+  emails: [],
+  isNewMessage: false
 };
 
 export default function(state = initialState, action) {
@@ -9,12 +10,13 @@ export default function(state = initialState, action) {
     case GET_EMAILS:
       return {
         ...state,
-        emails: payload
+        emails: payload,
+        isNewMessage: false
       };
     case SEND_EMAIL:
       return {
         ...state,
-        emails: payload
+        isNewMessage: payload
       };
 
     default:

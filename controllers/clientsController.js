@@ -3,10 +3,12 @@ const Client = require("../models/Client");
 class ClientController {
   static getAll(id) {
     return new Promise((resolve, reject) => {
-      Client.find({ user: id }, (err, data) => {
-        if (err) reject(err);
-        resolve(data);
-      });
+      Client.find({ user: id })
+        .sort({ lastName: 1 })
+        .exec((err, data) => {
+          if (err) reject(err);
+          resolve(data);
+        });
     });
   }
 

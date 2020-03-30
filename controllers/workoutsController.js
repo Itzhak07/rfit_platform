@@ -6,6 +6,7 @@ class WorkoutsController {
     return new Promise((resolve, reject) => {
       Workout.find({ user: id })
         .populate("client")
+        .sort({ startDate: -1 })
         .exec((err, data) => {
           if (err) reject(err);
           resolve(data);
@@ -75,7 +76,6 @@ class WorkoutsController {
       });
     });
   }
-
 }
 
 module.exports = WorkoutsController;

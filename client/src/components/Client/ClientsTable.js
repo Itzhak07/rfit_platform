@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
-import { Paper, CircularProgress } from "@material-ui/core";
+import { Paper, CircularProgress, Chip } from "@material-ui/core";
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -36,13 +36,13 @@ export default function ClientsTable({
           field: "firstName",
           render: rowData => (
             <Link to={"/dashboard/clients/" + rowData._id}>
-              {rowData.firstName}
+              <Chip label={rowData.firstName} />
             </Link>
           ),
           cellStyle: {
             fontWeight: 600,
-            color: "#3f51b5",
-            transform: " scale(1.2)"
+            // color: "#3f51b5",
+            // transform: " scale(1.2)"
           }
         },
         {

@@ -4,6 +4,7 @@ import "moment-timezone";
 import MaterialTable from "material-table";
 import { CircularProgress } from "@material-ui/core";
 import { Chip } from "@material-ui/core";
+import { Link } from "react-router-dom";
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -44,7 +45,11 @@ export default function WorkoutsTable({
           title: "Name",
           field: "client",
           lookup: clientsLookUp,
-          render: rowData => <Chip size="small" label={`${rowData.title}`} />
+          render: rowData => (
+            <Link to={"/dashboard/clients/" + rowData.client}>
+              <Chip size="small" label={`${rowData.title}`} />
+            </Link>
+          )
         },
         { title: "Date", field: "date", type: "date" },
         { title: "Start", field: "startDate", type: "time", filtering: false },

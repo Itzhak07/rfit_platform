@@ -24,6 +24,7 @@ import {
 import SnackbarComponent from "./SnackbarComponent";
 import { Scrollbars } from "react-custom-scrollbars";
 import { sendEmail } from "../../../actions/messageActions";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -79,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SendMailForm = ({ sendEmail, clients }) => {
+const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
   const [formData, setFormData] = useState({
     subject: "",
     to: [],
@@ -91,13 +92,39 @@ const SendMailForm = ({ sendEmail, clients }) => {
   const { subject, to, message } = formData;
   const inputRef = useRef();
 
+  const { id } = useParams();
+
   useEffect(() => {
-    if (open) {
-      setTimeout(() => {
-        setOpen(false);
-      }, 3000);
+    const thisClient =
+      clients !== null
+        ? clients.filter(client => {
+            return client._id === id;
+          })
+        : "";
+
+    setFormData({
+      ...formData,
+      to: [
+        {
+          name: `${thisClient[0].firstName} ${thisClient[0].lastName}`,
+          email: thisClient[0].email,
+          id: thisClient[0]._id
+        }
+      ]
+    });
+  }, [id]);
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  useEffect(() => {
+    if (isNewMessage && closeModal) {
+      console.log("is new message");
+
+      closeModal();
     }
-  }, [open]);
+  }, [isNewMessage, closeModal]);
 
   const handleChange = event => {
     if (event.target.type === "checkbox") {
@@ -143,21 +170,8 @@ const SendMailForm = ({ sendEmail, clients }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    // console.log(inputRef.current.innerHTML);
-
     sendEmail(formData);
     setOpen(true);
-    setFormData({ subject: "", to: [], message: "" });
-
-    // axios
-    //   .post(`http://localhost:3000/api/messages/send`, { formData })
-    //   .then(res => {
-    //     console.log(res.data);
-
-    //     setOpen(true);
-    //   });
-
     setFormData({ subject: "", to: [], message: "" });
   };
 
@@ -288,18 +302,20 @@ const SendMailForm = ({ sendEmail, clients }) => {
           </Scrollbars>
         </Paper>
       </Container>
-      <SnackbarComponent state={open} />
+      {/* <SnackbarComponent state={open} /> */}
     </div>
   );
 };
 
 SendMailForm.propTypes = {
   clients: PropTypes.array,
-  sendEmail: PropTypes.func
+  sendEmail: PropTypes.func,
+  isNewMessage: PropTypes.bool
 };
 
 const mapStateToPros = state => ({
-  clients: state.clients.clients
+  clients: state.clients.clients,
+  isNewMessage: state.messages.isNewMessage
 });
 
 export default connect(mapStateToPros, { sendEmail })(SendMailForm);

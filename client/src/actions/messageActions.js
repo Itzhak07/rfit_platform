@@ -1,4 +1,5 @@
 import { GET_EMAILS, SEND_EMAIL } from "./types";
+import { setAlert } from "./alertActions";
 import Axios from "axios";
 
 export const getEmails = () => dispatch => {
@@ -11,10 +12,22 @@ export const getEmails = () => dispatch => {
 };
 
 export const sendEmail = data => dispatch => {
-  Axios.post(`https://rfit-platform.herokuapp.com/api/messages/send`, data).then(res => {
+  Axios.post(
+    `https://rfit-platform.herokuapp.com/api/messages/send`,
+    data
+  ).then(res => {
     dispatch({
       type: SEND_EMAIL,
+      payload: true
+    });
+    dispatch({
+      type: GET_EMAILS,
       payload: res.data
     });
   });
+  // .catch(err => {
+  //   const { error } = err.response.data;
+
+  //   dispatch(setAlert(error));
+  // });
 };
