@@ -77,7 +77,7 @@ export const ClientProfile = ({ client, topClients }) => {
           ) : (
             ""
           )}{" "}
-          ClientProfile
+          Profile
         </ListSubheader>
       }
     >
