@@ -4,8 +4,14 @@ import {
   CircularProgress,
   Dialog,
   DialogActions,
-  Slide
+  Slide,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography
 } from "@material-ui/core";
+import { Close as CloseIcon } from "@material-ui/icons";
+import { isMobile } from "react-device-detect";
 
 const AddClient = lazy(() =>
   import(
@@ -25,11 +31,36 @@ const AddWorkout = lazy(() =>
   )
 );
 
+const SendEmail = lazy(() =>
+  import(
+    /* webpackChunkName: "SendMailForm"*/ "../../layouts/Messages/components/SendMailForm"
+  )
+);
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AddModal({ open, closeModal, closeMenu, type }) {
+export default function AddModal({ open, closeModal, type }) {
+  const modalToolbar = (
+    <AppBar style={{ position: "relative" }}>
+      <Toolbar>
+        <IconButton
+          edge="start"
+          color="inherit"
+          onClick={closeModal}
+          aria-label="close"
+        >
+          <CloseIcon />
+        </IconButton>
+        {/* <Typography variant="h6">Sound</Typography>
+        <Button autoFocus color="inherit" onClick={closeModal}>
+          save
+        </Button> */}
+      </Toolbar>
+    </AppBar>
+  );
+
   return (
     <div>
       <Dialog
@@ -39,7 +70,11 @@ export default function AddModal({ open, closeModal, closeMenu, type }) {
         onClose={closeModal}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
+        fullScreen={isMobile ? true : false}
+        maxWidth="lg"
       >
+        {/* {isMobile ? modalToolbar : ""} */}
+        {modalToolbar}
         <Suspense fallback={<CircularProgress />}>
           {type === "Client" ? (
             <AddClient closeModal={closeModal} />
@@ -47,6 +82,8 @@ export default function AddModal({ open, closeModal, closeMenu, type }) {
             <AddWorkout closeModal={closeModal} />
           ) : type === "editClient" ? (
             <EditClient closeModal={closeModal} />
+          ) : type === "sendEmail" ? (
+            <SendEmail closeModal={closeModal} />
           ) : (
             ""
           )}

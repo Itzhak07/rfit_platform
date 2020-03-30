@@ -6,7 +6,8 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
+  Chip
 } from "@material-ui/core";
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -50,7 +51,7 @@ function SimpleWorkoutsTable({ data, setPageName }) {
                   to={`./dashboard/clients/${workout.client}`}
                   onClick={() => setPageName("Clients Manager")}
                 >
-                  {workout.title}
+                  <Chip label={workout.title} size="small" color="primary" />
                 </Link>
               </TableCell>
               <TableCell align="left">

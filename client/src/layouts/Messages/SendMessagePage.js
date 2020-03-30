@@ -9,11 +9,7 @@ const SendMessagePage = ({ setPageName }) => {
     setPageName("New Message");
   }, [setPageName]);
 
-  return (
-    <div>
-      <SendMailForm />
-    </div>
-  );
+  return <SendMailForm />;
 };
 
 SendMessagePage.propTypes = {

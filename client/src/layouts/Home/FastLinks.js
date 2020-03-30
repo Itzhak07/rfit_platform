@@ -5,7 +5,8 @@ import {
   CalendarToday as CalendarTodayIcon,
   AccountBox as AccountBoxIcon,
   FitnessCenter as FitnessCenterIcon,
-  Group as GroupIcon
+  Group as GroupIcon,
+  Email as EmailIcon
 } from "@material-ui/icons";
 import { Fab } from "@material-ui/core";
 
@@ -21,7 +22,7 @@ const styles = {
     margin: 5
   },
   button: {
-    width: 150
+    width: 130
   },
   icon: { marginRight: 5 }
 };
@@ -32,7 +33,6 @@ const FastLinks = () => {
       <Link style={styles.linkBtn} to="./dashboard/schedule">
         <Fab
           variant="extended"
-          size="large"
           color="secondary"
           aria-label="schedule"
           style={styles.button}
@@ -44,7 +44,6 @@ const FastLinks = () => {
       <Link style={styles.linkBtn} to="./dashboard/workouts">
         <Fab
           variant="extended"
-          size="large"
           color="secondary"
           aria-label="workouts"
           style={styles.button}
@@ -56,7 +55,6 @@ const FastLinks = () => {
       <Link style={styles.linkBtn} to="./dashboard/clients">
         <Fab
           variant="extended"
-          size="large"
           color="secondary"
           aria-label="clients"
           style={styles.button}
@@ -65,10 +63,20 @@ const FastLinks = () => {
           Clients
         </Fab>
       </Link>
+      <Link style={styles.linkBtn} to="./dashboard/messages">
+        <Fab
+          variant="extended"
+          color="secondary"
+          aria-label="schedule"
+          style={styles.button}
+        >
+          <EmailIcon style={styles.icon} />
+          Messages
+        </Fab>
+      </Link>
       <Link style={styles.linkBtn} to="./dashboard/account">
         <Fab
           variant="extended"
-          size="large"
           color="secondary"
           aria-label="account"
           style={styles.button}

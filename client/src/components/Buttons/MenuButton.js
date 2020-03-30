@@ -4,7 +4,8 @@ import { CircularProgress } from "@material-ui/core";
 import {
   PersonAdd as PersonAddIcon,
   Edit as EditIcon,
-  FitnessCenter as FitnessCenterIcon
+  FitnessCenter as FitnessCenterIcon,
+  Email as EmailIcon
 } from "@material-ui/icons/";
 import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
 
@@ -21,7 +22,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MenuButton({ addClient, editClient, addWorkout }) {
+export default function MenuButton({
+  addClient,
+  editClient,
+  addWorkout,
+  sendEmail
+}) {
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [formType, setFormType] = useState();
@@ -29,6 +35,12 @@ export default function MenuButton({ addClient, editClient, addWorkout }) {
   const [actions, setActions] = useState([]);
 
   useEffect(() => {
+    if ((sendEmail, editClient)) {
+      return setActions([
+        { icon: <EditIcon />, name: "Edit Client", form: "editClient" },
+        { icon: <EmailIcon />, name: "New Message", form: "sendEmail" }
+      ]);
+    }
     if (addClient) {
       return setActions([
         { icon: <PersonAddIcon />, name: "New Client", form: "Client" }
@@ -36,20 +48,27 @@ export default function MenuButton({ addClient, editClient, addWorkout }) {
     }
     if (editClient) {
       return setActions([
-        { icon: <EditIcon />, name: "Edit Client", form: "editClient" }
+        { icon: <EditIcon />, name: "Edit Client", form: "editClient" },
+        { icon: <EmailIcon />, name: "New Message", form: "sendEmail" }
       ]);
     }
     if (addWorkout) {
       return setActions([
         { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
       ]);
+    }
+    if (sendEmail) {
+      return setActions([
+        { icon: <EmailIcon />, name: "New Message", form: "sendEmail" }
+      ]);
     } else {
       return setActions([
         { icon: <PersonAddIcon />, name: "New Client", form: "Client" },
-        { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" }
+        { icon: <FitnessCenterIcon />, name: "New Workout", form: "Workout" },
+        { icon: <EmailIcon />, name: "New Message", form: "sendEmail" }
       ]);
     }
-  }, [addWorkout, addClient, editClient]);
+  }, [addWorkout, addClient, editClient, sendEmail]);
 
   const handleClose = () => {
     setOpen(false);
@@ -90,11 +109,7 @@ export default function MenuButton({ addClient, editClient, addWorkout }) {
         ))}
       </SpeedDial>
       <Suspense fallback={<CircularProgress />}>
-        <AddModal
-          open={openModal}
-          closeModal={modalClose}
-          type={formType}
-        />
+        <AddModal open={openModal} closeModal={modalClose} type={formType} />
       </Suspense>
     </div>
   );

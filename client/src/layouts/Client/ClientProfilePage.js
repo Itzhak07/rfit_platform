@@ -45,7 +45,13 @@ const useStyles = makeStyles(theme => ({
   item: { padding: "0 0 20px 0" }
 }));
 
-function ClientProfilePage({ clients, workouts, emails, setPageName }) {
+function ClientProfilePage({
+  clients,
+  workouts,
+  emails,
+  topClients,
+  setPageName
+}) {
   const [state, setState] = useState({
     thisClient: "",
     thisWorkouts: "",
@@ -102,7 +108,7 @@ function ClientProfilePage({ clients, workouts, emails, setPageName }) {
           <Container maxWidth="xl" disableGutters>
             <div className={classes.profileSection}>
               <Paper className={classes.profilePaper} variant="outlined">
-                {<ClientProfile client={thisClient} />}
+                {<ClientProfile client={thisClient} topClients={topClients} />}
               </Paper>
               <Paper className={classes.emailsPaper} variant="outlined">
                 <ClientMessages client={thisClient} emails={thisEmails} />
@@ -116,9 +122,9 @@ function ClientProfilePage({ clients, workouts, emails, setPageName }) {
               />
             </Paper>
             <div>
-              <MenuButton editClient />
+              <MenuButton editClient sendEmail />
             </div>
-          </Container>{" "}
+          </Container>
         </div>
       )}
     </div>
@@ -129,13 +135,15 @@ ClientProfilePage.propTypes = {
   clients: PropTypes.array,
   workouts: PropTypes.array,
   emails: PropTypes.array,
+  topClients: PropTypes.array,
   setPageName: PropTypes.func
 };
 
 const mapStateToProps = state => ({
   clients: state.clients.clients,
   workouts: state.workouts.workouts,
-  emails: state.messages.emails
+  emails: state.messages.emails,
+  topClients: state.clients.topClients
 });
 
 export default connect(mapStateToProps, { setPageName })(ClientProfilePage);

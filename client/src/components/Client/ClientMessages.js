@@ -74,7 +74,7 @@ export default function ClientMessages({ client, emails }) {
         );
       })
     ) : (
-      <ListItem className={classes.nested} dense>
+      <ListItem button className={classes.nested} dense>
         <ListItemIcon>
           <ErrorOutlineIcon color="secondary" fontSize="large" />
         </ListItemIcon>

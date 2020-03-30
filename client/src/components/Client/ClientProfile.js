@@ -12,12 +12,20 @@ import {
   PhoneIphone as PhoneIcon,
   Wc as GenderIcon,
   CheckCircleOutline as ActiveIcon,
-  ErrorOutline as NotActiveIcon
+  ErrorOutline as NotActiveIcon,
+  StarRate as TopClientIcon
 } from "@material-ui/icons";
 
+export const ClientProfile = ({ client, topClients }) => {
+  const isTopClient =
+    topClients !== null
+      ? topClients.filter(topClient => {
+          return topClient.id === client._id;
+        })
+      : "";
 
-export const ClientProfile = ({ client }) => {
- 
+  console.log(isTopClient);
+
   const ListItemsOptions = [
     {
       primary: "Name",
@@ -60,8 +68,16 @@ export const ClientProfile = ({ client }) => {
       component="nav"
       aria-labelledby="client-profile-list"
       subheader={
-        <ListSubheader component="div" id="client-profile-list">
-          Profile
+        <ListSubheader disableGutters component="div" id="client-profile-list">
+          {isTopClient.length ? (
+            <TopClientIcon
+              fontSize="large"
+              style={{ position: "relative", top: 10, color: "#ffb100" }}
+            />
+          ) : (
+            ""
+          )}{" "}
+          ClientProfile
         </ListSubheader>
       }
     >
