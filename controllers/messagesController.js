@@ -8,6 +8,7 @@ class MessageController {
     return new Promise((resolve, reject) => {
       Message.find({ user: id })
         .populate("participants")
+        .sort({ date: -1 })
         .exec((err, data) => {
           if (err) reject(err);
           resolve(data);
