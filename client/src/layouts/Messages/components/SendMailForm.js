@@ -21,7 +21,6 @@ import {
   MailOutline as MailOutlineIcon,
   People as PeopleIcon
 } from "@material-ui/icons";
-import SnackbarComponent from "./SnackbarComponent";
 import { Scrollbars } from "react-custom-scrollbars";
 import { sendEmail } from "../../../actions/messageActions";
 import { useParams } from "react-router-dom";
@@ -86,7 +85,6 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
     to: [],
     message: ""
   });
-  const [open, setOpen] = useState(false);
 
   const classes = useStyles();
   const { subject, to, message } = formData;
@@ -95,23 +93,22 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    const thisClient =
-      clients !== null
-        ? clients.filter(client => {
-            return client._id === id;
-          })
-        : "";
+    if (id !== undefined) {
+      const thisClient = clients.filter(client => {
+        return client._id === id;
+      });
 
-    setFormData({
-      ...formData,
-      to: [
-        {
-          name: `${thisClient[0].firstName} ${thisClient[0].lastName}`,
-          email: thisClient[0].email,
-          id: thisClient[0]._id
-        }
-      ]
-    });
+      setFormData({
+        ...formData,
+        to: [
+          {
+            name: `${thisClient[0].firstName} ${thisClient[0].lastName}`,
+            email: thisClient[0].email,
+            id: thisClient[0]._id
+          }
+        ]
+      });
+    }
   }, [id]);
 
   useEffect(() => {
@@ -171,7 +168,6 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
   const onSubmit = e => {
     e.preventDefault();
     sendEmail(formData);
-    setOpen(true);
     setFormData({ subject: "", to: [], message: "" });
   };
 
