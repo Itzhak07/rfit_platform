@@ -61,11 +61,9 @@ const useStyles = makeStyles(theme => ({
     height: 470,
     maxHeight: 470,
     padding: 20,
-    // overflow: "auto",
     transition: "all 0.3s ease",
     [theme.breakpoints.down("md")]: {
       width: "100%",
-      // marginTop: 10,
       transition: "all 0.3s ease"
     }
   },

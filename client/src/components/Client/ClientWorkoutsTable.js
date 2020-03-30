@@ -28,7 +28,7 @@ export default function ClientWorkoutsTable({ workouts, client }) {
   return (
     <div className={classes.root}>
       <MaterialTable
-        title={`${client.firstName}'s Appointments History:`}
+        title={`Appointments`}
         className={classes.table}
         columns={columns}
         data={data}
