@@ -491,10 +491,6 @@ class Schedule extends React.PureComponent {
           const thisClient = this.props.activeClients.filter(
             client => client._id === added.data.title
           );
-
-          // thisClient[0]["id"] = thisClient[0]["_id"];
-          // delete thisClient[0]["_id"];
-
           this.props.sendEmail({
             subject: "New appointment has been scheduled!",
             to: thisClient,
@@ -528,11 +524,6 @@ class Schedule extends React.PureComponent {
           let thisClient = this.props.activeClients.filter(
             client => client._id === update.client
           );
-
-          console.log(thisClient);
-
-          thisClient[0]["id"] = thisClient[0]["_id"];
-
           this.props.sendEmail({
             subject: "Appointment Changed",
             to: thisClient,

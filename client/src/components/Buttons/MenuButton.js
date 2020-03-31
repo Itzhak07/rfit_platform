@@ -91,7 +91,7 @@ export default function MenuButton({
   return (
     <div className={classes.root}>
       <SpeedDial
-        ariaLabel="SpeedDial Button"
+        ariaLabel="SpeedDial-Button"
         icon={<SpeedDialIcon />}
         onClose={handleClose}
         onOpen={handleOpen}

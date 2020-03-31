@@ -90,7 +90,7 @@ const Home = lazy(async () => {
 });
 
 const Account = lazy(async () => {
-  await store.dispatch(loadUser());
+  // await store.dispatch(loadUser());
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Account"*/ "./layouts/Account/Account"),
     new Promise(resolve => setTimeout(resolve, 300))
@@ -99,7 +99,7 @@ const Account = lazy(async () => {
 });
 
 const ClientProfilePage = lazy(async () => {
-  await store.dispatch(fetchClients());
+  // await store.dispatch(fetchClients());
   await store.dispatch(setPageName("Clients Manager"));
   const [moduleExports] = await Promise.all([
     import(
@@ -112,7 +112,7 @@ const ClientProfilePage = lazy(async () => {
 
 const SendMessagePage = lazy(async () => {
   localStorage.setItem("lastPageView", "New Message");
-  await store.dispatch(fetchClients());
+  // await store.dispatch(fetchClients());
   const [moduleExports] = await Promise.all([
     import(
       /* webpackChunkName: "SendMessagePage"*/ "./layouts/Messages/SendMessagePage"
