@@ -64,7 +64,7 @@ export const updateClient = data => dispatch => {
 
 export const setTopClients = workouts => dispatch => {
   let counter = {};
-  const minCount = 3;
+  const minCount = 4;
   const keyArray = workouts.map(function(item) {
     return { name: item["title"], id: item["client"] };
   });

@@ -45,8 +45,15 @@ import {
 } from "../../actions/workoutActions";
 import { setPageName } from "../../actions/pageActions";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { CircularProgress, LinearProgress } from "@material-ui/core";
+import {
+  CircularProgress,
+  LinearProgress,
+  Checkbox,
+  FormControlLabel
+} from "@material-ui/core";
 import { Info } from "@material-ui/icons";
+import { sendEmail } from "../../actions/messageActions";
+import moment from "moment";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -74,7 +81,7 @@ const containerStyles = theme => ({
   },
   buttonGroup: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     padding: theme.spacing(0, 2)
   },
   button: {
@@ -106,7 +113,8 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     super(props);
 
     this.state = {
-      appointmentChanges: {}
+      appointmentChanges: {},
+      checked: false
     };
 
     this.getAppointmentData = () => {
@@ -134,19 +142,23 @@ class AppointmentFormContainerBasic extends React.PureComponent {
 
   commitAppointment(type) {
     const { commitChanges } = this.props;
+    const { checked } = this.state;
     const appointment = {
       ...this.getAppointmentData(),
       ...this.getAppointmentChanges()
     };
     if (type === "deleted") {
-      commitChanges({ [type]: appointment.id });
+      commitChanges({ [type]: { appointment, checked: checked } });
     } else if (type === "changed") {
-      commitChanges({ [type]: { [appointment.id]: appointment } });
+      commitChanges({
+        [type]: { [appointment.id]: appointment, checked: checked }
+      });
     } else {
-      commitChanges({ [type]: appointment });
+      commitChanges({ [type]: { data: appointment, checked: checked } });
     }
     this.setState({
-      appointmentChanges: {}
+      appointmentChanges: {},
+      checked: false
     });
   }
 
@@ -162,7 +174,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       activeClients
     } = this.props;
 
-    const { appointmentChanges } = this.state;
+    const { appointmentChanges, checked } = this.state;
 
     const displayAppointmentData = {
       ...appointmentData,
@@ -228,6 +240,10 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       cancelAppointment();
     };
 
+    const handleCheckChange = e => {
+      this.setState({ ...this.state, checked: !checked });
+    };
+
     return (
       <AppointmentForm.Overlay
         visible={visible}
@@ -244,6 +260,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
             <div className={classes.wrapper}>
               <Create className={classes.icon} color="action" />
               <Autocomplete
+                disabled={!isNewAppointment ? true : false}
                 options={clientsOptions}
                 placeholder=""
                 getOptionLabel={option => option.text}
@@ -257,7 +274,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                         : ""
                     }
                     variant="outlined"
-                    placeholder="client"
+                    placeholder="Client..."
                   />
                 )}
                 onChange={(event, newValue) => {
@@ -291,30 +308,40 @@ class AppointmentFormContainerBasic extends React.PureComponent {
             </div>
           </div>
           <div className={classes.buttonGroup}>
-            {!isNewAppointment && (
+            <div>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={checked} onChange={handleCheckChange} />
+                }
+                label="Send Email Confirmation"
+              />
+            </div>
+            <div>
+              {!isNewAppointment && (
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  className={classes.button}
+                  onClick={() => {
+                    visibleChange();
+                    this.commitAppointment("deleted");
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
               <Button
                 variant="outlined"
-                color="secondary"
+                color="primary"
                 className={classes.button}
                 onClick={() => {
                   visibleChange();
-                  this.commitAppointment("deleted");
+                  applyChanges();
                 }}
               >
-                Delete
+                {isNewAppointment ? "Create" : "Save"}
               </Button>
-            )}
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              onClick={() => {
-                visibleChange();
-                applyChanges();
-              }}
-            >
-              {isNewAppointment ? "Create" : "Save"}
-            </Button>
+            </div>
           </div>
         </div>
       </AppointmentForm.Overlay>
@@ -460,13 +487,29 @@ class Schedule extends React.PureComponent {
     this.setState(state => {
       let { data } = state;
       if (added) {
-        return this.props.createWorkout(added);
+        if (added.checked) {
+          const thisClient = this.props.activeClients.filter(
+            client => client._id === added.data.title
+          );
+
+          thisClient[0]["id"] = thisClient[0]["_id"];
+          delete thisClient[0]["_id"];
+
+          this.props.sendEmail({
+            subject: "New appointment has been scheduled!",
+            to: thisClient,
+            message: `an New appointment has been scheduled on ${moment(
+              added.data.startDate
+            ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
+          });
+        }
+
+        return this.props.createWorkout(added.data);
       }
 
       if (changed) {
         const id = Object.keys(changed)[0];
         const update = Object.values(changed)[0];
-
         if (!("title" in update)) {
           update.id = id;
         } else {
@@ -478,10 +521,47 @@ class Schedule extends React.PureComponent {
           }
         }
 
+        if (changed.checked) {
+          console.log(update);
+          console.log(this.props.activeClients);
+
+          let thisClient = this.props.activeClients.filter(
+            client => client._id === update.client
+          );
+
+          console.log(thisClient);
+
+          thisClient[0]["id"] = thisClient[0]["_id"];
+
+          this.props.sendEmail({
+            subject: "Appointment Changed",
+            to: thisClient,
+            message: `Your appointment has been changed to ${moment(
+              update.startDate
+            ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`
+          });
+        }
+
         this.props.updateWorkout(update);
       }
       if (deleted !== undefined) {
-        this.props.deleteWorkout(deleted);
+        if (deleted.checked) {
+          const thisClient = this.props.activeClients.filter(
+            client => client._id === deleted.appointment.client
+          );
+          thisClient[0]["id"] = thisClient[0]["_id"];
+          delete thisClient[0]["_id"];
+          this.props.deleteWorkout(deleted.appointment.id);
+          this.props.sendEmail({
+            subject: "Appointment Cancelled",
+            to: thisClient,
+            message: `Your appointment on ${moment(
+              deleted.appointment.startDate
+            ).format("LLLL")} has been cancelled by your trainer. `
+          });
+        } else {
+          this.props.deleteWorkout(deleted);
+        }
       }
       return { data, addedAppointment: {} };
     });
@@ -635,6 +715,7 @@ Schedule.propTypes = {
   deleteWorkout: PropTypes.func.isRequired,
   updateWorkout: PropTypes.func.isRequired,
   setPageName: PropTypes.func.isRequired,
+  sendEmail: PropTypes.func.isRequired,
   workouts: PropTypes.array.isRequired,
   clients: PropTypes.array.isRequired,
   activeClients: PropTypes.array.isRequired,
@@ -654,5 +735,6 @@ export default connect(mapStateToProps, {
   createWorkout,
   deleteWorkout,
   updateWorkout,
-  setPageName
+  setPageName,
+  sendEmail
 })(withStyles(styles, { name: "Schedule" })(Schedule));

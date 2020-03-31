@@ -45,6 +45,8 @@ export default function WorkoutsTable({
           title: "Name",
           field: "client",
           lookup: clientsLookUp,
+          editable: "onAdd",
+          disableClick: true,
           render: rowData => (
             <Link to={"/dashboard/clients/" + rowData.client}>
               <Chip size="small" label={`${rowData.title}`} />

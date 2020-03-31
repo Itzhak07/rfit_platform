@@ -9,7 +9,9 @@ import {
   Box,
   Typography,
   Container,
-  CircularProgress
+  CircularProgress,
+  Checkbox,
+  FormControlLabel
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { FitnessCenter as FitnessCenterIcon } from "@material-ui/icons";
@@ -22,6 +24,8 @@ import {
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Copyright } from "../Copyright/Copyright";
 import { createWorkout } from "../../actions/workoutActions";
+import { sendEmail } from "../../actions/messageActions";
+import moment from "moment";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -57,7 +61,8 @@ const AddWorkout = ({
   activeClients,
   alerts,
   closeModal,
-  isNewWorkout
+  isNewWorkout,
+  sendEmail
 }) => {
   const [formData, setFormData] = useState({
     client: "",
@@ -65,6 +70,8 @@ const AddWorkout = ({
     endDate: new Date(),
     notes: ""
   });
+
+  const [checked, setChecbox] = useState(false);
 
   useEffect(() => {
     if (isNewWorkout) {
@@ -99,9 +106,31 @@ const AddWorkout = ({
     setFormData({ ...formData, endDate: e });
   };
 
+  const handleCheckBox = e => setChecbox(e.target.checked);
+
   const onSubmit = e => {
     e.preventDefault();
     createWorkout(formData);
+
+    if (checked) {
+      const thisClient = activeClients.filter(
+        client => client._id === formData.client
+      );
+
+      thisClient[0]["id"] = thisClient[0]["_id"];
+      delete thisClient[0]["_id"];
+
+      sendEmail({
+        subject: "New appointment has been scheduled!",
+        to: thisClient,
+        message: `an New appointment has been scheduled on ${moment(
+          formData.startDate
+        ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`
+      });
+    }
+
+    setChecbox(false);
+
     setFormData({
       client: "",
       startDate: new Date(),
@@ -186,6 +215,17 @@ const AddWorkout = ({
           >
             Submit
           </Button>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked}
+                onChange={handleCheckBox}
+                name="email-confirmation"
+                color="secondary"
+              />
+            }
+            label="Send Email Confirmation"
+          />
         </form>
       </div>
       {alerts ? (
@@ -209,6 +249,7 @@ const AddWorkout = ({
 AddWorkout.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   activeClients: PropTypes.array.isRequired,
+  sendEmail: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
   isNewWorkout: PropTypes.bool.isRequired
 };
@@ -219,4 +260,6 @@ const mapStateToProps = state => ({
   isNewWorkout: state.workouts.isNewWorkout
 });
 
-export default connect(mapStateToProps, { createWorkout })(AddWorkout);
+export default connect(mapStateToProps, { createWorkout, sendEmail })(
+  AddWorkout
+);

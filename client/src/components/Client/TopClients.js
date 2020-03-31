@@ -96,7 +96,7 @@ const TopClients = ({ topClients, loading }) => {
           </List>
         ) : !loading && topClients == null ? (
           <Typography className={classes.message}>
-            Clients with minimum of 3 appointments will be shown here
+            Clients with minimum of 4 appointments will be shown here
           </Typography>
         ) : (
           ""

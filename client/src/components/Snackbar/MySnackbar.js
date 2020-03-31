@@ -34,7 +34,7 @@ function MySnackbar({
       setMessage("Message has been sent!");
       setOpen(true);
     }
-  }, [isNewClient, isNewWorkout, isNewMessage]);
+  }, [isNewClient, isNewWorkout, isClientUpdate, isNewMessage]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
