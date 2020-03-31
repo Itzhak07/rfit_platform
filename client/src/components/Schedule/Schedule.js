@@ -114,7 +114,8 @@ class AppointmentFormContainerBasic extends React.PureComponent {
 
     this.state = {
       appointmentChanges: {},
-      checked: false
+      checked: false,
+      clientOptions: []
     };
 
     this.getAppointmentData = () => {
@@ -160,6 +161,19 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       appointmentChanges: {},
       checked: false
     });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.activeClients !== null) {
+      const clients = this.props.activeClients.map(client => {
+        return {
+          id: client._id,
+          text: client.firstName + " " + client.lastName
+        };
+      });
+
+      this.setState({ ...this.state, clientOptions: clients });
+    }
   }
 
   render() {
@@ -261,9 +275,9 @@ class AppointmentFormContainerBasic extends React.PureComponent {
               <Create className={classes.icon} color="action" />
               <Autocomplete
                 disabled={!isNewAppointment ? true : false}
-                options={activeClients !== null ? clientsOptions : []}
+                options={this.state.clientOptions}
                 placeholder=""
-                getOptionLabel={option => option.text}
+                getOptionLabel={option => (option.text ? option.text : "")}
                 {...clientEditorProps("title")}
                 renderInput={params => (
                   <TextField
