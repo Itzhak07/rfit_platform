@@ -54,6 +54,7 @@ const LandingPage = lazy(() =>
 );
 
 const Schedule = lazy(async () => {
+  await store.dispatch(fetchClients());
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule"),
     new Promise(resolve => setTimeout(resolve, 300))

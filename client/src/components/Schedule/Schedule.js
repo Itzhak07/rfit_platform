@@ -163,18 +163,18 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.activeClients !== null) {
-      const clients = this.props.activeClients.map(client => {
-        return {
-          id: client._id,
-          text: client.firstName + " " + client.lastName
-        };
-      });
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.activeClients !== null) {
+  //     const clients = this.props.activeClients.map(client => {
+  //       return {
+  //         id: client._id,
+  //         text: client.firstName + " " + client.lastName
+  //       };
+  //     });
 
-      this.setState({ ...this.state, clientOptions: clients });
-    }
-  }
+  //     this.setState({ ...this.state, clientOptions: clients });
+  //   }
+  // }
 
   render() {
     const {
@@ -275,9 +275,9 @@ class AppointmentFormContainerBasic extends React.PureComponent {
               <Create className={classes.icon} color="action" />
               <Autocomplete
                 disabled={!isNewAppointment ? true : false}
-                options={this.state.clientOptions}
+                options={clientsOptions}
                 placeholder=""
-                getOptionLabel={option => (option.text ? option.text : "")}
+                getOptionLabel={option => (option.text )}
                 {...clientEditorProps("title")}
                 renderInput={params => (
                   <TextField
@@ -508,7 +508,7 @@ class Schedule extends React.PureComponent {
           this.props.sendEmail({
             subject: "New appointment has been scheduled!",
             to: thisClient,
-            message: `an New appointment has been scheduled on ${moment(
+            message: `an new appointment has been scheduled on ${moment(
               added.data.startDate
             ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
           });
