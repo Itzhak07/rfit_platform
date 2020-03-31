@@ -173,14 +173,18 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
   };
 
   let clientsCheckBox =
-    clients != null
+    clients !== null
       ? clients.map(client => {
           return (
             <div>
               <CheckBoxComponent
                 client={client}
                 checked={
-                  to.find(key => key.email === client.email) ? true : false
+                  to !== null
+                    ? to.find(key => key.email === client.email)
+                      ? true
+                      : false
+                    : false
                 }
                 handleChange={handleChange}
               />
@@ -269,7 +273,11 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
               control={
                 <Switch
                   checked={
-                    to != null && to.length < clients.length ? false : true
+                    to.length === 0
+                      ? false
+                      : to.length < clients.length
+                      ? false
+                      : true
                   }
                   onChange={handleCheckAll}
                   label="Select All"

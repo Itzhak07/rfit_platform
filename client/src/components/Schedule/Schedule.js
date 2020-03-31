@@ -261,7 +261,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
               <Create className={classes.icon} color="action" />
               <Autocomplete
                 disabled={!isNewAppointment ? true : false}
-                options={clientsOptions}
+                options={activeClients !== null ? clientsOptions : []}
                 placeholder=""
                 getOptionLabel={option => option.text}
                 {...clientEditorProps("title")}

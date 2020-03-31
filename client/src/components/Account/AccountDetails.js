@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import clsx from "clsx";
 import PropTypes from "prop-types";
@@ -11,7 +11,8 @@ import {
   Divider,
   Grid,
   Button,
-  TextField
+  TextField,
+  CircularProgress
 } from "@material-ui/core";
 
 import { updateUser } from "../../actions/authActions";
@@ -24,11 +25,22 @@ const AccountDetails = ({ className, user, updateUser, ...rest }) => {
   const classes = useStyles();
 
   const [values, setValues] = useState({
-    firstName: user !== null ? user.firstName : "",
-    lastName: user !== null ? user.lastName : ""
+    firstName: "",
+    lastName: "",
+    email: ""
   });
 
   const [disable, setDisable] = useState(true);
+
+  useEffect(() => {
+    if (user !== null) {
+      setValues({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      });
+    }
+  }, [user]);
 
   const handleChange = event => {
     setValues({
@@ -44,13 +56,60 @@ const AccountDetails = ({ className, user, updateUser, ...rest }) => {
     setDisable(true);
   };
 
+  const accountDetailsContent =
+    user !== null ? (
+      <Grid container spacing={3}>
+        <Grid item md={6} xs={12}>
+          <TextField
+            fullWidth
+            helperText="Please specify the first name"
+            label="First name"
+            margin="dense"
+            name="firstName"
+            onChange={handleChange}
+            required
+            value={values.firstName}
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <TextField
+            fullWidth
+            label="Last name"
+            helperText="Please specify the last name"
+            margin="dense"
+            name="lastName"
+            onChange={handleChange}
+            required
+            value={values.lastName}
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <TextField
+            fullWidth
+            label="Email Address"
+            margin="dense"
+            name="email"
+            required
+            value={values.email}
+            variant="outlined"
+            disabled
+          />
+        </Grid>
+      </Grid>
+    ) : (
+      <CircularProgress />
+    );
+
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <form autoComplete="off" noValidate onSubmit={e => onSubmit(e)}>
         <CardHeader subheader="The information can be edited" title="Profile" />
         <Divider />
         <CardContent>
-          <Grid container spacing={3}>
+          {accountDetailsContent}
+          {/* <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
               <TextField
                 fullWidth
@@ -89,7 +148,7 @@ const AccountDetails = ({ className, user, updateUser, ...rest }) => {
                 disabled
               />
             </Grid>
-          </Grid>
+          </Grid> */}
         </CardContent>
         <Divider />
         <CardActions>

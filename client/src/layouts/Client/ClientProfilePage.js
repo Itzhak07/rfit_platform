@@ -10,6 +10,7 @@ import MenuButton from "../../components/Buttons/MenuButton";
 import { ClientBreadCrumbs } from "./ClientBreadCrumbs";
 import { NotFound } from "../NotFound/NotFound";
 import ClientMessages from "../../components/Client/ClientMessages";
+import { Spinner } from "../Loader/Spinner";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,12 +51,13 @@ function ClientProfilePage({
   workouts,
   emails,
   topClients,
-  setPageName
+  setPageName,
+  loading
 }) {
   const [state, setState] = useState({
-    thisClient: "",
-    thisWorkouts: "",
-    thisEmails: ""
+    thisClient: null,
+    thisWorkouts: null,
+    thisEmails: null
   });
   const { thisClient, thisWorkouts, thisEmails } = state;
   const { id } = useParams();
@@ -66,39 +68,43 @@ function ClientProfilePage({
   }, [setPageName]);
 
   useEffect(() => {
-    const thisClient = clients.filter(client => {
-      return client._id === id;
-    });
+    if (clients !== null) {
+      const thisClient = clients.filter(client => {
+        return client._id === id;
+      });
 
-    const clientWorkouts = workouts.filter(workouts => {
-      return workouts.client === id;
-    });
+      const clientWorkouts = workouts.filter(workouts => {
+        return workouts.client === id;
+      });
 
-    const clientEmails = emails.filter(email => {
-      let clientEmail = {
-        subject: email.subject,
-        date: email.date,
-        message: email.message,
-        participants: email.participants.filter(client => {
-          return client._id === id;
-        })
-      };
+      const clientEmails = emails.filter(email => {
+        let clientEmail = {
+          subject: email.subject,
+          date: email.date,
+          message: email.message,
+          participants: email.participants.filter(client => {
+            return client._id === id;
+          })
+        };
 
-      if (clientEmail.participants.length > 0) {
-        return clientEmail;
-      }
-    });
+        if (clientEmail.participants.length > 0) {
+          return clientEmail;
+        }
+      });
 
-    setState({
-      thisClient: thisClient[0],
-      thisWorkouts: clientWorkouts,
-      thisEmails: clientEmails
-    });
+      setState({
+        thisClient: thisClient[0],
+        thisWorkouts: clientWorkouts,
+        thisEmails: clientEmails
+      });
+    }
   }, [clients, workouts, emails, id]);
 
   return (
     <div>
-      {!thisClient ? (
+      {loading ? (
+        <Spinner />
+      ) : !thisClient && !loading ? (
         <NotFound />
       ) : (
         <div className={classes.root}>
@@ -136,14 +142,16 @@ ClientProfilePage.propTypes = {
   workouts: PropTypes.array,
   emails: PropTypes.array,
   topClients: PropTypes.array,
-  setPageName: PropTypes.func
+  setPageName: PropTypes.func,
+  loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
   clients: state.clients.clients,
   workouts: state.workouts.workouts,
   emails: state.messages.emails,
-  topClients: state.clients.topClients
+  topClients: state.clients.topClients,
+  loading: state.clients.loading
 });
 
 export default connect(mapStateToProps, { setPageName })(ClientProfilePage);
