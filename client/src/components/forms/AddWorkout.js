@@ -117,13 +117,10 @@ const AddWorkout = ({
         client => client._id === formData.client
       );
 
-      thisClient[0]["id"] = thisClient[0]["_id"];
-      delete thisClient[0]["_id"];
-
       sendEmail({
         subject: "New appointment has been scheduled!",
         to: thisClient,
-        message: `an New appointment has been scheduled on ${moment(
+        message: ` an appointment has been scheduled for you on ${moment(
           formData.startDate
         ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`
       });

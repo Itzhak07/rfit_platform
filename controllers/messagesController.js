@@ -23,7 +23,7 @@ class MessageController {
       return participant.email;
     });
     const paticipantsId = to.map(participant => {
-      return participant.id;
+      return participant.id || participant._id;
     });
 
     return new Promise(async (resolve, reject) => {

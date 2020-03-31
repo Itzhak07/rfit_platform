@@ -492,8 +492,8 @@ class Schedule extends React.PureComponent {
             client => client._id === added.data.title
           );
 
-          thisClient[0]["id"] = thisClient[0]["_id"];
-          delete thisClient[0]["_id"];
+          // thisClient[0]["id"] = thisClient[0]["_id"];
+          // delete thisClient[0]["_id"];
 
           this.props.sendEmail({
             subject: "New appointment has been scheduled!",
