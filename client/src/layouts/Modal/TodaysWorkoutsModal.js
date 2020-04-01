@@ -8,10 +8,11 @@ import {
   Slide
 } from "@material-ui/core";
 import { CircularLoader } from "../Loader/Loaders";
+import { isMobile } from "react-device-detect";
 
-const SimpleWorkoutsTable = lazy(() =>
+const TodaysAppointments = lazy(() =>
   import(
-    /* webpackChunkName: "SimpleWorkoutsTable"*/ "../../components/Workouts/SimpleWorkoutsTable"
+    /* webpackChunkName: "SimpleWorkoutsTable"*/ "../../components/Workouts/TodaysAppointments"
   )
 );
 
@@ -28,6 +29,7 @@ export default function TodaysWorkoutsModal({
   return (
     <div>
       <Dialog
+        fullScreen={isMobile ? true : false}
         maxWidth="lg"
         open={open}
         TransitionComponent={Transition}
@@ -40,7 +42,7 @@ export default function TodaysWorkoutsModal({
         <DialogContent>
           <Suspense fallback={<CircularLoader />}>
             {data.length !== 0 ? (
-              <SimpleWorkoutsTable data={data} />
+              <TodaysAppointments data={data} />
             ) : (
               <h1>No Appointments For Today!</h1>
             )}

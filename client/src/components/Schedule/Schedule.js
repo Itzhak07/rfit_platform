@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-unused-state */
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, Fragment } from "react";
 import Paper from "@material-ui/core/Paper";
 import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
 
@@ -9,6 +9,7 @@ import {
   Toolbar,
   MonthView,
   WeekView,
+  DayView,
   ViewSwitcher,
   Appointments,
   AppointmentTooltip,
@@ -50,6 +51,7 @@ import { Info } from "@material-ui/icons";
 import { sendEmail } from "../../actions/messageActions";
 import moment from "moment";
 import { CircularLoader } from "../../layouts/Loader/Loaders";
+import { isMobile } from "react-device-detect";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -589,6 +591,27 @@ class Schedule extends React.PureComponent {
         left: 0
       }
     };
+
+    const desktopView = (
+      <Fragment>
+        <WeekView
+          startDayHour={startDayHour}
+          endDayHour={endDayHour}
+          cellDuration={60}
+        />
+        <MonthView />
+      </Fragment>
+    );
+
+    const mobileView = (
+      <DayView
+        startDayHour={startDayHour}
+        endDayHour={endDayHour}
+        cellDuration={60}
+        // name="schedule-page-DayView"
+      />
+    );
+
     const ToolbarWithLoading = withStyles(toolBarStyle, { name: "Toolbar" })(
       ({ children, classes, ...restProps }) => (
         <div className={classes.toolbarRoot}>
@@ -638,12 +661,15 @@ class Schedule extends React.PureComponent {
             onEditingAppointmentChange={this.onEditingAppointmentChange}
             onAddedAppointmentChange={this.onAddedAppointmentChange}
           />
+
+          {isMobile ? mobileView : desktopView}
+          {/* <DayView />
           <WeekView
             startDayHour={startDayHour}
             endDayHour={endDayHour}
             cellDuration={60}
-          />
-          <MonthView />
+          /> */}
+
           <AllDayPanel />
           <EditRecurrenceMenu />
           <ConfirmationDialog />
