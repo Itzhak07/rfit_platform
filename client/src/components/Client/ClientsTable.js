@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
-import { Paper, CircularProgress, Chip } from "@material-ui/core";
+import { Paper, Chip } from "@material-ui/core";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
+
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -40,9 +42,7 @@ export default function ClientsTable({
             </Link>
           ),
           cellStyle: {
-            fontWeight: 600,
-            // color: "#3f51b5",
-            // transform: " scale(1.2)"
+            fontWeight: 600
           }
         },
         {
@@ -102,7 +102,7 @@ export default function ClientsTable({
           }}
         />
         {alerts ? (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<CircularLoader />}>
             {alerts.map(alert => {
               return alert.msg.map(err => {
                 return <ErrorAlert message={err} />;

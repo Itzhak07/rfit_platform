@@ -1,16 +1,15 @@
 import React, { Suspense, lazy } from "react";
 import {
   Button,
-  CircularProgress,
   Dialog,
   DialogActions,
   Slide,
   AppBar,
   Toolbar,
-  IconButton,
-  Typography
+  IconButton
 } from "@material-ui/core";
 import { Close as CloseIcon } from "@material-ui/icons";
+import { CircularLoader } from "../Loader/Loaders";
 import { isMobile } from "react-device-detect";
 
 const AddClient = lazy(() =>
@@ -53,10 +52,6 @@ export default function AddModal({ open, closeModal, type }) {
         >
           <CloseIcon />
         </IconButton>
-        {/* <Typography variant="h6">Sound</Typography>
-        <Button autoFocus color="inherit" onClick={closeModal}>
-          save
-        </Button> */}
       </Toolbar>
     </AppBar>
   );
@@ -73,9 +68,8 @@ export default function AddModal({ open, closeModal, type }) {
         fullScreen={isMobile ? true : false}
         maxWidth="lg"
       >
-        {/* {isMobile ? modalToolbar : ""} */}
         {modalToolbar}
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {type === "Client" ? (
             <AddClient closeModal={closeModal} />
           ) : type === "Workout" ? (

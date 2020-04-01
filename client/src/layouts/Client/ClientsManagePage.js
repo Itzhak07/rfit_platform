@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createClient, updateClient } from "../../actions/clientActions";
 import ClientsTable from "../../components/Client/ClientsTable";
-import { Spinner } from "../Loader/Spinner";
+import { BigLogoSpinner } from "../Loader/Loaders";
 import MenuButton from "../../components/Buttons/MenuButton";
 import { setPageName } from "../../actions/pageActions";
 
@@ -22,7 +22,7 @@ const ClientsManagePage = ({
   return (
     <div className="conatiner">
       {loading ? (
-        <Spinner />
+        <BigLogoSpinner />
       ) : (
         <ClientsTable
           clients={clients}

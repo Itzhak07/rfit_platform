@@ -20,8 +20,7 @@ import {
   makeStyles,
   useTheme,
   Button,
-  Avatar,
-  CircularProgress
+  Avatar
 } from "@material-ui/core/";
 
 import {
@@ -36,7 +35,7 @@ import { drawerItems } from "./DrawerItems";
 import { Spring, config } from "react-spring/renderprops";
 import { isMobile } from "react-device-detect";
 import SearchBar from "./SearchBar";
-import { Spinner } from "../Loader/Spinner";
+import { BigLogoSpinner, CircularLoader } from "../Loader/Loaders";
 
 const drawerWidth = 240;
 
@@ -182,7 +181,7 @@ function ResponsiveDrawer({
         </div>
       ) : (
         <div className={classes.user}>
-          <CircularProgress />
+          <CircularLoader width={40} height={40} />
         </div>
       )}
       <Divider />
@@ -341,7 +340,7 @@ function ResponsiveDrawer({
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Suspense fallback={<Spinner />}>{children}</Suspense>
+        <Suspense fallback={<BigLogoSpinner />}>{children}</Suspense>
       </main>
     </div>
   );

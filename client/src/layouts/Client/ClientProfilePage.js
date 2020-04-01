@@ -10,7 +10,7 @@ import MenuButton from "../../components/Buttons/MenuButton";
 import { ClientBreadCrumbs } from "./ClientBreadCrumbs";
 import { NotFound } from "../NotFound/NotFound";
 import ClientMessages from "../../components/Client/ClientMessages";
-import { Spinner } from "../Loader/Spinner";
+import { BigLogoSpinner } from "../Loader/Loaders";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -103,7 +103,7 @@ function ClientProfilePage({
   return (
     <div>
       {loading ? (
-        <Spinner />
+        <BigLogoSpinner />
       ) : !thisClient && !loading ? (
         <NotFound />
       ) : (

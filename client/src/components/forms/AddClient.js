@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -9,14 +9,13 @@ import {
   Box,
   Typography,
   Container,
-  CircularProgress,
   MenuItem
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { createClient } from "../../actions/clientActions";
 import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
-import { useEffect } from "react";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -102,7 +101,6 @@ const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
             label="First Name"
             name="firstName"
             autoComplete="firstName"
-            autoFocus
             onChange={e => onChange(e)}
             value={firstName}
             className={classes.input}
@@ -179,7 +177,7 @@ const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
         </form>
       </div>
       {alerts ? (
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

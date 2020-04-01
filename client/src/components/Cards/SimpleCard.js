@@ -7,9 +7,9 @@ import {
   CardContent,
   Button,
   Typography,
-  Divider,
-  CircularProgress
+  Divider
 } from "@material-ui/core";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const useStyles = makeStyles({
   root: {
@@ -62,7 +62,7 @@ export default function SimpleCard({ title, count, url, btnName, openModal }) {
             {count ? (
               <Typography className={classes.countNum}>{count}</Typography>
             ) : (
-              <CircularProgress />
+              <CircularLoader />
             )}
           </CardContent>
           {openModal ? (

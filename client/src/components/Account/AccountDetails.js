@@ -11,11 +11,11 @@ import {
   Divider,
   Grid,
   Button,
-  TextField,
-  CircularProgress
+  TextField
 } from "@material-ui/core";
 
 import { updateUser } from "../../actions/authActions";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const useStyles = makeStyles(() => ({
   root: {}
@@ -99,7 +99,7 @@ const AccountDetails = ({ className, user, updateUser, ...rest }) => {
         </Grid>
       </Grid>
     ) : (
-      <CircularProgress />
+      <CircularLoader />
     );
 
   return (
@@ -107,49 +107,7 @@ const AccountDetails = ({ className, user, updateUser, ...rest }) => {
       <form autoComplete="off" noValidate onSubmit={e => onSubmit(e)}>
         <CardHeader subheader="The information can be edited" title="Profile" />
         <Divider />
-        <CardContent>
-          {accountDetailsContent}
-          {/* <Grid container spacing={3}>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                helperText="Please specify the first name"
-                label="First name"
-                margin="dense"
-                name="firstName"
-                onChange={handleChange}
-                required
-                value={values.firstName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Last name"
-                helperText="Please specify the last name"
-                margin="dense"
-                name="lastName"
-                onChange={handleChange}
-                required
-                value={values.lastName}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <TextField
-                fullWidth
-                label="Email Address"
-                margin="dense"
-                name="email"
-                required
-                value={user.email}
-                variant="outlined"
-                disabled
-              />
-            </Grid>
-          </Grid> */}
-        </CardContent>
+        <CardContent>{accountDetailsContent}</CardContent>
         <Divider />
         <CardActions>
           <Button

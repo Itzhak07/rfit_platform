@@ -8,7 +8,7 @@ import {
 } from "../../actions/workoutActions";
 
 import WorkoutsTable from "../../components/Workouts/workoutsTable";
-import { Spinner } from "../Loader/Spinner";
+import { BigLogoSpinner } from "../Loader/Loaders";
 import MenuButton from "../../components/Buttons/MenuButton";
 import { setPageName } from "../../actions/pageActions";
 
@@ -29,7 +29,7 @@ const AllWorkoutsPage = ({
   return (
     <div className="conatiner">
       {loading ? (
-        <Spinner />
+        <BigLogoSpinner />
       ) : (
         <WorkoutsTable
           workouts={workouts}

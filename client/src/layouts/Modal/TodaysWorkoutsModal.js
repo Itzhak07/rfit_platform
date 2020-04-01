@@ -5,9 +5,10 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Slide,
-  CircularProgress
+  Slide
 } from "@material-ui/core";
+import { CircularLoader } from "../Loader/Loaders";
+
 const SimpleWorkoutsTable = lazy(() =>
   import(
     /* webpackChunkName: "SimpleWorkoutsTable"*/ "../../components/Workouts/SimpleWorkoutsTable"
@@ -37,7 +38,7 @@ export default function TodaysWorkoutsModal({
       >
         <DialogTitle id="alert-dialog-slide-title">{title}</DialogTitle>
         <DialogContent>
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<CircularLoader />}>
             {data.length !== 0 ? (
               <SimpleWorkoutsTable data={data} />
             ) : (

@@ -1,22 +1,16 @@
-import React, { useEffect, lazy, Suspense, Fragment } from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { makeStyles } from "@material-ui/styles";
-import {
-  Card,
-  CardContent,
-  Avatar,
-  Typography,
-  CircularProgress
-} from "@material-ui/core";
+import { Card, CardContent, Avatar, Typography } from "@material-ui/core";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: "100%"
   },
   details: {
-    // margin: "auto",
     display: "flex",
     flexFlow: "row-reverse wrap",
     height: "100%",
@@ -66,40 +60,12 @@ const AccountProfile = ({ user }) => {
         </div>
       </Fragment>
     ) : (
-      <CircularProgress />
+      <CircularLoader />
     );
 
   return (
     <Card className={classes.root}>
-      <CardContent className={classes.details}>
-        {userProfile}
-        {/* <div>
-          <Typography gutterBottom variant="h4">
-            {user.firstName} {user.lastName}
-          </Typography>
-          <Typography
-            className={classes.locationText}
-            color="textSecondary"
-            variant="body1"
-          >
-            {user.email}
-          </Typography>
-          <Typography
-            className={classes.dateText}
-            color="textSecondary"
-            variant="body1"
-          >
-            Date Joined: {moment(user.date).format("L")}
-          </Typography>
-        </div>
-        <div className={classes.avatarWrapper}>
-          <Avatar
-            className={classes.avatar}
-            src={user.avatar}
-            alt="User's Avatar"
-          />
-        </div> */}
-      </CardContent>
+      <CardContent className={classes.details}>{userProfile}</CardContent>
     </Card>
   );
 };

@@ -1,11 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import {
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  Slide
-} from "@material-ui/core";
+import { Button, Dialog, DialogActions, Slide } from "@material-ui/core";
+import { CircularLoader } from "../Loader/Loaders";
 
 const Login = lazy(() =>
   import(/* webpackChunkName: "LoginForm"*/ "../../components/forms/Login")
@@ -31,7 +26,7 @@ export default function AuthModal({ open, handleCLose, type }) {
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {type === "Login" ? (
             <Login />
           ) : type === "Register" ? (

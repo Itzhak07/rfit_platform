@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense } from "react";
 import SimpleCard from "../../components/Cards/SimpleCard";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { CircularProgress } from "@material-ui/core";
+import { CircularLoader } from "../Loader/Loaders";
 
 const TodaysWorkoutsModal = lazy(() =>
   import(
@@ -84,7 +84,7 @@ const CardsHeader = ({
         openModal={modalOpen}
       />
 
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<CircularLoader />}>
         <TodaysWorkoutsModal
           open={open}
           handleClose={modalClose}

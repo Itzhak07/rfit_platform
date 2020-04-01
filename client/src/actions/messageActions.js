@@ -1,5 +1,4 @@
 import { GET_EMAILS, SEND_EMAIL } from "./types";
-import { setAlert } from "./alertActions";
 import Axios from "axios";
 
 export const getEmails = () => dispatch => {
@@ -25,9 +24,4 @@ export const sendEmail = data => dispatch => {
       payload: res.data
     });
   });
-  // .catch(err => {
-  //   const { error } = err.response.data;
-
-  //   dispatch(setAlert(error));
-  // });
 };

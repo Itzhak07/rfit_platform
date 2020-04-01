@@ -9,7 +9,6 @@ import {
   Box,
   Typography,
   Container,
-  CircularProgress,
   Checkbox,
   FormControlLabel
 } from "@material-ui/core";
@@ -26,6 +25,7 @@ import { Copyright } from "../Copyright/Copyright";
 import { createWorkout } from "../../actions/workoutActions";
 import { sendEmail } from "../../actions/messageActions";
 import moment from "moment";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -226,7 +226,7 @@ const AddWorkout = ({
         </form>
       </div>
       {alerts ? (
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

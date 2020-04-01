@@ -9,12 +9,12 @@ import {
   ListItemText,
   Typography,
   Divider,
-  CircularProgress,
   Fade
 } from "@material-ui/core";
 import StarRateIcon from "@material-ui/icons/StarRate";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -63,12 +63,9 @@ const TopClients = ({ topClients, loading }) => {
         <Typography className={classes.title}>Top Clients:</Typography>
         {loading ? (
           <div className={classes.loader}>
-            <CircularProgress />
+            <CircularLoader color="inherit" />
           </div>
-        ) : (
-          ""
-        )}
-        {!loading && topClients !== null ? (
+        ) : !loading && topClients !== null ? (
           <List>
             {topClients.map(client => {
               return (

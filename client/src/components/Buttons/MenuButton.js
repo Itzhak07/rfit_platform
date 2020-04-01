@@ -1,13 +1,13 @@
 import React, { useState, lazy, Suspense, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { CircularProgress } from "@material-ui/core";
+import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 import {
   PersonAdd as PersonAddIcon,
   Edit as EditIcon,
   FitnessCenter as FitnessCenterIcon,
   Email as EmailIcon
 } from "@material-ui/icons/";
-import { SpeedDial, SpeedDialIcon, SpeedDialAction } from "@material-ui/lab";
 
 const AddModal = lazy(() =>
   import(/* webpackChunkName: "AuthModal"*/ "../../layouts/Modal/AddModal")
@@ -70,12 +70,8 @@ export default function MenuButton({
     }
   }, [addWorkout, addClient, editClient, sendEmail]);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
+  const openHandler = () => {
+    setOpen(!open);
   };
 
   const modalOpen = type => {
@@ -93,8 +89,8 @@ export default function MenuButton({
       <SpeedDial
         ariaLabel="SpeedDial-Button"
         icon={<SpeedDialIcon />}
-        onClose={handleClose}
-        onOpen={handleOpen}
+        onClose={openHandler}
+        onOpen={openHandler}
         open={open}
         direction={"up"}
         FabProps={{ color: "secondary" }}
@@ -108,7 +104,7 @@ export default function MenuButton({
           />
         ))}
       </SpeedDial>
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<CircularLoader />}>
         <AddModal open={openModal} closeModal={modalClose} type={formType} />
       </Suspense>
     </div>

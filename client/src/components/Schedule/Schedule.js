@@ -45,15 +45,11 @@ import {
 } from "../../actions/workoutActions";
 import { setPageName } from "../../actions/pageActions";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import {
-  CircularProgress,
-  LinearProgress,
-  Checkbox,
-  FormControlLabel
-} from "@material-ui/core";
+import { LinearProgress, Checkbox, FormControlLabel } from "@material-ui/core";
 import { Info } from "@material-ui/icons";
 import { sendEmail } from "../../actions/messageActions";
 import moment from "moment";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
@@ -163,19 +159,6 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     });
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.activeClients !== null) {
-  //     const clients = this.props.activeClients.map(client => {
-  //       return {
-  //         id: client._id,
-  //         text: client.firstName + " " + client.lastName
-  //       };
-  //     });
-
-  //     this.setState({ ...this.state, clientOptions: clients });
-  //   }
-  // }
-
   render() {
     const {
       classes,
@@ -185,7 +168,8 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       cancelAppointment,
       target,
       onHide,
-      activeClients
+      activeClients,
+      loadingClients
     } = this.props;
 
     const { appointmentChanges, checked } = this.state;
@@ -195,15 +179,14 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       ...appointmentChanges
     };
 
-    const clientsOptions =
-      activeClients !== null
-        ? activeClients.map(client => {
-            return {
-              id: client._id,
-              text: client.firstName + " " + client.lastName
-            };
-          })
-        : "";
+    const clientsOptions = !loadingClients
+      ? activeClients.map(client => {
+          return {
+            id: client._id,
+            text: client.firstName + " " + client.lastName
+          };
+        })
+      : "";
 
     const isNewAppointment = appointmentData.id === undefined;
     const applyChanges = isNewAppointment
@@ -277,7 +260,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                 disabled={!isNewAppointment ? true : false}
                 options={clientsOptions}
                 placeholder=""
-                getOptionLabel={option => (option.text )}
+                getOptionLabel={option => option.text}
                 {...clientEditorProps("title")}
                 renderInput={params => (
                   <TextField
@@ -635,7 +618,7 @@ class Schedule extends React.PureComponent {
     return (
       <Paper>
         {this.props.alerts ? (
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<CircularLoader />}>
             {this.props.alerts.map(alert => {
               return alert.msg.map(err => {
                 return <ErrorAlert message={err} />;
@@ -702,7 +685,7 @@ class Schedule extends React.PureComponent {
           <AddIcon />
         </Fab>
 
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           <Modal
             open={open}
             handleClose={this.modalClose}
@@ -724,6 +707,7 @@ Schedule.propTypes = {
   workouts: PropTypes.array.isRequired,
   clients: PropTypes.array.isRequired,
   activeClients: PropTypes.array.isRequired,
+  loadingClients: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   alerts: PropTypes.array.isRequired
 };
@@ -732,6 +716,7 @@ const mapStateToProps = state => ({
   workouts: state.workouts.workouts,
   clients: state.clients.clients,
   activeClients: state.clients.active,
+  loadingClients: state.clients.loading,
   loading: state.workouts.loading,
   alerts: state.alerts.alerts
 });

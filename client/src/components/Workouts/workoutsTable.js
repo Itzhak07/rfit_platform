@@ -2,9 +2,10 @@ import React, { useState, useEffect, lazy, Suspense } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import "moment-timezone";
 import MaterialTable from "material-table";
-import { CircularProgress } from "@material-ui/core";
 import { Chip } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
+
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -108,7 +109,7 @@ export default function WorkoutsTable({
         }}
       />
       {alerts ? (
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

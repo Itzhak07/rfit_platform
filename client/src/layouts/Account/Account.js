@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setPageName } from "../../actions/pageActions";
 import { makeStyles } from "@material-ui/styles";
-import { CircularProgress } from "@material-ui/core";
+import { BigLogoSpinner } from "../Loader/Loaders";
 
 const AccountDetails = lazy(() =>
   import(
@@ -36,7 +36,7 @@ function Account({ user, setPageName }) {
 
   return (
     <div className={classes.root}>
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<BigLogoSpinner />}>
         <AccountProfile />
         <AccountDetails />
       </Suspense>

@@ -5,9 +5,8 @@ import Button from "../components/Button";
 import Typography from "../components/Typography";
 import MainSectionLayout from "./MainSectionLayout";
 import Background from "../../../../assets/images/landing-bg.jpg";
-import { CircularProgress } from "@material-ui/core";
 import LogoLight from "../../../../assets/images/logo_light.png";
-
+import { CircularLoader } from "../../../Loader/Loaders";
 const AuthModal = lazy(() =>
   import(/* webpackChunkName: "AuthModal"*/ "../../../Modal/AuthModal")
 );
@@ -109,7 +108,7 @@ function MainSection(props) {
         Sign Up
       </Button>
 
-      <Suspense fallback={<CircularProgress />}>
+      <Suspense fallback={<CircularLoader />}>
         <AuthModal open={open} handleCLose={modalClose} type="Register" />
       </Suspense>
     </MainSectionLayout>

@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const Spinner = () => {
+export const BigLogoSpinner = () => {
   const classes = useStyles();
 
   return (
@@ -29,5 +29,16 @@ export const Spinner = () => {
         <CircularProgress size={300} thickness={2} />
       </div>
     </Container>
+  );
+};
+
+export const CircularLoader = ({ size, color }) => {
+  return (
+    <div style={{ width: !size ? 40 : size, margin: "auto" }}>
+      <CircularProgress
+        size={!size ? 40 : size}
+        color={!color ? "primary" : color}
+      />
+    </div>
   );
 };

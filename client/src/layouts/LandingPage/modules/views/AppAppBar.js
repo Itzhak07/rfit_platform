@@ -4,11 +4,12 @@ import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "../components/AppBar";
 import Toolbar, { styles as toolbarStyles } from "../components/Toolbar";
-import { CircularProgress, Button, Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { Spring } from "react-spring/renderprops";
 import { Link } from "react-scroll";
 import { menuList } from "./utils";
 import { isMobile } from "react-device-detect";
+import { CircularLoader } from "../../../Loader/Loaders";
 
 const AuthModal = lazy(() =>
   import(/* webpackChunkName: "AuthModal"*/ "../../../Modal/AuthModal")
@@ -100,7 +101,7 @@ function AppAppBar(props) {
   });
 
   const lazyAppBarMobileMenu = (
-    <Suspense fallback={<CircularProgress />}>
+    <Suspense fallback={<CircularLoader />}>
       <MobileMenu
         className={classes.menuButton}
         open={open.menu}
@@ -151,7 +152,7 @@ function AppAppBar(props) {
             </Toolbar>
           </AppBar>
           {/* <div className={classes.placeholder} /> */}
-          <Suspense fallback={<CircularProgress />}>
+          <Suspense fallback={<CircularLoader />}>
             <AuthModal
               open={open.modal}
               handleCLose={modalHandler}

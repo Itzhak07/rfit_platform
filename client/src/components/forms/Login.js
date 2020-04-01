@@ -9,16 +9,17 @@ import {
   Box,
   Typography,
   Container,
-  CircularProgress
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import { Copyright } from "../Copyright/Copyright";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 
-const ErrorAlert = lazy(() => import(/* webpackChunkName: "ErrorAlert"*/"../Alerts/ErrorAlert"));
-
+const ErrorAlert = lazy(() =>
+  import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
+);
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -116,7 +117,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
         </form>
       </div>
       {alerts ? (
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

@@ -1,18 +1,20 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
-import ResponsiveDrawer from "./layouts/Drawer/ResponsiveDrawer";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
-import { Spinner } from "./layouts/Loader/Spinner";
-import "./App.css";
-import { NotFound } from "./layouts/NotFound/NotFound";
-import { loadUser } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
 import PrivateRoute from "./routing/PrivateRoute";
 import { fetchClients } from "./actions/clientActions";
-// import LandingPage from "./layouts/LandingPage/LandingPage";
+import { loadUser } from "./actions/authActions";
+import ResponsiveDrawer from "./layouts/Drawer/ResponsiveDrawer";
 import MySnackbar from "./components/Snackbar/MySnackbar";
-import { setPageName } from "./actions/pageActions";
+import { BigLogoSpinner } from "./layouts/Loader/Loaders";
+import { NotFound } from "./layouts/NotFound/NotFound";
+
+import "./App.css";
+
+// import LandingPage from "./layouts/LandingPage/LandingPage";
+
 // import { MessagesLayout } from "./layouts/Messages/MessagesLayout";
 
 // const Schedule = lazy(() =>
@@ -103,7 +105,7 @@ const Account = lazy(async () => {
 
 const ClientProfilePage = lazy(async () => {
   // await store.dispatch(fetchClients());
-  await store.dispatch(setPageName("Clients Manager"));
+  // await store.dispatch(setPageName("Clients Manager"));
   const [moduleExports] = await Promise.all([
     import(
       /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
@@ -115,7 +117,6 @@ const ClientProfilePage = lazy(async () => {
 
 const SendMessagePage = lazy(async () => {
   localStorage.setItem("lastPageView", "New Message");
-  // await store.dispatch(fetchClients());
   const [moduleExports] = await Promise.all([
     import(
       /* webpackChunkName: "SendMessagePage"*/ "./layouts/Messages/SendMessagePage"
@@ -148,7 +149,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<BigLogoSpinner />}>
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <ResponsiveDrawer>

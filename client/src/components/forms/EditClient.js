@@ -9,7 +9,6 @@ import {
   Box,
   Typography,
   Container,
-  CircularProgress,
   MenuItem
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,6 +16,7 @@ import { updateClient } from "../../actions/clientActions";
 import { Edit as EditIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
 import { useParams } from "react-router-dom";
+import { CircularLoader } from "../../layouts/Loader/Loaders";
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -202,7 +202,7 @@ const EditClient = ({ updateClient, alerts, closeModal, clients }) => {
         </form>
       </div>
       {alerts ? (
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularLoader />}>
           {alerts.map(alert => {
             return alert.msg.map(err => {
               return <ErrorAlert message={err} />;

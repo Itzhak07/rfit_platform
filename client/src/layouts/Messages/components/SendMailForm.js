@@ -24,6 +24,7 @@ import {
 import { Scrollbars } from "react-custom-scrollbars";
 import { sendEmail } from "../../../actions/messageActions";
 import { useParams } from "react-router-dom";
+import { CircularLoader } from "../../Loader/Loaders";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -96,7 +97,7 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
         return client._id === id;
       });
 
-      setFormData({
+      setFormData(formData => ({
         ...formData,
         to: [
           {
@@ -105,9 +106,9 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
             id: thisClient[0]._id
           }
         ]
-      });
+      }));
     }
-  }, [id]);
+  }, [id, clients]);
 
   useEffect(() => {
     if (isNewMessage && closeModal) {
@@ -173,33 +174,37 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
   };
 
   let clientsCheckBox =
-    clients !== null
-      ? clients.map(client => {
-          return (
-            <div>
-              <CheckBoxComponent
-                client={client}
-                checked={
-                  to !== null
-                    ? to.find(key => key.email === client.email)
-                      ? true
-                      : false
+    clients !== null ? (
+      clients.map(client => {
+        return (
+          <div>
+            <CheckBoxComponent
+              client={client}
+              checked={
+                to !== null
+                  ? to.find(key => key.email === client.email)
+                    ? true
                     : false
-                }
-                handleChange={handleChange}
-              />
-              <Divider />
-            </div>
-          );
-        })
-      : "";
+                  : false
+              }
+              handleChange={handleChange}
+            />
+            <Divider />
+          </div>
+        );
+      })
+    ) : (
+      <CircularLoader />
+    );
 
   const clientsChips =
-    to != null
-      ? to.map(client => {
-          return <ChipComponent client={client} handleDelete={handleDelete} />;
-        })
-      : "";
+    to != null ? (
+      to.map(client => {
+        return <ChipComponent client={client} handleDelete={handleDelete} />;
+      })
+    ) : (
+      <CircularLoader />
+    );
 
   return (
     <div>
@@ -298,7 +303,6 @@ const SendMailForm = ({ sendEmail, clients, isNewMessage, closeModal }) => {
           </Scrollbars>
         </Paper>
       </Container>
-      {/* <SnackbarComponent state={open} /> */}
     </div>
   );
 };
