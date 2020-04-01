@@ -61,8 +61,8 @@ function ClientProfilePage({
   });
   const { thisClient, thisWorkouts, thisEmails } = state;
   const { id } = useParams();
-
   const classes = useStyles();
+  
   useEffect(() => {
     setPageName("Clients Manager");
   }, [setPageName]);

@@ -24,8 +24,6 @@ export const ClientProfile = ({ client, topClients }) => {
         })
       : "";
 
-  console.log(isTopClient);
-
   const ListItemsOptions = [
     {
       primary: "Name",

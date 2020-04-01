@@ -20,7 +20,8 @@ import {
   makeStyles,
   useTheme,
   Button,
-  Avatar
+  Avatar,
+  Badge
 } from "@material-ui/core/";
 
 import {
@@ -164,6 +165,73 @@ function ResponsiveDrawer({
     setOpen({ ...open, [state]: !open[state] });
   };
 
+  const drawerItemsList = drawerItems.map(item => {
+    return (
+      <div
+        key={item.name}
+        className={active === item.viewName ? classes.active : ""}
+      >
+        {!item.isCollapse ? (
+          <Link
+            to={item.link}
+            onClick={() => {
+              if (isMobile) {
+                setMobileOpen(false);
+              }
+            }}
+          >
+            <ListItem button className={classes.listItem} divider>
+              <div className={classes.itemBalckBar} />
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} />
+            </ListItem>
+          </Link>
+        ) : (
+          <div>
+            <ListItem
+              button
+              onClick={() => openCollapse(item.state)}
+              className={classes.listItem}
+              divider
+            >
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.name} />
+              {open[item.state] ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                {item.subMenu.map(subitem => {
+                  return (
+                    <div
+                      key={subitem.key}
+                      className={` ${
+                        active === subitem.viewName ? classes.active : ""
+                      }  ${classes.collapsed}`}
+                    >
+                      <Link
+                        to={subitem.link}
+                        onClick={() => {
+                          if (isMobile) {
+                            setMobileOpen(false);
+                          }
+                        }}
+                      >
+                        <ListItem button className={classes.nested} divider>
+                          <ListItemIcon>{subitem.icon}</ListItemIcon>
+                          <ListItemText primary={subitem.name} />
+                        </ListItem>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </List>
+            </Collapse>
+          </div>
+        )}
+      </div>
+    );
+  });
+
   const drawer = (
     <div>
       <div className={classes.toolbar}>
@@ -185,78 +253,7 @@ function ResponsiveDrawer({
         </div>
       )}
       <Divider />
-      <List disablePadding>
-        {drawerItems.map(item => {
-          return (
-            <div
-              key={item.name}
-              className={active === item.viewName ? classes.active : ""}
-            >
-              {!item.isCollapse ? (
-                <Link
-                  to={item.link}
-                  onClick={() => {
-                    if (isMobile) {
-                      setMobileOpen(false);
-                    }
-                  }}
-                >
-                  <ListItem button className={classes.listItem} divider>
-                    <div className={classes.itemBalckBar} />
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.name} />
-                  </ListItem>
-                </Link>
-              ) : (
-                <div>
-                  <ListItem
-                    button
-                    onClick={() => openCollapse(item.state)}
-                    className={classes.listItem}
-                    divider
-                  >
-                    <ListItemIcon>{item.icon}</ListItemIcon>
-                    <ListItemText primary={item.name} />
-                    {open[item.state] ? <ExpandLess /> : <ExpandMore />}
-                  </ListItem>
-                  <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                      {item.subMenu.map(subitem => {
-                        return (
-                          <div
-                            key={subitem.key}
-                            className={` ${
-                              active === subitem.viewName ? classes.active : ""
-                            }  ${classes.collapsed}`}
-                          >
-                            <Link
-                              to={subitem.link}
-                              onClick={() => {
-                                if (isMobile) {
-                                  setMobileOpen(false);
-                                }
-                              }}
-                            >
-                              <ListItem
-                                button
-                                className={classes.nested}
-                                divider
-                              >
-                                <ListItemIcon>{subitem.icon}</ListItemIcon>
-                                <ListItemText primary={subitem.name} />
-                              </ListItem>
-                            </Link>
-                          </div>
-                        );
-                      })}
-                    </List>
-                  </Collapse>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </List>
+      <List disablePadding>{drawerItemsList}</List>
     </div>
   );
 

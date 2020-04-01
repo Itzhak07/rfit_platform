@@ -10,16 +10,27 @@ import ResponsiveDrawer from "./layouts/Drawer/ResponsiveDrawer";
 import MySnackbar from "./components/Snackbar/MySnackbar";
 import { BigLogoSpinner } from "./layouts/Loader/Loaders";
 import { NotFound } from "./layouts/NotFound/NotFound";
-
 import "./App.css";
 
 // import LandingPage from "./layouts/LandingPage/LandingPage";
 
 // import { MessagesLayout } from "./layouts/Messages/MessagesLayout";
 
-// const Schedule = lazy(() =>
+// const Schedule = lazy(() => {
+//   Promise.apply(store.dispatch(fetchClients())).then(
+//     Promise.resolve(
+//       import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule")
+//     )
+//   );
+
+// return new Promise(Promise.call => store.dispatch(fetchClients())).then(Promise.resolve =>
 //   import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule")
 // );
+// store.dispatch(fetchClients());
+// return import(
+//   /* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule"
+// );
+// });
 
 // const MessagesPage = lazy(() =>
 //   import(
