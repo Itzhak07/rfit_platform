@@ -94,7 +94,6 @@ const Home = lazy(async () => {
 
 const Account = lazy(async () => {
   // await store.dispatch(loadUser());
-  console.log(store.getState);
 
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Account"*/ "./layouts/Account/Account"),
