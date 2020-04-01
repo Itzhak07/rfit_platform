@@ -593,14 +593,13 @@ class Schedule extends React.PureComponent {
     };
 
     const desktopView = (
-      <Fragment>
+      <div>
         <WeekView
           startDayHour={startDayHour}
           endDayHour={endDayHour}
           cellDuration={60}
         />
-        <MonthView />
-      </Fragment>
+      </div>
     );
 
     const mobileView = (
@@ -663,12 +662,7 @@ class Schedule extends React.PureComponent {
           />
 
           {isMobile ? mobileView : desktopView}
-          {/* <DayView />
-          <WeekView
-            startDayHour={startDayHour}
-            endDayHour={endDayHour}
-            cellDuration={60}
-          /> */}
+          {!isMobile ? <MonthView /> : ""}
 
           <AllDayPanel />
           <EditRecurrenceMenu />
