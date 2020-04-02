@@ -4,5 +4,6 @@
     "sendgrid_API_KEY": "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",
     "myMail": "itzhak07@gmail.com",
     "accountSid": "AC73b89c727f8e52351fb6df0eb502def7",
-    "authToken": "142fb6b748a547af0103a9cbba2f483d"
+    "authToken": "142fb6b748a547af0103a9cbba2f483d",
+    "Twilio_Phone": "+14155238886"
 }
