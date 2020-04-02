@@ -1,6 +1,8 @@
 import React, { useState, lazy, Suspense, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { createClient } from "../../actions/clientActions";
+import { sendEmail } from "../../actions/messageActions";
 import {
   Avatar,
   Button,
@@ -12,7 +14,7 @@ import {
   MenuItem
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { createClient } from "../../actions/clientActions";
+
 import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
 import { CircularLoader } from "../../layouts/Loader/Loaders";
@@ -45,7 +47,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
+const AddClient = ({
+  createClient,
+  alerts,
+  closeModal,
+  isNewClient,
+  sendEmail
+}) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -69,16 +77,33 @@ const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
-    e.preventDefault();
-    createClient(formData);
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      gender: ""
-    });
+  const onSubmit = async e => {
+    try {
+      await e.preventDefault();
+
+      await createClient(formData);
+
+      await sendEmail({
+        subject: "Welcome!",
+        to: [formData],
+        message: `Hi ${firstName} ${lastName} 
+        Thanks for choosing me as your trainer!
+        If you would like to make your life a bit easier, please send a WhatsApp message to +14155238886 with code: join accept-noted ,
+        to get updated on appointments via WhatsApp.
+        Thanks!`,
+        type: "Welcome_Mail"
+      });
+
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        gender: ""
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -196,6 +221,7 @@ const AddClient = ({ createClient, alerts, closeModal, isNewClient }) => {
 
 AddClient.propTypes = {
   createClient: PropTypes.func.isRequired,
+  sendEmail: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
   isNewClient: PropTypes.bool.isRequired
 };
@@ -205,4 +231,4 @@ const mapStateToProps = state => ({
   isNewClient: state.clients.isNewClient
 });
 
-export default connect(mapStateToProps, { createClient })(AddClient);
+export default connect(mapStateToProps, { createClient, sendEmail })(AddClient);

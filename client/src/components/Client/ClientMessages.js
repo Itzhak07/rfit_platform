@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import Scrollbars from "react-custom-scrollbars";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Collapse,
-  ListSubheader,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
+  Tab,
+  Tabs
 } from "@material-ui/core";
 
 import {
@@ -16,7 +17,8 @@ import {
   Message as MessageIcon,
   ErrorOutline as ErrorOutlineIcon,
   ExpandLess,
-  ExpandMore
+  ExpandMore,
+  WhatsApp as WhatsAppIcon
 } from "@material-ui/icons/";
 
 const useStyles = makeStyles(theme => ({
@@ -29,7 +31,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EmailItemList = ({ date, subject, message }) => {
+const NoMessages = ({ type }) => {
+  const classes = useStyles();
+  return (
+    <ListItem button className={classes.nested}>
+      <ListItemIcon>
+        <ErrorOutlineIcon color="secondary" fontSize="large" />
+      </ListItemIcon>
+      <ListItemText primary={"No " + type} />
+    </ListItem>
+  );
+};
+
+const MessageItemList = ({ date, subject, message, type }) => {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const handleClick = () => {
@@ -40,7 +54,13 @@ const EmailItemList = ({ date, subject, message }) => {
     <div>
       <ListItem button onClick={handleClick} divider>
         <ListItemIcon>
-          <MailOutlineIcon color="primary" />
+          {type === 1 ? (
+            <MailOutlineIcon color="primary" />
+          ) : type === 2 ? (
+            <WhatsAppIcon color="primary" />
+          ) : (
+            ""
+          )}
         </ListItemIcon>
         <ListItemText primary={moment(date).format("L")} secondary={subject} />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -59,48 +79,115 @@ const EmailItemList = ({ date, subject, message }) => {
   );
 };
 
-export default function ClientMessages({ client, emails }) {
+export default function ClientMessages({ client, emails, whatsapps }) {
   const classes = useStyles();
+  const [value, setValue] = useState(0);
 
-  const listItems =
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    console.log(value);
+  });
+
+  const emailListItems =
     emails.length > 0 ? (
       emails.map(email => {
         return (
-          <EmailItemList
+          <MessageItemList
             date={email.date}
             message={email.message}
             subject={email.subject}
+            type={email.type}
           />
         );
       })
     ) : (
-      <ListItem button className={classes.nested} dense>
-        <ListItemIcon>
-          <ErrorOutlineIcon color="secondary" fontSize="large" />
-        </ListItemIcon>
-        <ListItemText primary="No Messages" />
-      </ListItem>
+      <NoMessages type="Emails" />
     );
 
+  const whatsappListItems =
+    whatsapps.length > 0 ? (
+      whatsapps.map(whatsapp => {
+        return (
+          <MessageItemList
+            date={whatsapp.date}
+            message={whatsapp.message}
+            subject={whatsapp.subject}
+            type={whatsapp.type}
+          />
+        );
+      })
+    ) : (
+      <NoMessages type="WhatsApp Messages" />
+    );
+
+  const setTabProps = index => {
+    return {
+      id: `message-type-tab-${index}`,
+      "aria-controls": `message-type-tab-${index}`
+    };
+  };
+
   return (
-    <Scrollbars
-      style={{
-        width: "100%",
-        height: "100%"
-      }}
-    >
-      <List
-        component="nav"
-        aria-labelledby="client-email-list"
-        subheader={
-          <ListSubheader component="div" id="client-email-list">
-            Messages
-          </ListSubheader>
-        }
-        className={classes.root}
+    <div>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        variant="fullWidth"
+        indicatorColor="primary"
+        textColor="primary"
+        aria-label="message-type-tab"
       >
-        {listItems}
-      </List>
-    </Scrollbars>
+        <Tab
+          icon={<MailOutlineIcon />}
+          label="Email"
+          value={0}
+          {...setTabProps(0)}
+        />
+
+        <Tab
+          icon={<WhatsAppIcon />}
+          label="WhatsApp"
+          value={1}
+          {...setTabProps(1)}
+        />
+      </Tabs>
+
+      <div hidden={value !== 0}>
+        <Scrollbars
+          style={{
+            width: "100%",
+            height: 350
+          }}
+        >
+          <List
+            component="nav"
+            aria-labelledby="client-email-list"
+            className={classes.root}
+          >
+            {emailListItems}
+          </List>
+        </Scrollbars>
+      </div>
+
+      <div hidden={value !== 1}>
+        <Scrollbars
+          style={{
+            width: "100%",
+            height: 350
+          }}
+        >
+          <List
+            component="nav"
+            aria-labelledby="client-email-list"
+            className={classes.root}
+          >
+            {whatsappListItems}
+          </List>
+        </Scrollbars>
+      </div>
+    </div>
   );
 }

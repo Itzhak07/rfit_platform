@@ -22,8 +22,9 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 
 export const UPDATE_USER = "UPDATE_USER";
 
-export const GET_EMAILS = "GET_EMAILS";
+export const GET_MESSAGES = "GET_MESSAGES";
 export const SEND_EMAIL = "SEND_EMAIL";
+export const SEND_WHATSAPP = "SEND_WHATSAPP";
 
 export const LOGOUT = "LOGOUT";
 

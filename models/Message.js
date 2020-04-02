@@ -8,6 +8,7 @@ var MessageSchema = new Schema({
   ],
   message: { type: String, required: true },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  type: { type: Number },
   date: { type: Date, default: Date.now }
 });
 

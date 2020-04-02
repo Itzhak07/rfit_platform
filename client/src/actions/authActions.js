@@ -14,7 +14,7 @@ import setAuthToken from "../utils/setAuthToken";
 import { fetchClients } from "./clientActions";
 import { fetchWorkouts } from "./workoutActions";
 import { setPageName } from "./pageActions";
-import { getEmails } from "./messageActions";
+import { getMessages } from "./messageActions";
 
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
@@ -31,7 +31,7 @@ export const loadUser = () => async dispatch => {
 
     await dispatch(fetchClients());
     await dispatch(fetchWorkouts());
-    await dispatch(getEmails());
+    await dispatch(getMessages());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR

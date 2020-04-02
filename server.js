@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const app = express();
 // var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var cors = require("cors");
 
@@ -31,6 +32,11 @@ db.once("open", function() {
 
 // Init Middleware
 app.use(express.json({ extended: false }));
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 app.use(cors());
 
 // Define Routes

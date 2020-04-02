@@ -19,10 +19,7 @@ export const fetchClients = () => dispatch => {
 
 export const createClient = data => async dispatch => {
   try {
-    await Axios.post(
-      `https://rfit-platform.herokuapp.com/api/clients/`,
-      data
-    ).then(res => {
+    await Axios.post(`https://rfit-platform.herokuapp.com/api/clients/`, data).then(res => {
       dispatch({
         type: NEW_CLIENT,
         payload: true

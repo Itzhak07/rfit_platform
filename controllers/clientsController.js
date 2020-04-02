@@ -35,16 +35,27 @@ class ClientController {
       });
 
       newClient.save((err, data) => {
-        if (err) reject(err);
-        resolve(ClientController.getAll(id));
+        if (err) {
+          reject(err);
+        } else {
+          resolve(ClientController.getAll(id));
+        }
       });
     });
   }
 
-  static getSingleClient(req) {
-    const { id } = req.body;
+  static getSingleClient(client_Id) {
     return new Promise((resolve, reject) => {
-      Client.find({ _id: `${id}` }).exec((err, data) => {
+      Client.find({ _id: `${client_Id}` }).exec((err, data) => {
+        if (err) reject(err);
+        resolve(data[0]);
+      });
+    });
+  }
+
+  static getClientByEmail(email, user) {
+    return new Promise((resolve, reject) => {
+      Client.find({ email: `${email}`, user: user }).exec((err, data) => {
         if (err) reject(err);
         resolve(data);
       });

@@ -20,8 +20,7 @@ import {
   makeStyles,
   useTheme,
   Button,
-  Avatar,
-  Badge
+  Avatar
 } from "@material-ui/core/";
 
 import {

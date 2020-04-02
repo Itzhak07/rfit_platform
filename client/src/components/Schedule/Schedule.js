@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable react/no-unused-state */
-import React, { lazy, Suspense, Fragment } from "react";
+import React, { lazy, Suspense } from "react";
 import Paper from "@material-ui/core/Paper";
 import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
 
@@ -48,7 +48,7 @@ import { setPageName } from "../../actions/pageActions";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { LinearProgress, Checkbox, FormControlLabel } from "@material-ui/core";
 import { Info } from "@material-ui/icons";
-import { sendEmail } from "../../actions/messageActions";
+import { sendEmail, sendWhatsApp } from "../../actions/messageActions";
 import moment from "moment";
 import { CircularLoader } from "../../layouts/Loader/Loaders";
 import { isMobile } from "react-device-detect";
@@ -112,7 +112,10 @@ class AppointmentFormContainerBasic extends React.PureComponent {
 
     this.state = {
       appointmentChanges: {},
-      checked: false,
+      checked: {
+        email: false,
+        whatsapp: false
+      },
       clientOptions: []
     };
 
@@ -157,7 +160,10 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     }
     this.setState({
       appointmentChanges: {},
-      checked: false
+      checked: {
+        whatsapp: false,
+        email: false
+      }
     });
   }
 
@@ -175,6 +181,8 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     } = this.props;
 
     const { appointmentChanges, checked } = this.state;
+
+    const { email, whatsapp } = checked;
 
     const displayAppointmentData = {
       ...appointmentData,
@@ -240,7 +248,10 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     };
 
     const handleCheckChange = e => {
-      this.setState({ ...this.state, checked: !checked });
+      this.setState({
+        ...this.state,
+        checked: { ...checked, [e.target.name]: e.target.checked }
+      });
     };
 
     return (
@@ -310,9 +321,23 @@ class AppointmentFormContainerBasic extends React.PureComponent {
             <div>
               <FormControlLabel
                 control={
-                  <Checkbox checked={checked} onChange={handleCheckChange} />
+                  <Checkbox
+                    name="email"
+                    checked={email}
+                    onChange={handleCheckChange}
+                  />
                 }
-                label="Send Email Confirmation"
+                label="Email Confirmation"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="whatsapp"
+                    checked={whatsapp}
+                    onChange={handleCheckChange}
+                  />
+                }
+                label="WhatsApp Confirmation"
               />
             </div>
             <div>
@@ -486,17 +511,30 @@ class Schedule extends React.PureComponent {
     this.setState(state => {
       let { data } = state;
       if (added) {
-        if (added.checked) {
+        if (added.checked.email || added.checked.whatsapp) {
           const thisClient = this.props.activeClients.filter(
             client => client._id === added.data.title
           );
-          this.props.sendEmail({
-            subject: "New appointment has been scheduled!",
-            to: thisClient,
-            message: `an new appointment has been scheduled on ${moment(
-              added.data.startDate
-            ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
-          });
+
+          if (added.checked.email) {
+            this.props.sendEmail({
+              subject: "New appointment has been scheduled!",
+              to: thisClient,
+              message: `an new appointment has been scheduled on ${moment(
+                added.data.startDate
+              ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
+            });
+          }
+
+          if (added.checked.whatsapp) {
+            this.props.sendWhatsApp({
+              subject: "New appointment has been scheduled!",
+              client_id: thisClient[0]._id,
+              message: `an new appointment has been scheduled on ${moment(
+                added.data.startDate
+              ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
+            });
+          }
         }
 
         return this.props.createWorkout(added.data);
@@ -516,42 +554,60 @@ class Schedule extends React.PureComponent {
           }
         }
 
-        if (changed.checked) {
-          console.log(update);
-          console.log(this.props.activeClients);
-
+        if (changed.checked.email || changed.checked.whatsapp) {
           let thisClient = this.props.activeClients.filter(
             client => client._id === update.client
           );
-          this.props.sendEmail({
-            subject: "Appointment Changed",
-            to: thisClient,
-            message: `Your appointment has been changed to ${moment(
-              update.startDate
-            ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`
-          });
+
+          if (changed.checked.email) {
+            this.props.sendEmail({
+              subject: "Appointment Changed",
+              to: thisClient,
+              message: `Your appointment has been changed to ${moment(
+                update.startDate
+              ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`
+            });
+          }
+          if (changed.checked.whatsapp) {
+            this.props.sendWhatsApp({
+              subject: "Appointment Changed",
+              client_id: thisClient[0]._id,
+              message: `Your appointment has been changed to ${moment(
+                update.startDate
+              ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`
+            });
+          }
         }
 
         this.props.updateWorkout(update);
       }
       if (deleted !== undefined) {
-        if (deleted.checked) {
+        if (deleted.checked.email || deleted.checked.whatsapp) {
           const thisClient = this.props.activeClients.filter(
             client => client._id === deleted.appointment.client
           );
-          thisClient[0]["id"] = thisClient[0]["_id"];
-          delete thisClient[0]["_id"];
-          this.props.deleteWorkout(deleted.appointment.id);
-          this.props.sendEmail({
-            subject: "Appointment Cancelled",
-            to: thisClient,
-            message: `Your appointment on ${moment(
-              deleted.appointment.startDate
-            ).format("LLLL")} has been cancelled by your trainer. `
-          });
-        } else {
-          this.props.deleteWorkout(deleted);
+          if (deleted.checked.email) {
+            this.props.sendEmail({
+              subject: "Appointment Cancelled",
+              to: thisClient,
+              message: `Your appointment on ${moment(
+                deleted.appointment.startDate
+              ).format("LLLL")} has been cancelled by your trainer. `
+            });
+          }
+
+          if (deleted.checked.whatsapp) {
+            this.props.sendWhatsApp({
+              subject: "Appointment Cancelled",
+              client_id: deleted.appointment.client,
+              message: `Your appointment on ${moment(
+                deleted.appointment.startDate
+              ).format("LLLL")} has been cancelled by your trainer. `
+            });
+          }
         }
+
+        return this.props.deleteWorkout(deleted.appointment.id);
       }
       return { data, addedAppointment: {} };
     });
@@ -724,6 +780,7 @@ Schedule.propTypes = {
   updateWorkout: PropTypes.func.isRequired,
   setPageName: PropTypes.func.isRequired,
   sendEmail: PropTypes.func.isRequired,
+  sendWhatsApp: PropTypes.func.isRequired,
   workouts: PropTypes.array.isRequired,
   clients: PropTypes.array.isRequired,
   activeClients: PropTypes.array.isRequired,
@@ -745,6 +802,7 @@ export default connect(mapStateToProps, {
   createWorkout,
   deleteWorkout,
   updateWorkout,
+  sendWhatsApp,
   setPageName,
   sendEmail
 })(withStyles(styles, { name: "Schedule" })(Schedule));

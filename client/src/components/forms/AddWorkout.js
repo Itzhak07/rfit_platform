@@ -23,7 +23,7 @@ import {
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Copyright } from "../Copyright/Copyright";
 import { createWorkout } from "../../actions/workoutActions";
-import { sendEmail } from "../../actions/messageActions";
+import { sendEmail, sendWhatsApp } from "../../actions/messageActions";
 import moment from "moment";
 import { CircularLoader } from "../../layouts/Loader/Loaders";
 
@@ -62,7 +62,8 @@ const AddWorkout = ({
   alerts,
   closeModal,
   isNewWorkout,
-  sendEmail
+  sendEmail,
+  sendWhatsApp
 }) => {
   const [formData, setFormData] = useState({
     client: "",
@@ -71,7 +72,10 @@ const AddWorkout = ({
     notes: ""
   });
 
-  const [checked, setChecbox] = useState(false);
+  const [checked, setChecbox] = useState({
+    email: false,
+    whatsApp: false
+  });
 
   useEffect(() => {
     if (isNewWorkout) {
@@ -106,13 +110,16 @@ const AddWorkout = ({
     setFormData({ ...formData, endDate: e });
   };
 
-  const handleCheckBox = e => setChecbox(e.target.checked);
+  const handleCheckBox = e =>
+    setChecbox({ ...checked, [e.target.name]: e.target.checked });
 
   const onSubmit = e => {
     e.preventDefault();
     createWorkout(formData);
 
-    if (checked) {
+    if (checked.email) {
+      console.log(checked.email, "email");
+
       const thisClient = activeClients.filter(
         client => client._id === formData.client
       );
@@ -126,7 +133,23 @@ const AddWorkout = ({
       });
     }
 
-    setChecbox(false);
+    if (checked.whatsApp) {
+      const thisClient = activeClients.filter(
+        client => client._id === formData.client
+      );
+
+      console.log(checked.whatsApp, "client");
+
+      sendWhatsApp({
+        subject: "New appointment has been scheduled!",
+        client_id: thisClient[0]._id,
+        message: ` an appointment has been scheduled for you on ${moment(
+          formData.startDate
+        ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`
+      });
+    }
+
+    setChecbox({ email: false, whatsapp: false });
 
     setFormData({
       client: "",
@@ -215,13 +238,24 @@ const AddWorkout = ({
           <FormControlLabel
             control={
               <Checkbox
-                checked={checked}
+                checked={checked.email}
                 onChange={handleCheckBox}
-                name="email-confirmation"
+                name="email"
                 color="secondary"
               />
             }
-            label="Send Email Confirmation"
+            label="Email Confirmation"
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={checked.whatsApp}
+                onChange={handleCheckBox}
+                name="whatsApp"
+                color="secondary"
+              />
+            }
+            label={"WhatsApp Confirmation"}
           />
         </form>
       </div>
@@ -247,6 +281,7 @@ AddWorkout.propTypes = {
   createWorkout: PropTypes.func.isRequired,
   activeClients: PropTypes.array.isRequired,
   sendEmail: PropTypes.func.isRequired,
+  sendWhatsApp: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
   isNewWorkout: PropTypes.bool.isRequired
 };
@@ -257,6 +292,8 @@ const mapStateToProps = state => ({
   isNewWorkout: state.workouts.isNewWorkout
 });
 
-export default connect(mapStateToProps, { createWorkout, sendEmail })(
-  AddWorkout
-);
+export default connect(mapStateToProps, {
+  createWorkout,
+  sendEmail,
+  sendWhatsApp
+})(AddWorkout);
