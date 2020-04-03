@@ -18,12 +18,12 @@ import {
   EditRecurrenceMenu,
   AllDayPanel,
   TodayButton,
-  DateNavigator
+  DateNavigator,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { connectProps } from "@devexpress/dx-react-core";
 import {
   KeyboardDateTimePicker,
-  MuiPickersUtilsProvider
+  MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 import { withStyles } from "@material-ui/core/styles";
@@ -42,7 +42,7 @@ import { connect } from "react-redux";
 import {
   createWorkout,
   deleteWorkout,
-  updateWorkout
+  updateWorkout,
 } from "../../actions/workoutActions";
 import { setPageName } from "../../actions/pageActions";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -60,50 +60,50 @@ const Modal = lazy(() =>
   import(/* webpackChunkName: "Modal"*/ "../../layouts/Modal/Modal")
 );
 
-const containerStyles = theme => ({
+const containerStyles = (theme) => ({
   container: {
     width: theme.spacing(68),
     padding: 0,
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   content: {
     padding: theme.spacing(2),
-    paddingTop: 0
+    paddingTop: 0,
   },
   header: {
     overflow: "hidden",
-    paddingTop: theme.spacing(0.5)
+    paddingTop: theme.spacing(0.5),
   },
   closeButton: {
-    float: "right"
+    float: "right",
   },
   buttonGroup: {
     display: "flex",
     justifyContent: "space-between",
-    padding: theme.spacing(0, 2)
+    padding: theme.spacing(0, 2),
   },
   button: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
   },
   picker: {
     marginRight: theme.spacing(2),
     "&:last-child": {
-      marginRight: 0
+      marginRight: 0,
     },
-    width: "50%"
+    width: "50%",
   },
   wrapper: {
     display: "flex",
     justifyContent: "space-between",
-    padding: theme.spacing(1, 0)
+    padding: theme.spacing(1, 0),
   },
   icon: {
     margin: theme.spacing(2, 0),
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   textField: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 });
 
 class AppointmentFormContainerBasic extends React.PureComponent {
@@ -114,9 +114,9 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       appointmentChanges: {},
       checked: {
         email: false,
-        whatsapp: false
+        whatsapp: false,
       },
-      clientOptions: []
+      clientOptions: [],
     };
 
     this.getAppointmentData = () => {
@@ -135,10 +135,10 @@ class AppointmentFormContainerBasic extends React.PureComponent {
   changeAppointment({ field, changes }) {
     const nextChanges = {
       ...this.getAppointmentChanges(),
-      [field]: changes
+      [field]: changes,
     };
     this.setState({
-      appointmentChanges: nextChanges
+      appointmentChanges: nextChanges,
     });
   }
 
@@ -147,13 +147,13 @@ class AppointmentFormContainerBasic extends React.PureComponent {
     const { checked } = this.state;
     const appointment = {
       ...this.getAppointmentData(),
-      ...this.getAppointmentChanges()
+      ...this.getAppointmentChanges(),
     };
     if (type === "deleted") {
       commitChanges({ [type]: { appointment, checked: checked } });
     } else if (type === "changed") {
       commitChanges({
-        [type]: { [appointment.id]: appointment, checked: checked }
+        [type]: { [appointment.id]: appointment, checked: checked },
       });
     } else {
       commitChanges({ [type]: { data: appointment, checked: checked } });
@@ -162,8 +162,8 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       appointmentChanges: {},
       checked: {
         whatsapp: false,
-        email: false
-      }
+        email: false,
+      },
     });
   }
 
@@ -177,7 +177,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       target,
       onHide,
       activeClients,
-      loadingClients
+      loadingClients,
     } = this.props;
 
     const { appointmentChanges, checked } = this.state;
@@ -186,14 +186,14 @@ class AppointmentFormContainerBasic extends React.PureComponent {
 
     const displayAppointmentData = {
       ...appointmentData,
-      ...appointmentChanges
+      ...appointmentChanges,
     };
 
     const clientsOptions = !loadingClients
-      ? activeClients.map(client => {
+      ? activeClients.map((client) => {
           return {
             id: client._id,
-            text: client.firstName + " " + client.lastName
+            text: client.firstName + " " + client.lastName,
           };
         })
       : "";
@@ -203,54 +203,54 @@ class AppointmentFormContainerBasic extends React.PureComponent {
       ? () => this.commitAppointment("added")
       : () => this.commitAppointment("changed");
 
-    const textEditorProps = field => ({
+    const textEditorProps = (field) => ({
       variant: "outlined",
       onChange: ({ target: change }) =>
         this.changeAppointment({
           field: [field],
-          changes: change.value
+          changes: change.value,
         }),
       value: displayAppointmentData[field] || "",
       label: field[0].toUpperCase() + field.slice(1),
-      className: classes.textField
+      className: classes.textField,
     });
 
-    const clientEditorProps = field => ({
+    const clientEditorProps = (field) => ({
       variant: "outlined",
       value: displayAppointmentData.client,
       label: displayAppointmentData.client,
-      className: classes.textField
+      className: classes.textField,
     });
 
-    const pickerEditorProps = field => ({
+    const pickerEditorProps = (field) => ({
       className: classes.picker,
       // keyboard: true,
       ampm: false,
       value: displayAppointmentData[field],
-      onChange: date =>
+      onChange: (date) =>
         this.changeAppointment({
           field: [field],
           changes: date
             ? date.toDate()
-            : new Date(displayAppointmentData[field])
+            : new Date(displayAppointmentData[field]),
         }),
       inputVariant: "outlined",
       format: "DD/MM/YYYY HH:mm",
-      onError: () => null
+      onError: () => null,
     });
 
     const cancelChanges = () => {
       this.setState({
-        appointmentChanges: {}
+        appointmentChanges: {},
       });
       visibleChange();
       cancelAppointment();
     };
 
-    const handleCheckChange = e => {
+    const handleCheckChange = (e) => {
       this.setState({
         ...this.state,
-        checked: { ...checked, [e.target.name]: e.target.checked }
+        checked: { ...checked, [e.target.name]: e.target.checked },
       });
     };
 
@@ -273,9 +273,9 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                 disabled={!isNewAppointment ? true : false}
                 options={clientsOptions}
                 placeholder=""
-                getOptionLabel={option => option.text}
+                getOptionLabel={(option) => option.text}
                 {...clientEditorProps("title")}
-                renderInput={params => (
+                renderInput={(params) => (
                   <TextField
                     {...params}
                     label={
@@ -290,7 +290,7 @@ class AppointmentFormContainerBasic extends React.PureComponent {
                 onChange={(event, newValue) => {
                   const change = {
                     field: "title",
-                    changes: newValue ? newValue.id : ""
+                    changes: newValue ? newValue.id : "",
                   };
                   this.changeAppointment(change);
                 }}
@@ -374,15 +374,15 @@ class AppointmentFormContainerBasic extends React.PureComponent {
 }
 
 const AppointmentFormContainer = withStyles(containerStyles, {
-  name: "AppointmentFormContainer"
+  name: "AppointmentFormContainer",
 })(AppointmentFormContainerBasic);
 
-const styles = theme => ({
+const styles = (theme) => ({
   addButton: {
     position: "fixed",
     bottom: theme.spacing(1) * 3,
-    right: theme.spacing(1) * 4
-  }
+    right: theme.spacing(1) * 4,
+  },
 });
 
 /* eslint-disable-next-line react/no-multi-comp */
@@ -404,7 +404,7 @@ class Schedule extends React.PureComponent {
       isNewAppointment: false,
       open: false,
       modalBody: "",
-      alerts: this.props.alerts
+      alerts: this.props.alerts,
     };
 
     this.toggleConfirmationVisible = this.toggleConfirmationVisible.bind(this);
@@ -426,19 +426,19 @@ class Schedule extends React.PureComponent {
         activeClients,
         addedAppointment,
         isNewAppointment,
-        previousAppointment
+        previousAppointment,
       } = this.state;
 
       const currentAppointment =
         this.props.workouts.filter(
-          appointment =>
+          (appointment) =>
             editingAppointment && appointment.id === editingAppointment.id
         )[0] || addedAppointment;
       const cancelAppointment = () => {
         if (isNewAppointment) {
           this.setState({
             editingAppointment: previousAppointment,
-            isNewAppointment: false
+            isNewAppointment: false,
           });
         }
       };
@@ -451,7 +451,7 @@ class Schedule extends React.PureComponent {
         commitChanges: this.commitChanges,
         visibleChange: this.toggleEditingFormVisibility,
         onEditingAppointmentChange: this.onEditingAppointmentChange,
-        cancelAppointment
+        cancelAppointment,
       };
     });
   }
@@ -473,7 +473,7 @@ class Schedule extends React.PureComponent {
     const { editingAppointment } = this.state;
     if (editingAppointment !== undefined) {
       this.setState({
-        previousAppointment: editingAppointment
+        previousAppointment: editingAppointment,
       });
     }
     this.setState({ editingAppointment: undefined, isNewAppointment: true });
@@ -486,7 +486,7 @@ class Schedule extends React.PureComponent {
   toggleEditingFormVisibility() {
     const { editingFormVisible } = this.state;
     this.setState({
-      editingFormVisible: !editingFormVisible
+      editingFormVisible: !editingFormVisible,
     });
   }
 
@@ -496,10 +496,10 @@ class Schedule extends React.PureComponent {
   }
 
   commitDeletedAppointment() {
-    this.setState(state => {
+    this.setState((state) => {
       const { data, deletedAppointmentId } = state;
       const nextData = data.filter(
-        appointment => appointment.id !== deletedAppointmentId
+        (appointment) => appointment.id !== deletedAppointmentId
       );
 
       return { data: nextData, deletedAppointmentId: null };
@@ -508,12 +508,12 @@ class Schedule extends React.PureComponent {
   }
 
   commitChanges({ added, changed, deleted }) {
-    this.setState(state => {
+    this.setState((state) => {
       let { data } = state;
       if (added) {
         if (added.checked.email || added.checked.whatsapp) {
           const thisClient = this.props.activeClients.filter(
-            client => client._id === added.data.title
+            (client) => client._id === added.data.title
           );
 
           if (added.checked.email) {
@@ -522,7 +522,7 @@ class Schedule extends React.PureComponent {
               to: thisClient,
               message: `an new appointment has been scheduled on ${moment(
                 added.data.startDate
-              ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
+              ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`,
             });
           }
 
@@ -532,7 +532,7 @@ class Schedule extends React.PureComponent {
               client_id: thisClient[0]._id,
               message: `an new appointment has been scheduled on ${moment(
                 added.data.startDate
-              ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`
+              ).format("LLLL")} - ${moment(added.data.endDate).format("LLLL")}`,
             });
           }
         }
@@ -556,7 +556,7 @@ class Schedule extends React.PureComponent {
 
         if (changed.checked.email || changed.checked.whatsapp) {
           let thisClient = this.props.activeClients.filter(
-            client => client._id === update.client
+            (client) => client._id === update.client
           );
 
           if (changed.checked.email) {
@@ -565,7 +565,7 @@ class Schedule extends React.PureComponent {
               to: thisClient,
               message: `Your appointment has been changed to ${moment(
                 update.startDate
-              ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`
+              ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`,
             });
           }
           if (changed.checked.whatsapp) {
@@ -574,7 +574,7 @@ class Schedule extends React.PureComponent {
               client_id: thisClient[0]._id,
               message: `Your appointment has been changed to ${moment(
                 update.startDate
-              ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`
+              ).format("LLLL")} - ${moment(update.endDate).format("LLLL")}`,
             });
           }
         }
@@ -582,9 +582,11 @@ class Schedule extends React.PureComponent {
         this.props.updateWorkout(update);
       }
       if (deleted !== undefined) {
-        if (deleted.checked.email || deleted.checked.whatsapp) {
+        if (typeof deleted === "string") {
+          return this.props.deleteWorkout(deleted);
+        } else {
           const thisClient = this.props.activeClients.filter(
-            client => client._id === deleted.appointment.client
+            (client) => client._id === deleted.appointment.client
           );
           if (deleted.checked.email) {
             this.props.sendEmail({
@@ -592,7 +594,7 @@ class Schedule extends React.PureComponent {
               to: thisClient,
               message: `Your appointment on ${moment(
                 deleted.appointment.startDate
-              ).format("LLLL")} has been cancelled by your trainer. `
+              ).format("LLLL")} has been cancelled by your trainer. `,
             });
           }
 
@@ -602,12 +604,12 @@ class Schedule extends React.PureComponent {
               client_id: deleted.appointment.client,
               message: `Your appointment on ${moment(
                 deleted.appointment.startDate
-              ).format("LLLL")} has been cancelled by your trainer. `
+              ).format("LLLL")} has been cancelled by your trainer. `,
             });
           }
-        }
 
-        return this.props.deleteWorkout(deleted.appointment.id);
+          return this.props.deleteWorkout(deleted.appointment.id);
+        }
       }
       return { data, addedAppointment: {} };
     });
@@ -621,7 +623,7 @@ class Schedule extends React.PureComponent {
     this.setState({ ...this.state, open: false });
   };
 
-  currentDateChange = currentDate => {
+  currentDateChange = (currentDate) => {
     this.setState({ ...this.state, currentDate: currentDate });
   };
 
@@ -632,20 +634,20 @@ class Schedule extends React.PureComponent {
       startDayHour,
       endDayHour,
       open,
-      modalBody
+      modalBody,
     } = this.state;
     const { classes } = this.props;
 
     const toolBarStyle = {
       toolbarRoot: {
-        position: "relative"
+        position: "relative",
       },
       progress: {
         position: "absolute",
         width: "100%",
         bottom: 0,
-        left: 0
-      }
+        left: 0,
+      },
     };
 
     const desktopView = (
@@ -697,8 +699,8 @@ class Schedule extends React.PureComponent {
       <Paper>
         {this.props.alerts ? (
           <Suspense fallback={<CircularLoader />}>
-            {this.props.alerts.map(alert => {
-              return alert.msg.map(err => {
+            {this.props.alerts.map((alert) => {
+              return alert.msg.map((err) => {
                 return <ErrorAlert message={err} />;
               });
             })}
@@ -754,7 +756,7 @@ class Schedule extends React.PureComponent {
             this.onEditingAppointmentChange(undefined);
             this.onAddedAppointmentChange({
               startDate: new Date(currentDate).setHours(startDayHour),
-              endDate: new Date(currentDate).setHours(startDayHour + 1)
+              endDate: new Date(currentDate).setHours(startDayHour + 1),
             });
           }}
         >
@@ -786,16 +788,16 @@ Schedule.propTypes = {
   activeClients: PropTypes.array.isRequired,
   loadingClients: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   workouts: state.workouts.workouts,
   clients: state.clients.clients,
   activeClients: state.clients.active,
   loadingClients: state.clients.loading,
   loading: state.workouts.loading,
-  alerts: state.alerts.alerts
+  alerts: state.alerts.alerts,
 });
 
 export default connect(mapStateToProps, {
@@ -804,5 +806,5 @@ export default connect(mapStateToProps, {
   updateWorkout,
   sendWhatsApp,
   setPageName,
-  sendEmail
+  sendEmail,
 })(withStyles(styles, { name: "Schedule" })(Schedule));

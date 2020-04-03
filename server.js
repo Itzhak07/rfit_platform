@@ -31,6 +31,7 @@ db.once("open", function() {
 });
 
 // Init Middleware
+app.set('view engine', 'ejs');
 app.use(express.json({ extended: false }));
 app.use(
   bodyParser.urlencoded({

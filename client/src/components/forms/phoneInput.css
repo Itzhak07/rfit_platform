@@ -1,0 +1,11 @@
+.react-tel-input .form-control + div:before {
+  content: "Phone input";
+  position: absolute;
+  top: -7px;
+  left: 19px;
+  display: block;
+  background: white;
+  padding: 0 5px;
+  font-size: 13px;
+  width: 100px;
+}

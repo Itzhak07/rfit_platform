@@ -11,40 +11,46 @@ import {
   Box,
   Typography,
   Container,
-  MenuItem
+  MenuItem,
+  Input,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import MaskedInput from "react-text-mask";
 import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
 import { CircularLoader } from "../../layouts/Loader/Loaders";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/material.css";
+import "./phoneInput.css";
 
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
   input: {
-    borderRadius: "30px",
-    width: "100%"
-  }
+    width: "100%",
+  },
+  phonecontainer: {
+    width: 400,
+  },
 }));
 
 const AddClient = ({
@@ -52,14 +58,14 @@ const AddClient = ({
   alerts,
   closeModal,
   isNewClient,
-  sendEmail
+  sendEmail,
 }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
-    gender: ""
+    gender: "",
   });
 
   useEffect(() => {
@@ -74,10 +80,10 @@ const AddClient = ({
 
   const classes = useStyles();
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     try {
       await e.preventDefault();
 
@@ -86,12 +92,12 @@ const AddClient = ({
       await sendEmail({
         subject: "Welcome!",
         to: [formData],
-        message: `Hi ${firstName} ${lastName} 
-        Thanks for choosing me as your trainer!
-        If you would like to make your life a bit easier, please send a WhatsApp message to +14155238886 with code: join accept-noted ,
-        to get updated on appointments via WhatsApp.
-        Thanks!`,
-        type: "Welcome_Mail"
+        message: `Hi ${firstName} ${lastName}
+          Thanks for choosing me as your trainer!
+          If you would like to make your life a bit easier, please send a WhatsApp message to +14155238886 with code: join accept-noted ,
+          to get updated on appointments via WhatsApp.
+          Thanks!`,
+        type: "Welcome_Mail",
       });
 
       setFormData({
@@ -99,7 +105,7 @@ const AddClient = ({
         lastName: "",
         email: "",
         phone: "",
-        gender: ""
+        gender: "",
       });
     } catch (err) {
       console.log(err);
@@ -116,7 +122,7 @@ const AddClient = ({
         <Typography component="h1" variant="h5">
           New Client
         </Typography>
-        <form className={classes.form} onSubmit={e => onSubmit(e)}>
+        <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -126,7 +132,7 @@ const AddClient = ({
             label="First Name"
             name="firstName"
             autoComplete="firstName"
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             value={firstName}
             className={classes.input}
           />
@@ -140,7 +146,7 @@ const AddClient = ({
             type="text"
             id="lastName"
             autoComplete="lastName"
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             value={lastName}
             className={classes.input}
           />
@@ -154,11 +160,11 @@ const AddClient = ({
             type="text"
             id="email"
             autoComplete="email"
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             value={email}
             className={classes.input}
           />
-          <TextField
+          {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -171,7 +177,24 @@ const AddClient = ({
             onChange={e => onChange(e)}
             value={phone}
             className={classes.input}
+          /> */}
+
+          <PhoneInput
+            country={"us"}
+            value={phone}
+            inputProps={{
+              name: "phone",
+              required: true,
+            }}
+            enableSearch
+            // containerClass={classes.phonecontainer}
+            containerStyle={{ marginTop: 10 }}
+            // disableDropdown
+            inputClass={classes.input}
+            inputStyle={{ width: "100%" }}
+            onChange={(phone) => setFormData({ ...formData, phone })}
           />
+
           <TextField
             id="gender"
             select
@@ -182,9 +205,9 @@ const AddClient = ({
             margin="normal"
             required
             className={classes.input}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           >
-            {genderOptions.map(option => (
+            {genderOptions.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
@@ -203,8 +226,8 @@ const AddClient = ({
       </div>
       {alerts ? (
         <Suspense fallback={<CircularLoader />}>
-          {alerts.map(alert => {
-            return alert.msg.map(err => {
+          {alerts.map((alert) => {
+            return alert.msg.map((err) => {
               return <ErrorAlert message={err} />;
             });
           })}
@@ -223,12 +246,12 @@ AddClient.propTypes = {
   createClient: PropTypes.func.isRequired,
   sendEmail: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
-  isNewClient: PropTypes.bool.isRequired
+  isNewClient: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   alerts: state.alerts.alerts,
-  isNewClient: state.clients.isNewClient
+  isNewClient: state.clients.isNewClient,
 });
 
 export default connect(mapStateToProps, { createClient, sendEmail })(AddClient);
