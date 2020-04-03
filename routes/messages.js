@@ -16,7 +16,7 @@ router.get("/", auth, async function(req, res, next) {
 
     res.json(messages);
   } catch (err) {
-    res.status(409).render("error");
+    res.status(409).json("error");
   }
 });
 

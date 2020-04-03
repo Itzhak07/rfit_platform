@@ -21,21 +21,21 @@ mongoose.connect(db_atlas, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function() {
+db.once("open", function () {
   console.log("Connected!");
 });
 
 // Init Middleware
-app.set('view engine', 'ejs');
+app.set("view engine", "");
 app.use(express.json({ extended: false }));
 app.use(
   bodyParser.urlencoded({
-    extended: true
+    extended: true,
   })
 );
 app.use(cors());

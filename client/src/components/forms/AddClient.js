@@ -12,10 +12,8 @@ import {
   Typography,
   Container,
   MenuItem,
-  Input,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import MaskedInput from "react-text-mask";
 import { PersonAdd as PersonAddIcon } from "@material-ui/icons";
 import { Copyright } from "../Copyright/Copyright";
 import { CircularLoader } from "../../layouts/Loader/Loaders";

@@ -29,7 +29,6 @@
     "react-scripts": "^3.4.0",
     "react-scroll": "^1.7.16",
     "react-spring": "^8.0.27",
-    "react-text-mask": "^5.4.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "use-debounce": "^3.4.0",

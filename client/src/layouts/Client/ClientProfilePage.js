@@ -12,16 +12,16 @@ import { NotFound } from "../NotFound/NotFound";
 import ClientMessages from "../../components/Client/ClientMessages";
 import { BigLogoSpinner } from "../Loader/Loaders";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     display: "flex",
-    flexFlow: "column wrap"
+    flexFlow: "column wrap",
   },
   profileSection: {
     display: "flex",
     flexFlow: "row wrap",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
   profilePaper: {
     width: "100%",
@@ -29,21 +29,21 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 500,
     margin: "0 20px 20px 0",
     [theme.breakpoints.down("sm")]: {
-      margin: "0 0 20px 0"
-    }
+      margin: "0 0 20px 0",
+    },
   },
   tablePaper: {
     padding: 20,
-    marginTop: 20
+    marginTop: 20,
   },
   emailsPaper: {
     width: "100%",
     maxWidth: 500,
     height: 443,
     padding: 10,
-    marginBottom: 20
+    marginBottom: 20,
   },
-  item: { padding: "0 0 20px 0" }
+  item: { padding: "0 0 20px 0" },
 }));
 
 function ClientProfilePage({
@@ -53,13 +53,13 @@ function ClientProfilePage({
   whatsapps,
   topClients,
   setPageName,
-  loading
+  loading,
 }) {
   const [state, setState] = useState({
     thisClient: null,
     thisWorkouts: null,
     thisEmails: null,
-    thisWhatsapps: null
+    thisWhatsapps: null,
   });
   const { thisClient, thisWorkouts, thisEmails, thisWhatsapps } = state;
   const { id } = useParams();
@@ -71,23 +71,23 @@ function ClientProfilePage({
 
   useEffect(() => {
     if (clients !== null) {
-      const thisClient = clients.filter(client => {
+      const thisClient = clients.filter((client) => {
         return client._id === id;
       });
 
-      const clientWorkouts = workouts.filter(workouts => {
+      const clientWorkouts = workouts.filter((workouts) => {
         return workouts.client === id;
       });
 
-      const clientEmails = emails.filter(email => {
+      const clientEmails = emails.filter((email) => {
         let clientEmail = {
           subject: email.subject,
           date: email.date,
           message: email.message,
           type: email.type,
-          participants: email.participants.filter(client => {
+          participants: email.participants.filter((client) => {
             return client._id === id;
-          })
+          }),
         };
 
         if (clientEmail.participants.length > 0) {
@@ -95,15 +95,15 @@ function ClientProfilePage({
         }
       });
 
-      const clientWhatsAppMessages = whatsapps.filter(msg => {
+      const clientWhatsAppMessages = whatsapps.filter((msg) => {
         let message = {
           subject: msg.subject,
           date: msg.date,
           message: msg.message,
           type: msg.type,
-          participants: msg.participants.filter(client => {
+          participants: msg.participants.filter((client) => {
             return client._id === id;
-          })
+          }),
         };
         if (message.participants.length > 0) {
           return message;
@@ -114,7 +114,7 @@ function ClientProfilePage({
         thisClient: thisClient[0],
         thisWorkouts: clientWorkouts,
         thisEmails: clientEmails,
-        thisWhatsapps: clientWhatsAppMessages
+        thisWhatsapps: clientWhatsAppMessages,
       });
     }
   }, [clients, workouts, emails, whatsapps, id]);
@@ -153,8 +153,10 @@ function ClientProfilePage({
             </div>
           </Container>
         </div>
-      ) : (
+      ) : !loading && thisClient == null ? (
         <NotFound />
+      ) : (
+        ""
       )}
     </div>
   );
@@ -167,16 +169,16 @@ ClientProfilePage.propTypes = {
   whatsapps: PropTypes.array,
   topClients: PropTypes.array,
   setPageName: PropTypes.func,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   clients: state.clients.clients,
   workouts: state.workouts.workouts,
   emails: state.messages.emails,
   whatsapps: state.messages.whatsapp,
   topClients: state.clients.topClients,
-  loading: state.clients.loading
+  loading: state.clients.loading,
 });
 
 export default connect(mapStateToProps, { setPageName })(ClientProfilePage);

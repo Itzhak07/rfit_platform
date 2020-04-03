@@ -28,10 +28,10 @@ class ClientController {
         firstName: firstName,
         lastName: lastName,
         email: email,
-        phone: phone,
+        phone: phone.split(" ").join(""),
         gender: gender,
         status: 1,
-        user: id
+        user: id,
       });
 
       newClient.save((err, data) => {
