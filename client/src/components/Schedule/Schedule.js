@@ -511,7 +511,7 @@ class Schedule extends React.PureComponent {
     this.setState((state) => {
       let { data } = state;
       if (added) {
-        if (added.checked.email || added.checked.whatsapp) {
+        if ("checked" in added) {
           const thisClient = this.props.activeClients.filter(
             (client) => client._id === added.data.title
           );
@@ -554,7 +554,7 @@ class Schedule extends React.PureComponent {
           }
         }
 
-        if (changed.checked.email || changed.checked.whatsapp) {
+        if ("checked" in changed) {
           let thisClient = this.props.activeClients.filter(
             (client) => client._id === update.client
           );
@@ -582,12 +582,11 @@ class Schedule extends React.PureComponent {
         this.props.updateWorkout(update);
       }
       if (deleted !== undefined) {
-        if (typeof deleted === "string") {
-          return this.props.deleteWorkout(deleted);
-        } else {
+        if ("checked" in deleted) {
           const thisClient = this.props.activeClients.filter(
             (client) => client._id === deleted.appointment.client
           );
+
           if (deleted.checked.email) {
             this.props.sendEmail({
               subject: "Appointment Cancelled",
@@ -610,6 +609,7 @@ class Schedule extends React.PureComponent {
 
           return this.props.deleteWorkout(deleted.appointment.id);
         }
+        return this.props.deleteWorkout(deleted);
       }
       return { data, addedAppointment: {} };
     });
