@@ -10,7 +10,7 @@ import {
   Typography,
   Container,
   Checkbox,
-  FormControlLabel
+  FormControlLabel,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { FitnessCenter as FitnessCenterIcon } from "@material-ui/icons";
@@ -18,7 +18,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import {
   DateTimePicker,
   TimePicker,
-  MuiPickersUtilsProvider
+  MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Copyright } from "../Copyright/Copyright";
@@ -31,29 +31,29 @@ const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
   input: {
     borderRadius: "30px",
     width: "100%",
-    margin: "16px 0 8px 0"
-  }
+    margin: "16px 0 8px 0",
+  },
 }));
 
 const AddWorkout = ({
@@ -63,18 +63,18 @@ const AddWorkout = ({
   closeModal,
   isNewWorkout,
   sendEmail,
-  sendWhatsApp
+  sendWhatsApp,
 }) => {
   const [formData, setFormData] = useState({
     client: "",
     startDate: new Date(),
     endDate: new Date(),
-    notes: ""
+    notes: "",
   });
 
   const [checked, setChecbox] = useState({
     email: false,
-    whatsApp: false
+    whatsApp: false,
   });
 
   useEffect(() => {
@@ -85,35 +85,35 @@ const AddWorkout = ({
 
   const { endDate, startDate, notes } = formData;
 
-  const clientsOptions = activeClients.map(client => {
+  const clientsOptions = activeClients.map((client) => {
     return {
       id: client._id,
-      text: client.firstName + " " + client.lastName
+      text: client.firstName + " " + client.lastName,
     };
   });
 
   const classes = useStyles();
 
-  const onWorkoutChange = e => {
+  const onWorkoutChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onClientChange = id => {
+  const onClientChange = (id) => {
     setFormData({ ...formData, client: id });
   };
 
-  const onStartChange = e => {
+  const onStartChange = (e) => {
     setFormData({ ...formData, startDate: e, endDate: e });
   };
 
-  const onEndChange = e => {
+  const onEndChange = (e) => {
     setFormData({ ...formData, endDate: e });
   };
 
-  const handleCheckBox = e =>
+  const handleCheckBox = (e) =>
     setChecbox({ ...checked, [e.target.name]: e.target.checked });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     createWorkout(formData);
 
@@ -121,7 +121,7 @@ const AddWorkout = ({
       console.log(checked.email, "email");
 
       const thisClient = activeClients.filter(
-        client => client._id === formData.client
+        (client) => client._id === formData.client
       );
 
       sendEmail({
@@ -129,13 +129,13 @@ const AddWorkout = ({
         to: thisClient,
         message: ` an appointment has been scheduled for you on ${moment(
           formData.startDate
-        ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`
+        ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`,
       });
     }
 
     if (checked.whatsApp) {
       const thisClient = activeClients.filter(
-        client => client._id === formData.client
+        (client) => client._id === formData.client
       );
 
       console.log(checked.whatsApp, "client");
@@ -145,7 +145,7 @@ const AddWorkout = ({
         client_id: thisClient[0]._id,
         message: ` an appointment has been scheduled for you on ${moment(
           formData.startDate
-        ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`
+        ).format("LLLL")} - ${moment(formData.endDate).format("LLLL")}`,
       });
     }
 
@@ -155,7 +155,7 @@ const AddWorkout = ({
       client: "",
       startDate: new Date(),
       endDate: new Date(),
-      notes: ""
+      notes: "",
     });
   };
 
@@ -169,16 +169,16 @@ const AddWorkout = ({
         <Typography component="h1" variant="h5">
           New Workout
         </Typography>
-        <form className={classes.form} onSubmit={e => onSubmit(e)}>
+        <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <Autocomplete
             id="combo-box-demo"
             options={clientsOptions}
-            getOptionLabel={option => option.text}
+            getOptionLabel={(option) => option.text}
             className={classes.input}
             onChange={(event, value) => {
               onClientChange(value.id);
             }}
-            renderInput={params => (
+            renderInput={(params) => (
               <TextField
                 {...params}
                 className={classes.input}
@@ -198,7 +198,7 @@ const AddWorkout = ({
               inputVariant="outlined"
               value={startDate}
               disablePast
-              onChange={e => onStartChange(e)}
+              onChange={(e) => onStartChange(e)}
             />
           </MuiPickersUtilsProvider>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -211,14 +211,14 @@ const AddWorkout = ({
               inputVariant="outlined"
               autoOk
               value={endDate}
-              onChange={e => onEndChange(e)}
+              onChange={(e) => onEndChange(e)}
             />
           </MuiPickersUtilsProvider>
           <TextField
             id="outlined-multiline-static"
             name="notes"
             label="Workout"
-            onChange={e => onWorkoutChange(e)}
+            onChange={(e) => onWorkoutChange(e)}
             className={classes.input}
             multiline
             rows="5"
@@ -261,8 +261,8 @@ const AddWorkout = ({
       </div>
       {alerts ? (
         <Suspense fallback={<CircularLoader />}>
-          {alerts.map(alert => {
-            return alert.msg.map(err => {
+          {alerts.map((alert) => {
+            return alert.msg.map((err) => {
               return <ErrorAlert message={err} />;
             });
           })}
@@ -283,17 +283,17 @@ AddWorkout.propTypes = {
   sendEmail: PropTypes.func.isRequired,
   sendWhatsApp: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
-  isNewWorkout: PropTypes.bool.isRequired
+  isNewWorkout: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   alerts: state.alerts.alerts,
   activeClients: state.clients.active,
-  isNewWorkout: state.workouts.isNewWorkout
+  isNewWorkout: state.workouts.isNewWorkout,
 });
 
 export default connect(mapStateToProps, {
   createWorkout,
   sendEmail,
-  sendWhatsApp
+  sendWhatsApp,
 })(AddWorkout);

@@ -8,7 +8,7 @@ import {
   Box,
   Typography,
   Container,
-  Grid
+  Grid,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,24 +23,24 @@ const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
@@ -49,17 +49,17 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
     lastName: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
   });
 
   const { firstName, lastName, email, password, password2 } = formData;
 
   const classes = useStyles();
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
       setAlert([{ msg: "Passwords doesn't match." }]);
@@ -82,7 +82,7 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} onSubmit={e => onSubmit(e)}>
+        <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -93,9 +93,8 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
                 fullWidth
                 id="firstName"
                 label="First Name"
-                autoFocus
                 value={firstName}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -108,7 +107,7 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
                 name="lastName"
                 autoComplete="lastName"
                 value={lastName}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -121,7 +120,7 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
                 name="email"
                 autoComplete="email"
                 value={email}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -135,7 +134,7 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
                 id="password"
                 autoComplete="current-password"
                 value={password}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -149,7 +148,7 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
                 id="password2"
                 autoComplete="password2"
                 value={password2}
-                onChange={e => onChange(e)}
+                onChange={(e) => onChange(e)}
               />
             </Grid>
           </Grid>
@@ -166,8 +165,8 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
       </div>
       {alerts ? (
         <Suspense fallback={<CircularLoader />}>
-          {alerts.map(alert => {
-            return alert.msg.map(err => {
+          {alerts.map((alert) => {
+            return alert.msg.map((err) => {
               return <ErrorAlert message={err} />;
             });
           })}
@@ -185,12 +184,12 @@ const Register = ({ alerts, register, isAuthenticated, setAlert }) => {
 Register.propTypes = {
   register: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  alerts: state.alerts.alerts
+  alerts: state.alerts.alerts,
 });
 
 export default connect(mapStateToProps, { register, setAlert })(Register);

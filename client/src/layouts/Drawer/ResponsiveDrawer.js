@@ -20,14 +20,14 @@ import {
   makeStyles,
   useTheme,
   Button,
-  Avatar
+  Avatar,
 } from "@material-ui/core/";
 
 import {
   Menu as MenuIcon,
   ExitToApp as ExitToAppIcon,
   ExpandLess,
-  ExpandMore
+  ExpandMore,
 } from "@material-ui/icons/";
 
 import logo from "../../assets/images/logo.png";
@@ -39,15 +39,15 @@ import { BigLogoSpinner, CircularLoader } from "../Loader/Loaders";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
       width: drawerWidth,
-      flexShrink: 0
-    }
+      flexShrink: 0,
+    },
   },
   appBar: {
     backgroundImage:
@@ -55,72 +55,72 @@ const useStyles = makeStyles(theme => ({
     marginLeft: drawerWidth,
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
-      flexGrow: 1
-    }
+      flexGrow: 1,
+    },
   },
 
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   toolbar: theme.mixins.toolbar,
 
   logoWrapper: {
-    textAlign: "center"
+    textAlign: "center",
   },
 
   logo: {
     width: 114,
     position: "relative",
-    top: 5
+    top: 5,
   },
   pageName: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   logout: {
-    color: "white"
+    color: "white",
   },
   user: {
     textAlign: "center",
-    padding: "10px 0"
+    padding: "10px 0",
   },
   avatar: {
     width: theme.spacing(7),
     height: theme.spacing(7),
-    margin: "auto"
+    margin: "auto",
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    width: "100%"
+    width: "100%",
   },
   listItem: {
     padding: "15px 0 15px 15px;",
     transition: "all 0.3s ease",
     "&:hover": {
       padding: "20px 0 20px 15px",
-      transition: "all 0.3s ease"
-    }
+      transition: "all 0.3s ease",
+    },
   },
   listIcon: {
-    fontSize: 30
+    fontSize: 30,
   },
   collapsed: {
     transition: "all 0.3s ease",
     "&:hover": {
       paddingLeft: 5,
-      transition: "all 0.3s ease"
-    }
+      transition: "all 0.3s ease",
+    },
   },
   active: {
     transition: "all 0.3s ease-in",
-    borderLeft: "7px solid #3f51b5"
-  }
+    borderLeft: "7px solid #3f51b5",
+  },
 }));
 
 function ResponsiveDrawer({
@@ -128,7 +128,7 @@ function ResponsiveDrawer({
   children,
   logout,
   auth: { user },
-  pageName
+  pageName,
 }) {
   const classes = useStyles();
   const theme = useTheme();
@@ -139,7 +139,7 @@ function ResponsiveDrawer({
       pageName === "New Message" || pageName === "Messages Center"
         ? true
         : false,
-    workouts: pageName === "Workouts Manager" ? true : false
+    workouts: pageName === "Workouts Manager" ? true : false,
   });
 
   function handleDrawerToggle() {
@@ -149,22 +149,22 @@ function ResponsiveDrawer({
   useEffect(() => {
     setActive(pageName);
     if (pageName === "Workouts Manager") {
-      setOpen(open => ({ ...open, workouts: true }));
+      setOpen((open) => ({ ...open, workouts: true }));
     } else {
-      setOpen(open => ({ ...open, workouts: false }));
+      setOpen((open) => ({ ...open, workouts: false }));
     }
     if (pageName === "New Message" || pageName === "Messages Center") {
-      setOpen(open => ({ ...open, messages: true }));
+      setOpen((open) => ({ ...open, messages: true }));
     } else {
-      setOpen(open => ({ ...open, messages: false }));
+      setOpen((open) => ({ ...open, messages: false }));
     }
   }, [pageName]);
 
-  const openCollapse = state => {
+  const openCollapse = (state) => {
     setOpen({ ...open, [state]: !open[state] });
   };
 
-  const drawerItemsList = drawerItems.map(item => {
+  const drawerItemsList = drawerItems.map((item) => {
     return (
       <div
         key={item.name}
@@ -195,11 +195,15 @@ function ResponsiveDrawer({
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.name} />
-              {open[item.state] ? <ExpandLess /> : <ExpandMore />}
+              {open[item.state] ? (
+                <ExpandLess fontSize="small" />
+              ) : (
+                <ExpandMore fontSize="small" />
+              )}
             </ListItem>
             <Collapse in={open[item.state]} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                {item.subMenu.map(subitem => {
+                {item.subMenu.map((subitem) => {
                   return (
                     <div
                       key={subitem.key}
@@ -262,7 +266,7 @@ function ResponsiveDrawer({
       to={{ opacity: 1, marginTop: 0 }}
       config={config.slow}
     >
-      {props => (
+      {(props) => (
         <Toolbar style={props}>
           <IconButton
             color="inherit"
@@ -313,10 +317,10 @@ function ResponsiveDrawer({
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true // Better open performance on mobile.
+              keepMounted: true, // Better open performance on mobile.
             }}
           >
             {drawer}
@@ -325,7 +329,7 @@ function ResponsiveDrawer({
         <Hidden xsDown implementation="css">
           <Drawer
             classes={{
-              paper: classes.drawerPaper
+              paper: classes.drawerPaper,
             }}
             variant="permanent"
             open
@@ -346,12 +350,12 @@ ResponsiveDrawer.propTypes = {
   container: PropTypes.object,
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  pageName: PropTypes.string.isRequired
+  pageName: PropTypes.string.isRequired,
 };
 
-const mapStateToPros = state => ({
+const mapStateToPros = (state) => ({
   auth: state.auth,
-  pageName: state.page.pageName
+  pageName: state.page.pageName,
 });
 
 export default connect(mapStateToPros, { logout })(ResponsiveDrawer);

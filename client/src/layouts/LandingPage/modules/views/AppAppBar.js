@@ -19,59 +19,60 @@ const MobileMenu = lazy(() =>
   import(/* webpackChunkName: "MobileMenu"*/ "../components/MobileMenu")
 );
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    position: "absolute"
+    position: "absolute",
   },
   title: {
     fontSize: 24,
     color: "white",
-    cursor: "pointer"
+    cursor: "pointer",
   },
   placeholder: toolbarStyles(theme).root,
   toolbar: {
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   left: {
-    flex: 1
+    flex: 1,
   },
   right: {
     flex: 2,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   rightLink: {
     fontSize: 14,
     color: theme.palette.common.white,
     marginLeft: theme.spacing(1),
-    "&:hover": {
-      color: "#dcdcdc"
-    }
   },
   linkItem: {
-    color: theme.palette.common.white
+    color: theme.palette.common.white,
   },
   signUpButton: {
-    color: theme.palette.secondary.main
+    color: theme.palette.secondary.main,
   },
   menuButton: {
     color: theme.palette.common.white,
-    fontSize: 20
-  }
+    fontSize: 20,
+    transition: "all 0.3s ease",
+  },
+  active: {
+    borderBottom: `1px solid ${theme.palette.secondary.main}`,
+  },
 });
 
 function AppAppBar(props) {
   const { classes } = props;
   const [open, setOpen] = useState({
     menu: false,
-    modal: false
+    modal: false,
   });
 
   const [formType, setForm] = useState("");
 
   const { menu, modal } = open;
 
-  const modalHandler = type => {
+  const modalHandler = (type) => {
     setOpen({ ...open, modal: !modal });
 
     if (type) {
@@ -85,7 +86,7 @@ function AppAppBar(props) {
 
   const appBarDesktopItems = menuList.map((item, index) => {
     return (
-      <Button className={classes.rightLink} key={index}>
+      <Button key={index}>
         <Link
           to={item.to}
           spy={true}
@@ -93,6 +94,7 @@ function AppAppBar(props) {
           offset={item.offset}
           duration={500}
           className={classes.linkItem}
+          activeClass={classes.active}
         >
           {item.primary}
         </Link>
@@ -116,7 +118,7 @@ function AppAppBar(props) {
       to={{ opacity: 1, marginTop: 0 }}
       config={{ velocity: 10 }}
     >
-      {props => (
+      {(props) => (
         <div className={classes.root}>
           <AppBar style={props} position="fixed">
             <Toolbar className={classes.toolbar}>
@@ -155,7 +157,7 @@ function AppAppBar(props) {
           <Suspense fallback={<CircularLoader />}>
             <AuthModal
               open={open.modal}
-              handleCLose={modalHandler}
+              handleClose={modalHandler}
               type={formType}
             />
           </Suspense>
@@ -166,7 +168,7 @@ function AppAppBar(props) {
 }
 
 AppAppBar.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(AppAppBar);

@@ -12,30 +12,33 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Collapse
+  Collapse,
 } from "@material-ui/core";
 import {
   ExpandLess,
   ExpandMore,
   Face,
-  FitnessCenter
+  FitnessCenter,
 } from "@material-ui/icons";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   table: {
-    minWidth: 650
+    minWidth: 650,
   },
   name: {
-    fontWeight: 800
+    fontWeight: 800,
   },
   mobileRoot: {
     width: "100%",
     maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  }
+    backgroundColor: theme.palette.background.paper,
+  },
+  mobileIcon: {
+    minWidth: 35,
+  },
 }));
 
 const DesktopView = ({ data }) => {
@@ -52,7 +55,7 @@ const DesktopView = ({ data }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(workout => {
+          {data.map((workout) => {
             return (
               <TableRow key={workout.id}>
                 <TableCell
@@ -99,7 +102,7 @@ const MobileView = ({ data }) => {
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItem>
-              <ListItemIcon>
+              <ListItemIcon className={classes.mobileIcon}>
                 <Face />
               </ListItemIcon>
               <ListItemText>
@@ -113,7 +116,7 @@ const MobileView = ({ data }) => {
               </ListItemText>
             </ListItem>
             <ListItem divider>
-              <ListItemIcon>
+              <ListItemIcon className={classes.mobileIcon}>
                 <FitnessCenter />
               </ListItemIcon>
               <ListItemText primary={workout.notes}></ListItemText>
@@ -131,7 +134,7 @@ const MobileView = ({ data }) => {
       className={classes.mobileRoot}
       dense
     >
-      {data.map(workout => {
+      {data.map((workout) => {
         return <MobileItems workout={workout} />;
       })}
     </List>

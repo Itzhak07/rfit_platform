@@ -70,7 +70,7 @@ const Schedule = lazy(async () => {
   await store.dispatch(fetchClients());
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Schedule"*/ "./components/Schedule/Schedule"),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -80,7 +80,7 @@ const WorkoutesManager = lazy(async () => {
     import(
       /* webpackChunkName: "WorkoutsManagePage"*/ "./layouts/Workouts/WorkoutsManagePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -90,7 +90,7 @@ const ClientsManager = lazy(async () => {
     import(
       /* webpackChunkName: "ClientsManagePage"*/ "./layouts/Client/ClientsManagePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -98,7 +98,7 @@ const ClientsManager = lazy(async () => {
 const Home = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Home"*/ "./layouts/Home/Home"),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -106,7 +106,7 @@ const Home = lazy(async () => {
 const Account = lazy(async () => {
   const [moduleExports] = await Promise.all([
     import(/* webpackChunkName: "Account"*/ "./layouts/Account/Account"),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -116,7 +116,7 @@ const ClientProfilePage = lazy(async () => {
     import(
       /* webpackChunkName: "ClientProfilePage"*/ "./layouts/Client/ClientProfilePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -127,7 +127,7 @@ const SendMessagePage = lazy(async () => {
     import(
       /* webpackChunkName: "SendMessagePage"*/ "./layouts/Messages/SendMessagePage"
     ),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });
@@ -138,7 +138,7 @@ const AllMessagesPage = lazy(async () => {
     import(
       /* webpackChunkName: "AllMessagesPage"*/ "./layouts/Messages/AllMessagesPage"
     ),
-    new Promise(resolve => setTimeout(resolve, 300))
+    new Promise((resolve) => setTimeout(resolve, 300)),
   ]);
   return moduleExports;
 });

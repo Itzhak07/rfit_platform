@@ -1,16 +1,8 @@
 import React, { Suspense, lazy } from "react";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  Slide,
-  AppBar,
-  Toolbar,
-  IconButton
-} from "@material-ui/core";
-import { Close as CloseIcon } from "@material-ui/icons";
+import { Button, Dialog, DialogActions, Slide } from "@material-ui/core";
 import { CircularLoader } from "../Loader/Loaders";
 import { isMobile } from "react-device-detect";
+import ModalToolbar from "./components/ModalToolbar";
 
 const AddClient = lazy(() =>
   import(
@@ -41,21 +33,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AddModal({ open, closeModal, type }) {
-  const modalToolbar = (
-    <AppBar style={{ position: "relative" }}>
-      <Toolbar>
-        <IconButton
-          edge="start"
-          color="inherit"
-          onClick={closeModal}
-          aria-label="close"
-        >
-          <CloseIcon />
-        </IconButton>
-      </Toolbar>
-    </AppBar>
-  );
-
   return (
     <div>
       <Dialog
@@ -68,7 +45,7 @@ export default function AddModal({ open, closeModal, type }) {
         fullScreen={isMobile ? true : false}
         maxWidth="lg"
       >
-        {modalToolbar}
+        <ModalToolbar closeModal={closeModal} />
         <Suspense fallback={<CircularLoader />}>
           {type === "Client" ? (
             <AddClient closeModal={closeModal} />

@@ -13,7 +13,7 @@ const ClientsManagePage = ({
   clients,
   loading,
   alerts,
-  setPageName
+  setPageName,
 }) => {
   useEffect(() => {
     setPageName("Clients Manager");
@@ -42,17 +42,17 @@ ClientsManagePage.propTypes = {
   updateClient: PropTypes.func.isRequired,
   setPageName: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   clients: state.clients.clients,
   loading: state.clients.loading,
-  alerts: state.alerts.alerts
+  alerts: state.alerts.alerts,
 });
 
 export default connect(mapStateToProps, {
   createClient,
   updateClient,
-  setPageName
+  setPageName,
 })(ClientsManagePage);

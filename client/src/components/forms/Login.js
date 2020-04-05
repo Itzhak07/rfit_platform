@@ -21,43 +21,43 @@ const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
   },
   input: {
-    borderRadius: "30px"
-  }
+    borderRadius: "30px",
+  },
 }));
 
 const Login = ({ login, alerts, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const { email, password } = formData;
 
   const classes = useStyles();
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     login(email, password);
   };
@@ -76,7 +76,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
         <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <form className={classes.form} onSubmit={e => onSubmit(e)}>
+        <form className={classes.form} onSubmit={(e) => onSubmit(e)}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -86,8 +86,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             value={email}
             className={classes.input}
           />
@@ -101,7 +100,7 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             type="password"
             id="password-login"
             autoComplete="current-password"
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
             value={password}
             className={classes.input}
           />
@@ -118,8 +117,8 @@ const Login = ({ login, alerts, isAuthenticated }) => {
       </div>
       {alerts ? (
         <Suspense fallback={<CircularLoader />}>
-          {alerts.map(alert => {
-            return alert.msg.map(err => {
+          {alerts.map((alert) => {
+            return alert.msg.map((err) => {
               return <ErrorAlert message={err} />;
             });
           })}
@@ -136,12 +135,12 @@ const Login = ({ login, alerts, isAuthenticated }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  alerts: state.alerts.alerts
+  alerts: state.alerts.alerts,
 });
 
 export default connect(mapStateToProps, { login })(Login);

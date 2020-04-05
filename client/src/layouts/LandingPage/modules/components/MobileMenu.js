@@ -7,31 +7,36 @@ import {
   Button,
   ListItem,
   ListItemText,
-  Drawer
+  Drawer,
 } from "@material-ui/core/";
 
 import { menuList } from "../views/utils";
 
 const useStyles = makeStyles({
   list: {
-    width: "100%"
+    width: "100%",
+    height: 310,
   },
   listItem: {
-    textAlign: "center"
+    textAlign: "center",
+    height: 100,
   },
   rightLink: {
     fontSize: 14,
 
     color: "black",
     "&:hover": {
-      color: "#dcdcdc"
-    }
+      color: "#dcdcdc",
+    },
   },
   menuButton: {
     height: "100%",
     color: "white",
-    fontSize: 30
-  }
+    fontSize: 30,
+  },
+  itemText: {
+    fontSize: 26,
+  },
 });
 
 export default function MobileMenu({ open, setOpen }) {
@@ -56,7 +61,13 @@ export default function MobileMenu({ open, setOpen }) {
             key={index}
           >
             <ListItem divider button className={classes.listItem}>
-              <ListItemText primary={item.primary} />
+              <ListItemText
+                primary={item.primary}
+                primaryTypographyProps={{
+                  variant: "h5",
+                  className: classes.itemText,
+                }}
+              />
             </ListItem>
           </Link>
         );
