@@ -12,7 +12,7 @@ function MySnackbar({
   isNewWorkout,
   isNewClient,
   isClientUpdate,
-  isNewMessage
+  isNewMessage,
 }) {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -31,7 +31,7 @@ function MySnackbar({
       setOpen(true);
     }
     if (isNewMessage) {
-      setMessage("Message has been sent!");
+      setMessage("Message was sent!");
       setOpen(true);
     }
   }, [isNewClient, isNewWorkout, isClientUpdate, isNewMessage]);
@@ -59,14 +59,14 @@ MySnackbar.propTypes = {
   isNewWorkout: PropTypes.bool.isRequired,
   isNewClient: PropTypes.bool.isRequired,
   isClientUpdate: PropTypes.bool.isRequired,
-  isNewMessage: PropTypes.bool.isRequired
+  isNewMessage: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isNewWorkout: state.workouts.isNewWorkout,
   isNewClient: state.clients.isNewClient,
   isClientUpdate: state.clients.isClientUpdate,
-  isNewMessage: state.messages.isNewMessage
+  isNewMessage: state.messages.isNewMessage,
 });
 
 export default connect(mapStateToProps, {})(MySnackbar);

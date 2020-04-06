@@ -4,35 +4,35 @@ import { withStyles } from "@material-ui/core/styles";
 import { capitalize } from "@material-ui/core/utils";
 import MuiTypography from "@material-ui/core/Typography";
 
-const styles = theme => ({
+const styles = (theme) => ({
   markedH2Center: {
     height: 4,
     width: 73,
     display: "block",
     margin: `${theme.spacing(1)}px auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   markedH3Center: {
     height: 4,
     width: 55,
     display: "block",
     margin: `${theme.spacing(1)}px auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   markedH4Center: {
     height: 4,
     width: 55,
     display: "block",
     margin: `${theme.spacing(1)}px auto 0`,
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.secondary.main,
   },
   markedH6Left: {
     height: 2,
     width: 28,
     display: "block",
     marginTop: theme.spacing(0.5),
-    background: "currentColor"
-  }
+    background: "currentColor",
+  },
 });
 
 const variantMapping = {
@@ -42,7 +42,7 @@ const variantMapping = {
   h4: "h1",
   h5: "h3",
   h6: "h2",
-  subtitle1: "h3"
+  subtitle1: "h3",
 };
 
 function Typography(props) {
@@ -66,7 +66,7 @@ Typography.propTypes = {
   children: PropTypes.node,
   classes: PropTypes.object.isRequired,
   marked: PropTypes.oneOf([false, "center", "left"]),
-  variant: PropTypes.string
+  variant: PropTypes.string,
 };
 
 export default withStyles(styles)(Typography);

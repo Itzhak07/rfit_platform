@@ -9,14 +9,14 @@ import {
   Box,
   Typography,
   Container,
+  InputAdornment,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { LockOutlined as LockOutlinedIcon } from "@material-ui/icons/";
 import { makeStyles } from "@material-ui/core/styles";
 import { login } from "../../actions/authActions";
 import { Redirect } from "react-router-dom";
 import { Copyright } from "../Copyright/Copyright";
 import { CircularLoader } from "../../layouts/Loader/Loaders";
-
 const ErrorAlert = lazy(() =>
   import(/* webpackChunkName: "ErrorAlert"*/ "../Alerts/ErrorAlert")
 );
@@ -38,9 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-  },
-  input: {
-    borderRadius: "30px",
   },
 }));
 
@@ -88,7 +85,6 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             autoComplete="email"
             onChange={(e) => onChange(e)}
             value={email}
-            className={classes.input}
           />
           <TextField
             variant="outlined"
@@ -102,7 +98,6 @@ const Login = ({ login, alerts, isAuthenticated }) => {
             autoComplete="current-password"
             onChange={(e) => onChange(e)}
             value={password}
-            className={classes.input}
           />
           <Button
             type="submit"

@@ -1,96 +1,48 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Typography from "../components/Typography";
 import Mockup from "../../../../assets/images/mockup.png";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(4)
+    display: "flex",
+    flexFlow: "row wrap-reverse",
+    justifyContent: "space-evenly",
+    margin: "50px 0",
   },
+
   images: {
     width: "100%",
-    margin: "50px auto"
+    padding: 16,
   },
   imageWrapper: {
     position: "relative",
     display: "block",
+    maxWidth: 900,
+
     padding: 0,
     borderRadius: 0,
-    height: "40vh",
-    [theme.breakpoints.down("sm")]: {
-      width: "100% !important",
-      height: 100
-    },
-    "&:hover": {
-      zIndex: 1
-    },
-    "&:hover $imageBackdrop": {
-      opacity: 0.15
-    },
-    "&:hover $imageMarked": {
-      opacity: 0
-    },
-    "&:hover $imageTitle": {
-      border: "4px solid currentColor"
-    }
   },
-  imageButton: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: theme.palette.common.white
+  texts: {
+    maxWidth: 700,
+    padding: 20,
   },
-  imageSrc: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: "cover",
-    backgroundPosition: "center 40%"
+  pargraph: {
+    fontSize: 24,
   },
-  imageBackdrop: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    background: theme.palette.common.black,
-    opacity: 0.5,
-    transition: theme.transitions.create("opacity")
+  bolder: {
+    fontWeight: 500,
+    color: "#3f51b5;",
   },
-  imageTitle: {
-    position: "relative",
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px 14px`
-  },
-  imageMarked: {
-    height: 3,
-    width: 18,
-    background: theme.palette.common.white,
-    position: "absolute",
-    bottom: -2,
-    left: "calc(50% - 9px)",
-    transition: theme.transitions.create("opacity")
-  }
 });
 
 function MockUpSection(props) {
   const { classes } = props;
 
   return (
-    <Container className={classes.root} component="section">
-      <Typography variant="h2" marked="center" align="center" component="h2">
-        Everything you need in one place
-      </Typography>
-      <div className={classes.imagesWrapper}>
+    <div className={classes.root} component="section">
+      <div className={classes.imageWrapper}>
         <img
           className={classes.images}
           src={Mockup}
@@ -98,12 +50,42 @@ function MockUpSection(props) {
           alt="mockup"
         />
       </div>
-    </Container>
+      <div className={classes.texts}>
+        <Typography
+          variant="h2"
+          marked="center"
+          align="center"
+          component="h2"
+          gutterBottom
+        >
+          Everything you need in one place
+        </Typography>
+        <Typography
+          variant="h5"
+          component="h5"
+          paragraph
+          className={classes.pargraph}
+        >
+          Every trainer has a very tight schedule.
+          <br />
+          Between trainig sessions, programming appointments, communication with
+          clients and etc...
+          <br />
+          the <span className={classes.bolder}>RFit Platform</span> was created
+          to provide a <span className={classes.bolder}>SIMPLE</span> but{" "}
+          <span className={classes.bolder}>POWERFUL</span> solution to manage it
+          all.
+          <br />
+          Free of charge and unlimited of use, the RFit Platform is here to
+          assit your every need.
+        </Typography>
+      </div>
+    </div>
   );
 }
 
 MockUpSection.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(MockUpSection);
