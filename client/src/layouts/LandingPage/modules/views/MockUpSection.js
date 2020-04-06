@@ -66,10 +66,10 @@ function MockUpSection(props) {
           paragraph
           className={classes.pargraph}
         >
-          Every trainer has a very tight schedule.
+          Every trainer has a very tight schedule,
           <br />
-          Between trainig sessions, programming appointments, communication with
-          clients and etc...
+          whether if there's a training session, programming appointment, client
+          call and etc...
           <br />
           the <span className={classes.bolder}>RFit Platform</span> was created
           to provide a <span className={classes.bolder}>SIMPLE</span> but{" "}
