@@ -582,7 +582,11 @@ class Schedule extends React.PureComponent {
 
         this.props.updateWorkout(update);
       }
+
       if (deleted !== undefined) {
+        if (typeof deleted === "string") {
+          return this.props.deleteWorkout(deleted);
+        }
         if ("checked" in deleted) {
           const thisClient = this.props.activeClients.filter(
             (client) => client._id === deleted.appointment.client
@@ -607,10 +611,8 @@ class Schedule extends React.PureComponent {
               ).format("LLLL")} has been cancelled by your trainer. `,
             });
           }
-
           return this.props.deleteWorkout(deleted.appointment.id);
         }
-        return this.props.deleteWorkout(deleted);
       }
       return { data, addedAppointment: {} };
     });

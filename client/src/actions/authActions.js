@@ -7,7 +7,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  UPDATE_USER
+  UPDATE_USER,
 } from "./types";
 import { setAlert } from "./alertActions";
 import setAuthToken from "../utils/setAuthToken";
@@ -16,7 +16,7 @@ import { fetchWorkouts } from "./workoutActions";
 import { setPageName } from "./pageActions";
 import { getMessages } from "./messageActions";
 
-export const loadUser = () => async dispatch => {
+export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -26,7 +26,7 @@ export const loadUser = () => async dispatch => {
 
     await dispatch({
       type: USER_LOADED,
-      payload: res.data
+      payload: res.data,
     });
 
     await dispatch(fetchClients());
@@ -34,21 +34,18 @@ export const loadUser = () => async dispatch => {
     await dispatch(getMessages());
   } catch (err) {
     dispatch({
-      type: AUTH_ERROR
+      type: AUTH_ERROR,
     });
   }
 };
 
-export const register = ({
-  firstName,
-  lastName,
-  email,
-  password
-}) => async dispatch => {
+export const register = ({ firstName, lastName, email, password }) => async (
+  dispatch
+) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   const body = JSON.stringify({ firstName, lastName, email, password });
@@ -62,7 +59,7 @@ export const register = ({
 
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(loadUser());
@@ -72,16 +69,16 @@ export const register = ({
     dispatch(setAlert(error));
 
     dispatch({
-      type: REGISTER_FAIL
+      type: REGISTER_FAIL,
     });
   }
 };
 
-export const login = (email, password) => async dispatch => {
+export const login = (email, password) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   const body = JSON.stringify({ email, password });
@@ -95,7 +92,7 @@ export const login = (email, password) => async dispatch => {
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(loadUser());
@@ -105,24 +102,24 @@ export const login = (email, password) => async dispatch => {
     dispatch(setAlert(error));
 
     dispatch({
-      type: LOGIN_FAIL
+      type: LOGIN_FAIL,
     });
   }
 };
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch) => {
   dispatch({ type: LOGOUT });
   dispatch(setPageName("Dashboard"));
 };
 
-export const updateUser = data => dispatch => {
+export const updateUser = (data) => (dispatch) => {
   axios
     .put(`https://rfit-platform.herokuapp.com/api/users/update`, data)
-    .then(res => {
+    .then((res) => {
       dispatch({
         type: UPDATE_USER,
-        payload: res.data
+        payload: res.data,
       });
     })
-    .catch(err => {});
+    .catch((err) => {});
 };

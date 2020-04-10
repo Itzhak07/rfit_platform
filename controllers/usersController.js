@@ -30,7 +30,7 @@ class UserController {
     const avatar = gravatar.url(email, {
       s: "200",
       r: "pg",
-      d: "mm"
+      d: "mm",
     });
     return new Promise(async (resolve, reject) => {
       let user = new User({
@@ -38,7 +38,7 @@ class UserController {
         lastName,
         email,
         password,
-        avatar
+        avatar,
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -49,8 +49,8 @@ class UserController {
       const payload = {
         user: {
           id: user._id,
-          email: user.email
-        }
+          email: user.email,
+        },
       };
 
       jwt.sign(
@@ -73,8 +73,8 @@ class UserController {
       }
       const payload = {
         user: {
-          id: user._id
-        }
+          id: user._id,
+        },
       };
 
       jwt.sign(

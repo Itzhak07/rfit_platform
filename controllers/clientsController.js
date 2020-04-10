@@ -1,4 +1,7 @@
 const Client = require("../models/Client");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 class ClientController {
   static getAll(id) {
@@ -22,19 +25,22 @@ class ClientController {
 
   static addClient(req, id) {
     const { firstName, lastName, email, phone, gender } = req.body;
-
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       let newClient = new Client({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+        firstName,
+        lastName,
+        email,
         phone: phone.split(" ").join(""),
-        gender: gender,
+        gender,
         status: 1,
         user: id,
       });
 
-      newClient.save((err, data) => {
+      const { password } = newClient;
+
+      const salt = await bcrypt.genSalt(10);
+      newClient.password = await bcrypt.hash(password, salt);
+      await newClient.save((err, data) => {
         if (err) {
           reject(err);
         } else {
@@ -46,10 +52,12 @@ class ClientController {
 
   static getSingleClient(client_Id) {
     return new Promise((resolve, reject) => {
-      Client.find({ _id: `${client_Id}` }).exec((err, data) => {
-        if (err) reject(err);
-        resolve(data[0]);
-      });
+      Client.find({ _id: `${client_Id}` })
+        .select("-password")
+        .exec((err, data) => {
+          if (err) reject(err);
+          resolve(data[0]);
+        });
     });
   }
 
@@ -68,6 +76,25 @@ class ClientController {
       Client.findByIdAndUpdate(_id, body).exec((err, docs) => {
         if (err) reject(err);
         resolve(ClientController.getAll(userid));
+      });
+    });
+  }
+
+  static login(user, password) {
+    return new Promise(async (resolve, reject) => {
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+        reject({ error: [{ msg: "Invalid Credentials" }] });
+      }
+      const payload = {
+        user: {
+          id: user._id,
+        },
+      };
+      jwt.sign(payload, config.get("jwtSecret"), (err, token) => {
+        if (err) reject(err);
+        resolve(token);
       });
     });
   }
