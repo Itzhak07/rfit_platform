@@ -57,7 +57,7 @@ router.get("/singleclient", async function (req, res, next) {
   }
 });
 
-// Update Workout
+// Update Client
 router.put(
   "/update",
   [
@@ -88,5 +88,21 @@ router.put(
     }
   }
 );
+
+// Update Client *ClientApp
+router.put("/update-info", auth, async function (req, res, next) {
+  try {
+    const { id } = req.user;
+    const { body } = req;
+    const client = await ClientController.updateInfo(body, id);
+
+    res.json(client);
+  } catch (err) {
+    console.log(err);
+
+    const { errmsg } = err;
+    res.status(409).json({ error: ["Client is already exists"] });
+  }
+});
 
 module.exports = router;

@@ -15,6 +15,7 @@ import { fetchClients } from "./clientActions";
 import { fetchWorkouts } from "./workoutActions";
 import { setPageName } from "./pageActions";
 import { getMessages } from "./messageActions";
+import io from "socket.io-client";
 
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -28,6 +29,11 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
+
+    
+
+    console.log(socket);
+    
 
     await dispatch(fetchClients());
     await dispatch(fetchWorkouts());

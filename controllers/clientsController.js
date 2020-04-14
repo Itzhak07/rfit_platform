@@ -15,8 +15,7 @@ class ClientController {
     });
   }
 
-  static clientValidation(body) {
-    const { email } = body;
+  static clientValidation(email) {
     const email_lowerCase = email.toLowerCase();
     let client = Client.findOne({ email: email_lowerCase });
 
@@ -53,7 +52,7 @@ class ClientController {
   static getSingleClient(client_Id) {
     return new Promise((resolve, reject) => {
       Client.find({ _id: `${client_Id}` })
-        .select("-password")
+        // .select("-password")
         .exec((err, data) => {
           if (err) reject(err);
           resolve(data[0]);
@@ -80,12 +79,21 @@ class ClientController {
     });
   }
 
+  static updateInfo(body, id) {
+    return new Promise((resolve, reject) => {
+      Client.findByIdAndUpdate(id, body).exec((err, docs) => {
+        if (err) reject(err);
+        resolve(ClientController.getSingleClient(id));
+      });
+    });
+  }
+
   static login(user, password) {
     return new Promise(async (resolve, reject) => {
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        reject({ error: [{ msg: "Invalid Credentials" }] });
+        reject({ error: "Invalid Credentials" });
       }
       const payload = {
         user: {
@@ -96,6 +104,26 @@ class ClientController {
         if (err) reject(err);
         resolve(token);
       });
+    });
+  }
+
+  static updatePassword(user, oldPass, newPass) {
+    return new Promise(async (resolve, reject) => {
+      const { _id } = user;
+      const isMatch = await bcrypt.compare(oldPass, user.password);
+
+      if (!isMatch) {
+        reject({ error: "Invalid Credentials" });
+      } else {
+        const salt = await bcrypt.genSalt(10);
+        const newPassword = await bcrypt.hash(newPass, salt);
+        Client.findByIdAndUpdate(_id, { password: newPassword }).exec(
+          (err, docs) => {
+            if (err) reject(err);
+            resolve(ClientController.getSingleClient(_id));
+          }
+        );
+      }
     });
   }
 }

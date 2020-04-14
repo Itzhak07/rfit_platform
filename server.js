@@ -4,6 +4,8 @@ const app = express();
 // var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var server = require("http").createServer(app);
+var io = require("socket.io").listen(server);
 var cors = require("cors");
 
 var userRouter = require("./routes/users");
@@ -59,5 +61,12 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const PORT = process.env.PORT || 3000;
+
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  // socket.on("disconnect", function () {
+  //   console.log("user disconnected");
+  // });
+});
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
