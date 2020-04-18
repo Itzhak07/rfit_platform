@@ -25,11 +25,7 @@ class ClientController {
 
   static addClient(req, id) {
     const { firstName, lastName, email, phone, gender } = req.body;
-    const avatar = gravatar.url(email, {
-      s: "200",
-      r: "pg",
-      d: "mm",
-    });
+
     return new Promise(async (resolve, reject) => {
       let newClient = new Client({
         firstName,
@@ -37,8 +33,6 @@ class ClientController {
         email,
         phone: phone.split(" ").join(""),
         gender,
-        avatar,
-        status: 1,
         user: id,
       });
 
