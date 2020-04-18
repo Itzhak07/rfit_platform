@@ -9,6 +9,7 @@ var clientSchema = new Schema({
   phone: { type: String },
   status: { type: Number },
   gender: { type: String },
+  avatar: { type: String },
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   date: { type: Date, default: Date.now },
 });

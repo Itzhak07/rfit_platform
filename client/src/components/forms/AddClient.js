@@ -92,8 +92,10 @@ const AddClient = ({
         to: [formData],
         message: `Hi ${firstName} ${lastName}
           Thanks for choosing me as your trainer!
+          Your initial password is RFit7707, use it to login into your account.
           If you would like to make your life a bit easier, please send a WhatsApp message to +14155238886 with code: join accept-noted ,
           to get updated on appointments via WhatsApp.
+
           Thanks!`,
         type: "Welcome_Mail",
       });

@@ -5,5 +5,10 @@
     "myMail": "itzhak07@gmail.com",
     "accountSid": "AC73b89c727f8e52351fb6df0eb502def7",
     "authToken": "142fb6b748a547af0103a9cbba2f483d",
-    "Twilio_Phone": "+14155238886"
+    "Twilio_Phone": "+14155238886",
+    "cloudinary": {
+        "name": "itzhak07",
+        "api_key": "165312284892295",
+        "api_secret": "78wHqbiMmlG-PnsyieA74utZcL0"
+    }
 }

@@ -3,6 +3,9 @@ var router = express.Router();
 const ClientController = require("../controllers/clientsController");
 const { check, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
+var cloudinary = require("cloudinary").v2;
+var upload = require("../utils/multer");
+const config = require("config").get("cloudinary");
 
 /* GET users listing. */
 router.get("/", auth, async function (req, res, next) {
@@ -102,6 +105,38 @@ router.put("/update-info", auth, async function (req, res, next) {
 
     const { errmsg } = err;
     res.status(409).json({ error: ["Client is already exists"] });
+  }
+});
+
+router.post("/upload-avatar", [auth, upload], async function (req, res, next) {
+  try {
+    cloudinary.config({
+      cloud_name: config.name,
+      api_key: config.api_key,
+      api_secret: config.api_secret,
+    });
+
+    const { id } = req.user;
+    const { body } = req;
+
+    const upload = await cloudinary.uploader.upload(req.file.path, {
+      crop: "thumb",
+    });
+
+    const client = await ClientController.updateInfo(
+      { avatar: upload.url },
+      id
+    );
+
+    console.log("upload avatar: Success");
+
+    res.json(client);
+  } catch (err) {
+    console.log(err);
+
+    console.log("upload avatar: Fail");
+    const { errmsg } = err;
+    res.status(409).json({ error: ["Error"] });
   }
 });
 

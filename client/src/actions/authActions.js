@@ -30,11 +30,6 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data,
     });
 
-    
-
-    console.log(socket);
-    
-
     await dispatch(fetchClients());
     await dispatch(fetchWorkouts());
     await dispatch(getMessages());
