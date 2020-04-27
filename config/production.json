@@ -1,14 +1,14 @@
 {
-    "jwtSecret": "Execute_Order_66",
-    "mongoURI": "mongodb+srv://Itzhak07:Itzhak07@cluster0-tuoql.mongodb.net/RFit_DB?retryWrites=true&w=majority",
-    "sendgrid_API_KEY": "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",
-    "myMail": "itzhak07@gmail.com",
-    "accountSid": "AC73b89c727f8e52351fb6df0eb502def7",
-    "authToken": "142fb6b748a547af0103a9cbba2f483d",
-    "Twilio_Phone": "+14155238886",
+    "jwtSecret": "//JWT SECRET//",
+    "mongoURI": "//MONGODB URI//",
+    "sendgrid_API_KEY": "//SENDGRID API KEY//",
+    "myMail": "//MY EMAIL ADDRESS//",
+    "accountSid": "//Twilio accountSid//",
+    "authToken": "//Twilio authToken//",
+    "Twilio_Phone": "//Twilio Phone Number//",
     "cloudinary": {
-        "name": "itzhak07",
-        "api_key": "165312284892295",
-        "api_secret": "78wHqbiMmlG-PnsyieA74utZcL0"
+        "name": "//cloudinary name//",
+        "api_key": "//cloudinary API KEY//",
+        "api_secret": "cloudinary API-SECRET//"
     }
 }
