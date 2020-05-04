@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const fetch = require("node-fetch");
 // var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
@@ -15,6 +16,7 @@ var messagesRouter = require("./routes/messages");
 const config = require("config");
 
 const db_atlas = config.get("mongoURI");
+const site_url = config.get("site_url");
 
 // Connect Database
 mongoose.connect(db_atlas, {
@@ -62,5 +64,16 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const PORT = process.env.PORT || 3000;
+const thirtyMinutes = 30 * 60 * 1000;
+
+(function () {
+  setInterval(() => {
+    try {
+      fetch(site_url, { method: "GET" });
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, thirtyMinutes);
+})();
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

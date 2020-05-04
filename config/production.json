@@ -1,4 +1,5 @@
 {
+    "site_url": "http://www.rfit-platform.com/",
     "jwtSecret": "//JWT SECRET//",
     "mongoURI": "//MONGODB URI//",
     "sendgrid_API_KEY": "//SENDGRID API KEY//",
