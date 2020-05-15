@@ -36,7 +36,7 @@ filtering options using Material-Table.
 
 * Messages - Send emails with SendGrid API integration. 
 option to send automatic email for every new/change/cancellation of appointment,
-or send a custom email to a specific customer.
+or send a custom email to a specific client.
 
 
 ## Dashboard:
